@@ -1,8 +1,9 @@
 // ==UserScript==
 // @name         BandcampTrackCover
 // @namespace    https://github.com/TheLastZombie/
-// @version      1.0.0
+// @version      1.0.1
 // @description  Forces showing track instead of album covers on Bandcamp.
+// @downloadURL  https://raw.github.com/TheLastZombie/userscripts/master/BandcampTrackCover.user.js
 // @author       TheLastZombie
 // @match        https://*.bandcamp.com/*
 // @grant        none
