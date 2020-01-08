@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GeniusNowPlaying
 // @namespace    https://github.com/TheLastZombie/
-// @version      1.0.2
+// @version      1.0.3
 // @description  Displays a link to the lyrics of your currently playing song via Last.fm.
 // @downloadURL  https://raw.github.com/TheLastZombie/userscripts/master/GeniusNowPlaying.user.js
 // @author       TheLastZombie
