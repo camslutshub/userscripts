@@ -58,3 +58,24 @@ Displays a link to the lyrics of your currently playing song via Last.fm.
 - Initial release
 
 </details>
+
+## [ViewOnYP](https://raw.github.com/TheLastZombie/userscripts/master/ViewOnYP.user.js)
+
+Adds a YP button to the social links of Patreon artists.
+
+<details>
+
+<summary>Screenshot</summary>
+
+
+
+</details>
+
+<details>
+
+<summary>Changelog</summary>
+
+### Version 1.0.0
+- Initial release
+
+</details>
