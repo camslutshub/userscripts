@@ -59,6 +59,27 @@ Displays a link to the lyrics of your currently playing song via Last.fm.
 
 </details>
 
+## [TracklistToRYM](https://raw.github.com/TheLastZombie/userscripts/master/TracklistToRYM.user.js)
+
+Imports an album's tracklist from various sources into Rate Your Music.
+
+<details>
+  
+<summary>Screenshot</summary>
+
+
+
+</details>
+
+<details>
+
+<summary>Changelog</summary>
+
+### Version 1.0.0
+- Initial release
+
+</details>
+
 ## [ViewOnYP](https://raw.github.com/TheLastZombie/userscripts/master/ViewOnYP.user.js)
 
 Adds a YP button to the social links of Patreon artists.
