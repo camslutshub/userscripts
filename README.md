@@ -34,7 +34,7 @@ Displays a link to the lyrics of your currently playing song via Last.fm.
 
 <summary>Screenshot</summary>
 
-
+![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/GeniusNowPlaying.png)
 
 </details>
 
