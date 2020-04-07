@@ -64,7 +64,7 @@ Displays a link to the lyrics of your currently playing song via Last.fm.
 Imports an album's tracklist from various sources into Rate Your Music.
 
 <details>
-  
+
 <summary>Screenshot</summary>
 
 
@@ -88,13 +88,16 @@ Adds a YP button to the social links of Patreon artists.
 
 <summary>Screenshot</summary>
 
-
+![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/ViewOnYP.png)
 
 </details>
 
 <details>
 
 <summary>Changelog</summary>
+
+### Version 1.0.1
+- Fix #3
 
 ### Version 1.0.0
 - Initial release
