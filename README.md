@@ -75,6 +75,11 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Changelog</summary>
 
+### Version 1.1.0
+- Add Apple Music support
+- Improve parent selector
+- Improve status and error messages
+
 ### Version 1.0.0
 - Initial release
 
