@@ -67,7 +67,7 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Screenshot</summary>
 
-
+![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/TracklistToRYM.gif)
 
 </details>
 
