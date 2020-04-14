@@ -10,7 +10,7 @@ Forces showing track instead of album covers on Bandcamp.
 
 <summary>Screenshot</summary>
 
-
+![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/BandcampTrackCover.png)
 
 </details>
 
