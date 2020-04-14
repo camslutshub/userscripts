@@ -75,6 +75,9 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Changelog</summary>
 
+### Version 1.1.1
+- Improve Discogs title selector
+
 ### Version 1.1.0
 - Add Apple Music support
 - Improve parent selector
