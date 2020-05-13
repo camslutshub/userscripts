@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         TracklistToRYM
 // @namespace    https://github.com/TheLastZombie/
-// @version      1.1.1
+// @version      1.1.2
 // @description  Imports an album's tracklist from various sources into Rate Your Music.
 // @downloadURL  https://raw.github.com/TheLastZombie/userscripts/master/TracklistToRYM.user.js
 // @author       TheLastZombie
@@ -33,10 +33,10 @@
                 var result = "";
 
                 if (site == "apple") {
-                    $(data).find(".table__row").each(function(i) {
-                        var index = $(this).find(".table__row__number").text().trim();
-                        var title = $(this).find(".table__row__headline").text().trim();
-                        var length = $(this).find(".table__row__duration-counter").text();
+                    $(data).find(".row.song").each(function(i) {
+                        var index = $(this).find(".song-index .column-data").text().trim();
+                        var title = $(this).find(".song-name").text().trim();
+                        var length = $(this).find(".time-data").text();
                         result += index + "|" + title + "|" + length + "\n";
                     });
                 };
