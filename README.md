@@ -75,6 +75,18 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Changelog</summary>
 
+### Version 1.3.0
+- Add Deezer support
+- Add Genius support
+- Add MusicBrainz support
+- Add URL to sources option
+- Append instead of replace option
+- Clear input on submit
+- Remove leading zeros
+- Store data in JSON object
+- General code cleanup
+- Improve error handling
+
 ### Version 1.2.0
 - Modify modal width
 - Add URL placeholders
