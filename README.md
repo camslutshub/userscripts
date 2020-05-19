@@ -124,6 +124,9 @@ Adds a YP button to the social links of Patreon artists.
 
 <summary>Changelog</summary>
 
+### Version 1.0.2
+- Update selector classes
+
 ### Version 1.0.1
 - Fix #3
 
