@@ -59,6 +59,27 @@ Displays a link to the lyrics of your currently playing song via Last.fm.
 
 </details>
 
+## [T3Xtend](https://raw.github.com/TheLastZombie/userscripts/master/T3Xtend.user.js)
+
+Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
+
+<details>
+
+<summary>Screenshot</summary>
+
+![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/T3Xtend.png)
+
+</details>
+
+<details>
+
+<summary>Changelog</summary>
+
+### Version 1.0.0
+- Initial release
+
+</details>
+
 ## [TracklistToRYM](https://raw.github.com/TheLastZombie/userscripts/master/TracklistToRYM.user.js)
 
 Imports an album's tracklist from various sources into Rate Your Music.
