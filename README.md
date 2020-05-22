@@ -18,6 +18,9 @@ Forces showing track instead of album covers on Bandcamp.
 
 <summary>Changelog</summary>
 
+### Version 1.0.2
+- Fix #1 and #2
+
 ### Version 1.0.1
 - Add `@downloadURL`
 
