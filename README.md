@@ -45,6 +45,9 @@ Displays a link to the lyrics of your currently playing song via Last.fm.
 
 <summary>Changelog</summary>
 
+### Version 1.0.5
+- Make selectors less strict
+
 ### Version 1.0.4
 - Update selector classes
 
