@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         T3Xtend
 // @namespace    https://github.com/TheLastZombie/
-// @version      1.0.0
+// @version      1.0.1
 // @description  Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
 // @downloadURL  https://raw.github.com/TheLastZombie/userscripts/master/T3Xtend.user.js
 // @author       TheLastZombie
@@ -37,6 +37,7 @@
         var button = $(this)
             .clone()
             .attr("href", $(this).attr("href").replace("/zip/", "/t3x/"))
+            .attr("title", "")
             .text("T3X");
         $(this).after(button);
     });

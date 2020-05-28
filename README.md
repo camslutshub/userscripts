@@ -84,6 +84,9 @@ Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
 
 <summary>Changelog</summary>
 
+### Version 1.0.1
+- Don't display incorrect download size
+
 ### Version 1.0.0
 - Initial release
 
