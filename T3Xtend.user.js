@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         T3Xtend
 // @namespace    https://github.com/TheLastZombie/
-// @version      1.1.0
+// @version      1.1.1
 // @description  Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
 // @downloadURL  https://raw.github.com/TheLastZombie/userscripts/master/T3Xtend.user.js
 // @author       TheLastZombie
@@ -44,15 +44,17 @@
 
     // Add Composer command buttons
 
-    $(".ter-ext-single-versionhistory tr td:last-child a:first-child").each(function () {
-        var button = $(this)
-            .clone()
-            .attr("href", "javascript:void(0)")
-            .attr("onclick", "copyToClipboard(this)")
-            .attr("title", "")
-            .html(`<svg style="width:18px;height:18px;position:relative;top:-1px" viewBox="0 0 24 24"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" /></svg><span style="display:none">` + $("#install-composer kbd").text() + ":" + $(this).parent().parent().find("td:first-child strong").text() + `</span>`);
-        $(this).after(button);
-    });
+    if ($("#install-composer").length) {
+        $(".ter-ext-single-versionhistory tr td:last-child a:first-child").each(function () {
+            var button = $(this)
+                .clone()
+                .attr("href", "javascript:void(0)")
+                .attr("onclick", "copyToClipboard(this)")
+                .attr("title", "")
+                .html(`<svg style="width:18px;height:18px;position:relative;top:-1px" viewBox="0 0 24 24"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" /></svg><span style="display:none">` + $("#install-composer kbd").text() + ":" + $(this).parent().parent().find("td:first-child strong").text() + `</span>`);
+            $(this).after(button);
+        });
+    };
 
     // Improve button styles
 

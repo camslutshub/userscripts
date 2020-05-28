@@ -84,8 +84,11 @@ Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
 
 <summary>Changelog</summary>
 
+### Version 1.1.1
+- Don't add Composer buttons if extension is not available via Composer
+
 ### Version 1.1.0
-- Add composer command buttons
+- Add Composer command buttons
 - Fix top border offset
 
 ### Version 1.0.1
