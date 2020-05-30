@@ -115,6 +115,9 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Changelog</summary>
 
+### Version 1.3.1
+- Improve Discogs parent selector
+
 ### Version 1.3.0
 - Add Deezer support
 - Add Genius support

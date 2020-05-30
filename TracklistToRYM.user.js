@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         TracklistToRYM
 // @namespace    https://github.com/TheLastZombie/
-// @version      1.3.0
+// @version      1.3.1
 // @description  Imports an album's tracklist from various sources into Rate Your Music.
 // @downloadURL  https://raw.github.com/TheLastZombie/userscripts/master/TracklistToRYM.user.js
 // @author       TheLastZombie
@@ -46,7 +46,7 @@
             id: "discogs",
             name: "Discogs",
             placeholder: "https://discogs.com/release/*",
-            parent: ".tracklist_track",
+            parent: ".tracklist_track:not(.track_heading)",
             index: ".tracklist_track_pos",
             title: ".tracklist_track_title > span",
             length: ".tracklist_track_duration span"
