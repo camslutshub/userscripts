@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         TracklistToRYM
 // @namespace    https://github.com/TheLastZombie/
-// @version      1.3.1
+// @version      1.3.2
 // @description  Imports an album's tracklist from various sources into Rate Your Music.
 // @downloadURL  https://raw.github.com/TheLastZombie/userscripts/master/TracklistToRYM.user.js
 // @author       TheLastZombie
@@ -123,7 +123,7 @@
                 parent.append("<p id='ttrym-success' style='color:green'>Successfully imported " + amount + " tracks.</p>");
 
             }).catch((error) => {
-                parent.append("<p id=*ttrym-error* style=*color:red'>" + error.toString() + "</p>");
+                parent.append("<p id='ttrym-error' style='color:red'>" + error.toString() + "</p>");
             }).finally(() => {
                 $("#ttrym-info").remove();
             });
