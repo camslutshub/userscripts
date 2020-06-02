@@ -24,7 +24,7 @@ Forces showing track instead of album covers on Bandcamp.
 - Add homepage URL
 
 ### Version 1.0.2
-- Fix #1 and #2
+- Fix [#1](https://github.com/TheLastZombie/userscripts/issues/1) and [#2](https://github.com/TheLastZombie/userscripts/issues/2)
 
 ### Version 1.0.1
 - Add `@downloadURL`
@@ -130,6 +130,9 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Changelog</summary>
 
+### Version 1.4.0
+- Fix [#4](https://github.com/TheLastZombie/userscripts/issues/4)
+
 ### Version 1.3.3
 - Add userscript icon
 - Add German description
@@ -200,7 +203,7 @@ Adds a YP button to the social links of Patreon artists.
 - Update selector classes
 
 ### Version 1.0.1
-- Fix #3
+- Fix [#3](https://github.com/TheLastZombie/userscripts/issues/3)
 
 ### Version 1.0.0
 - Initial release

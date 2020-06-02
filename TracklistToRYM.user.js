@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           TracklistToRYM
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.3.3
+// @version        1.4.0
 // @description    Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @homepageURL    https://github.com/TheLastZombie/userscripts/
@@ -9,7 +9,15 @@
 // @author         TheLastZombie
 // @match          https://rateyourmusic.com/releases/ac
 // @match          https://rateyourmusic.com/releases/ac?*
-// @grant          none
+// @connect        apple.com
+// @connect        bandcamp.com
+// @connect        deezer.com
+// @connect        discogs.com
+// @connect        genius.com
+// @connect        musicbrainz.org
+// @connect        *
+// @grant          GM.xmlHttpRequest
+// @grant          GM_xmlhttpRequest
 // @icon           https://e.snmc.io/2.5/img/sonemic.png
 // ==/UserScript==
 
@@ -96,39 +104,44 @@
 
             const site = $("#ttrym-site").val();
             const input = sites.filter(x => x.id == site)[0];
-            const link = "https://cors-anywhere.herokuapp.com/" + $("#ttrym-link").val();
+            const link = $("#ttrym-link").val();
 
-            fetch(link).then((response) => {
-                return response.text();
-            }).then((data) => {
+            GM.xmlHttpRequest({
+                method: "GET",
+                url: link,
+                onload: (response) => {
 
-                var result = "";
-                var amount = 0;
+                    var data = response.responseText;
 
-                $(data).find(input.parent).each(function (i) {
-                    amount++;
-                    var index = $(this).find(input.index).children().remove().end().text().trim().replace(/^0+/, "") || i + 1;
-                    var title = $(this).find(input.title).children().remove().end().text().trim() || "";
-                    var length = $(this).find(input.length).children().remove().end().text().trim() || "";
-                    result += index + "|" + title + "|" + length + "\n";
-                });
+                    var result = "";
+                    var amount = 0;
 
-                if (amount == 0) return parent.append("<p id='ttrym-warning' style='color:orange'>Did not find any tracks. Please check your URL and try again.</p>");
+                    $(data).find(input.parent).each(function (i) {
+                        amount++;
+                        var index = $(this).find(input.index).children().remove().end().text().trim().replace(/^0+/, "") || i + 1;
+                        var title = $(this).find(input.title).children().remove().end().text().trim() || "";
+                        var length = $(this).find(input.length).children().remove().end().text().trim() || "";
+                        result += index + "|" + title + "|" + length + "\n";
+                    });
 
-                goAdvanced();
-                $("#track_advanced").val($("#ttrym-append").prop("checked") ? $("#track_advanced").val() + result : result);
-                goSimple();
-                if ($("#ttrym-sources").prop("checked") && !$("#notes").val().includes($("#ttrym-link").val())) {
-                    $("#notes").val($("#notes").val() + ($("#notes").val() == "" ? "" : "\n") + $("#ttrym-link").val());
-                };
-                $("#ttrym-link").val("");
+                    if (amount == 0) return parent.append("<p id='ttrym-warning' style='color:orange'>Did not find any tracks. Please check your URL and try again.</p>");
 
-                parent.append("<p id='ttrym-success' style='color:green'>Successfully imported " + amount + " tracks.</p>");
+                    goAdvanced();
+                    $("#track_advanced").val($("#ttrym-append").prop("checked") ? $("#track_advanced").val() + result : result);
+                    goSimple();
+                    if ($("#ttrym-sources").prop("checked") && !$("#notes").val().includes($("#ttrym-link").val())) {
+                        $("#notes").val($("#notes").val() + ($("#notes").val() == "" ? "" : "\n") + $("#ttrym-link").val());
+                    };
+                    $("#ttrym-link").val("");
 
-            }).catch((error) => {
-                parent.append("<p id='ttrym-error' style='color:red'>" + error.toString() + "</p>");
-            }).finally(() => {
-                $("#ttrym-info").remove();
+                    parent.append("<p id='ttrym-success' style='color:green'>Successfully imported " + amount + " tracks.</p>");
+                    $("#ttrym-info").remove();
+
+                },
+                onerror: () => {
+                    parent.append("<p id='ttrym-error' style='color:red'>" + response.responseText + "</p>");
+                    $("#ttrym-info").remove();
+                }
             });
 
         } catch (e) {
