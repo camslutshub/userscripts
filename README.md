@@ -18,6 +18,11 @@ Forces showing track instead of album covers on Bandcamp.
 
 <summary>Changelog</summary>
 
+### Version 1.0.3
+- Add userscript icon
+- Add German description
+- Add homepage URL
+
 ### Version 1.0.2
 - Fix #1 and #2
 
@@ -44,6 +49,11 @@ Displays a link to the lyrics of your currently playing song via Last.fm.
 <details>
 
 <summary>Changelog</summary>
+
+### Version 1.0.7
+- Add German description
+- Add homepage URL
+- Update jQuery to 3.5.1
 
 ### Version 1.0.6
 - Update selector classes
@@ -84,6 +94,11 @@ Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
 
 <summary>Changelog</summary>
 
+### Version 1.1.2
+- Add userscript icon
+- Add German description
+- Add homepage URL
+
 ### Version 1.1.1
 - Don't add Composer buttons if extension is not available via Composer
 
@@ -114,6 +129,11 @@ Imports an album's tracklist from various sources into Rate Your Music.
 <details>
 
 <summary>Changelog</summary>
+
+### Version 1.3.3
+- Add userscript icon
+- Add German description
+- Add homepage URL
 
 ### Version 1.3.2
 - Fix quotes around error message attributes
@@ -169,6 +189,12 @@ Adds a YP button to the social links of Patreon artists.
 <details>
 
 <summary>Changelog</summary>
+
+### Version 1.0.3
+- Add userscript icon
+- Add German description
+- Add homepage URL
+- Update jQuery to 3.5.1
 
 ### Version 1.0.2
 - Update selector classes

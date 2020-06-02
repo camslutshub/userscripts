@@ -1,13 +1,16 @@
 // ==UserScript==
-// @name         TracklistToRYM
-// @namespace    https://github.com/TheLastZombie/
-// @version      1.3.2
-// @description  Imports an album's tracklist from various sources into Rate Your Music.
-// @downloadURL  https://raw.github.com/TheLastZombie/userscripts/master/TracklistToRYM.user.js
-// @author       TheLastZombie
-// @match        https://rateyourmusic.com/releases/ac
-// @match        https://rateyourmusic.com/releases/ac?*
-// @grant        none
+// @name           TracklistToRYM
+// @namespace      https://github.com/TheLastZombie/
+// @version        1.3.3
+// @description    Imports an album's tracklist from various sources into Rate Your Music.
+// @description:de Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
+// @homepageURL    https://github.com/TheLastZombie/userscripts/
+// @downloadURL    https://raw.github.com/TheLastZombie/userscripts/master/TracklistToRYM.user.js
+// @author         TheLastZombie
+// @match          https://rateyourmusic.com/releases/ac
+// @match          https://rateyourmusic.com/releases/ac?*
+// @grant          none
+// @icon           https://e.snmc.io/2.5/img/sonemic.png
 // ==/UserScript==
 
 (function () {

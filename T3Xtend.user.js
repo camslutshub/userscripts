@@ -1,12 +1,15 @@
 // ==UserScript==
-// @name         T3Xtend
-// @namespace    https://github.com/TheLastZombie/
-// @version      1.1.1
-// @description  Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
-// @downloadURL  https://raw.github.com/TheLastZombie/userscripts/master/T3Xtend.user.js
-// @author       TheLastZombie
-// @match        https://extensions.typo3.org/extension/*
-// @grant        none
+// @name           T3Xtend
+// @namespace      https://github.com/TheLastZombie/
+// @version        1.1.2
+// @description    Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
+// @description:de Zeigt sowohl T3X- als auch Download-Links zu alten Versionen von TYPO3-Extensions.
+// @homepageURL    https://github.com/TheLastZombie/userscripts/
+// @downloadURL    https://raw.github.com/TheLastZombie/userscripts/master/T3Xtend.user.js
+// @author         TheLastZombie
+// @match          https://extensions.typo3.org/extension/*
+// @grant          none
+// @icon           https://typo3.org/typo3conf/ext/t3olayout/Resources/Public/Icons/favicon.ico
 // ==/UserScript==
 
 (function() {

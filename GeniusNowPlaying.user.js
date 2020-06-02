@@ -1,13 +1,15 @@
 // ==UserScript==
-// @name         GeniusNowPlaying
-// @namespace    https://github.com/TheLastZombie/
-// @version      1.0.6
-// @description  Displays a link to the lyrics of your currently playing song via Last.fm.
-// @downloadURL  https://raw.github.com/TheLastZombie/userscripts/master/GeniusNowPlaying.user.js
-// @author       TheLastZombie
-// @match        https://genius.com/
-// @grant        none
-// @require      https://code.jquery.com/jquery-3.4.1.js
+// @name           GeniusNowPlaying
+// @namespace      https://github.com/TheLastZombie/
+// @version        1.0.7
+// @description    Displays a link to the lyrics of your currently playing song via Last.fm.
+// @description:de Zeigt einen Link zu dem Text des momentan spielenden Songs via Last.fm.
+// @homepageURL    https://github.com/TheLastZombie/userscripts/
+// @downloadURL    https://raw.github.com/TheLastZombie/userscripts/master/GeniusNowPlaying.user.js
+// @author         TheLastZombie
+// @match          https://genius.com/
+// @grant          none
+// @require        https://code.jquery.com/jquery-3.5.1.js
 // ==/UserScript==
 
 $(function () {
@@ -40,7 +42,7 @@ $(function () {
         $(this).parent().hide();
     });
     $("#gnp-button-fmkey").click(function () {
-    
+
         if ($(this).prev().val() == "") return;
         window.localStorage.setItem("gnp-fmkey", $(this).prev().val());
         $(this).parent().hide();
@@ -65,4 +67,3 @@ $(function () {
     };
 
 });
-

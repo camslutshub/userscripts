@@ -1,12 +1,15 @@
 // ==UserScript==
-// @name         BandcampTrackCover
-// @namespace    https://github.com/TheLastZombie/
-// @version      1.0.2
-// @description  Forces showing track instead of album covers on Bandcamp.
-// @downloadURL  https://raw.github.com/TheLastZombie/userscripts/master/BandcampTrackCover.user.js
-// @author       TheLastZombie
-// @match        https://*.bandcamp.com/*
-// @grant        none
+// @name           BandcampTrackCover
+// @namespace      https://github.com/TheLastZombie/
+// @version        1.0.3
+// @description    Forces showing track instead of album covers on Bandcamp.
+// @description:de Ersetzt gegebenenfalls Album- mit Trackcovern auf Bandcamp.
+// @homepageURL    https://github.com/TheLastZombie/userscripts/
+// @downloadURL    https://raw.github.com/TheLastZombie/userscripts/master/BandcampTrackCover.user.js
+// @author         TheLastZombie
+// @match          https://*.bandcamp.com/*
+// @grant          none
+// @icon           https://s4.bcbits.com/img/favicon/favicon-32x32.png
 // ==/UserScript==
 
 $(function () {
