@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           TracklistToRYM
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.4.0
+// @version        1.5.0
 // @description    Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @homepageURL    https://github.com/TheLastZombie/userscripts/
@@ -29,7 +29,7 @@
         {
             id: "apple",
             name: "Apple Music",
-            placeholder: "https://music.apple.com/album/*",
+            placeholder: "https://music.apple.com/*/album/*",
             parent: ".row.song",
             index: ".song-index .column-data",
             title: ".song-name",
@@ -72,6 +72,15 @@
             length: false
         },
         {
+            id: "last.fm",
+            name: "Last.fm",
+            placeholder: "https://www.last.fm/music/*/*",
+            parent: ".chartlist-row",
+            index: ".chartlist-index",
+            title: ".chartlist-name a",
+            length: ".chartlist-duration"
+        },
+        {
             id: "musicbrainz",
             name: "MusicBrainz",
             placeholder: "https://musicbrainz.org/release/*",
@@ -106,6 +115,13 @@
             const input = sites.filter(x => x.id == site)[0];
             const link = $("#ttrym-link").val();
 
+            if (!new RegExp(input.placeholder
+                .replace(/[.+\-?^${}()|[\]\\]/g, "\\$&")
+                .replace(/\*/g, ".*")
+            ).test(link)) {
+                parent.append("<p id='ttrym-warning' style='color:orange'>Warning: Entered URL does not match the selected site's placeholder. Request may not succeed.</p>");
+            };
+
             GM.xmlHttpRequest({
                 method: "GET",
                 url: link,
@@ -124,7 +140,10 @@
                         result += index + "|" + title + "|" + length + "\n";
                     });
 
-                    if (amount == 0) return parent.append("<p id='ttrym-warning' style='color:orange'>Did not find any tracks. Please check your URL and try again.</p>");
+                    if (amount == 0) {
+                        $("#ttrym-info").remove();
+                        return parent.append("<p id='ttrym-warning' style='color:orange'>Did not find any tracks. Please check your URL and try again.</p>");
+                    };
 
                     goAdvanced();
                     $("#track_advanced").val($("#ttrym-append").prop("checked") ? $("#track_advanced").val() + result : result);

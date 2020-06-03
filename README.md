@@ -133,6 +133,12 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Changelog</summary>
 
+### Version 1.5.0
+- Add Last.fm support
+- Warn if URL does not match placeholder
+- Improve Apple Music placeholder
+- Remove info message if no tracks were found
+
 ### Version 1.4.0
 - Fix [#4](https://github.com/TheLastZombie/userscripts/issues/4)
 
