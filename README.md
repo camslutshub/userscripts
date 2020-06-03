@@ -133,6 +133,9 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Changelog</summary>
 
+### Version 1.5.1
+- Add missing last.fm @connect key
+
 ### Version 1.5.0
 - Add Last.fm support
 - Warn if URL does not match placeholder

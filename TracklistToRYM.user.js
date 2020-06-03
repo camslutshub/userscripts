@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           TracklistToRYM
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.5.0
+// @version        1.5.1
 // @description    Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @homepageURL    https://github.com/TheLastZombie/userscripts/
@@ -14,6 +14,7 @@
 // @connect        deezer.com
 // @connect        discogs.com
 // @connect        genius.com
+// @connect        last.fm
 // @connect        musicbrainz.org
 // @connect        *
 // @grant          GM.xmlHttpRequest
