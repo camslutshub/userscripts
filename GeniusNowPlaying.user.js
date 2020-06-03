@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           GeniusNowPlaying
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.0.7
+// @version        1.0.8
 // @description    Displays a link to the lyrics of your currently playing song via Last.fm.
 // @description:de Zeigt einen Link zu dem Text des momentan spielenden Songs via Last.fm.
 // @homepageURL    https://github.com/TheLastZombie/userscripts/
@@ -10,6 +10,7 @@
 // @match          https://genius.com/
 // @grant          none
 // @require        https://code.jquery.com/jquery-3.5.1.js
+// @icon           https://genius.com/favicon.ico
 // ==/UserScript==
 
 $(function () {

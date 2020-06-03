@@ -50,6 +50,9 @@ Displays a link to the lyrics of your currently playing song via Last.fm.
 
 <summary>Changelog</summary>
 
+### Version 1.0.8
+- Fix [#5](https://github.com/TheLastZombie/userscripts/issues/5)
+
 ### Version 1.0.7
 - Add German description
 - Add homepage URL
