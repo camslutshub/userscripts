@@ -25,7 +25,7 @@ Forces showing track instead of album covers on Bandcamp.
 
 ### Version 1.0.2
 - Fix [#1](https://github.com/TheLastZombie/userscripts/issues/1) and [#2](https://github.com/TheLastZombie/userscripts/issues/2)
-- Remove jQuery @require
+- Remove jQuery dependency
 
 ### Version 1.0.1
 - Add `@downloadURL`
@@ -135,7 +135,7 @@ Imports an album's tracklist from various sources into Rate Your Music.
 <summary>Changelog</summary>
 
 ### Version 1.5.1
-- Add missing last.fm @connect key
+- Add missing last.fm `@connect` key
 
 ### Version 1.5.0
 - Add Last.fm support
