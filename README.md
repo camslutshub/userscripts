@@ -25,6 +25,7 @@ Forces showing track instead of album covers on Bandcamp.
 
 ### Version 1.0.2
 - Fix [#1](https://github.com/TheLastZombie/userscripts/issues/1) and [#2](https://github.com/TheLastZombie/userscripts/issues/2)
+- Remove jQuery @require
 
 ### Version 1.0.1
 - Add `@downloadURL`
