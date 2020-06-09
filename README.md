@@ -134,6 +134,18 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Changelog</summary>
 
+### Version 1.6.0
+- Add AllMusic support
+- Add Beatport support
+- Add Google Play support
+- Add Juno Download support
+- Add Metal Archives support
+- Add Musik-Sammler support
+- Modify modal width
+- Only use first matched element
+- Clone to allow access to children
+- Use name instead of ID
+
 ### Version 1.5.1
 - Add missing last.fm `@connect` key
 

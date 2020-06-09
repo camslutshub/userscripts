@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           TracklistToRYM
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.5.1
+// @version        1.6.0
 // @description    Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @homepageURL    https://github.com/TheLastZombie/userscripts/
@@ -9,13 +9,19 @@
 // @author         TheLastZombie
 // @match          https://rateyourmusic.com/releases/ac
 // @match          https://rateyourmusic.com/releases/ac?*
+// @connect        allmusic.com
 // @connect        apple.com
 // @connect        bandcamp.com
+// @connect        beatport.com
 // @connect        deezer.com
 // @connect        discogs.com
 // @connect        genius.com
+// @connect        google.com
+// @connect        junodownload.com
 // @connect        last.fm
+// @connect        metal-archives.com
 // @connect        musicbrainz.org
+// @connect        musik-sammler.de
 // @connect        *
 // @grant          GM.xmlHttpRequest
 // @grant          GM_xmlhttpRequest
@@ -28,7 +34,14 @@
 
     const sites = [
         {
-            id: "apple",
+            name: "AllMusic",
+            placeholder: "https://www.allmusic.com/album/*",
+            parent: ".track",
+            index: ".tracknum",
+            title: ".title a",
+            length: ".time"
+        },
+        {
             name: "Apple Music",
             placeholder: "https://music.apple.com/*/album/*",
             parent: ".row.song",
@@ -37,7 +50,6 @@
             length: ".time-data"
         },
         {
-            id: "bandcamp",
             name: "Bandcamp",
             placeholder: "https://*.bandcamp.com/album/*",
             parent: ".title-col",
@@ -46,7 +58,14 @@
             length: ".time"
         },
         {
-            id: "deezer",
+            name: "Beatport",
+            placeholder: "https://www.beatport.com/release/*/*",
+            parent: ".track",
+            index: ".buk-track-num",
+            title: ".buk-track-primary-title",
+            length: ".buk-track-length"
+        },
+        {
             name: "Deezer",
             placeholder: "https://deezer.com/album/*",
             parent: ".song",
@@ -55,7 +74,6 @@
             length: ".timestamp"
         },
         {
-            id: "discogs",
             name: "Discogs",
             placeholder: "https://discogs.com/release/*",
             parent: ".tracklist_track:not(.track_heading)",
@@ -64,7 +82,6 @@
             length: ".tracklist_track_duration span"
         },
         {
-            id: "genius",
             name: "Genius",
             placeholder: "https://genius.com/albums/*/*",
             parent: ".chart_row",
@@ -73,7 +90,22 @@
             length: false
         },
         {
-            id: "last.fm",
+            name: "Google Play",
+            placeholder: "https://play.google.com/store/music/album/*",
+            parent: "[data-album-is-available]",
+            index: "[data-update-url-on-play] div",
+            title: "[itemprop='name']",
+            length: "[aria-label]"
+        },
+        {
+            name: "Juno Download",
+            placeholder: "https://www.junodownload.com/products/*",
+            parent: ".product-tracklist-track",
+            index: ".track-title",
+            title: "[itemprop='name']",
+            length: ".col-1"
+        },
+        {
             name: "Last.fm",
             placeholder: "https://www.last.fm/music/*/*",
             parent: ".chartlist-row",
@@ -82,25 +114,40 @@
             length: ".chartlist-duration"
         },
         {
-            id: "musicbrainz",
+            name: "Metal Archives",
+            placeholder: "https://www.metal-archives.com/albums/*/*/*",
+            parent: ".table_lyrics .even, .table_lyrics .odd",
+            index: "td",
+            title: ".wrapWords",
+            length: "td[align='right']"
+        },
+        {
             name: "MusicBrainz",
             placeholder: "https://musicbrainz.org/release/*",
             parent: "#content tr.odd, #content tr.even",
             index: "td.pos",
             title: "td > a bdi, td .name-variation > a bdi",
             length: "td.treleases"
+        },
+        {
+            name: "Musik-Sammler",
+            placeholder: "https://www.musik-sammler.de/release/*",
+            parent: "[itemprop='track'] tbody tr",
+            index: ".track-position",
+            title: ".track-title span",
+            length: ".track-time"
         }
     ];
 
-    parent.width(381);
+    parent.width(489);
     parent.append("<br><br>Or import tracklists from other sources using TracklistToRYM.<p style='display:flex'><select id='ttrym-site'>"
-        + sites.map(x => "<option value='" + x.id + "'>" + x.name + "</option>").join("")
+        + sites.map(x => "<option value='" + x.name + "'>" + x.name + "</option>").join("")
         + "</select><input id='ttrym-link' placeholder='Album URL' style='flex:1'></input><button id='ttrym-submit'>Import</button></p>"
         + "<p><input id='ttrym-sources' name='ttrym-sources' type='checkbox' checked><label for='ttrym-sources'> Add URL to sources </label>"
         + "<input id='ttrym-append' name='ttrym-append' type='checkbox'><label for='ttrym-append'> Append instead of replace </label></p>");
 
     $("#ttrym-site").bind("change", function () {
-        $("#ttrym-link").attr("placeholder", sites.filter(x => x.id == $(this).val())[0].placeholder);
+        $("#ttrym-link").attr("placeholder", sites.filter(x => x.name == $(this).val())[0].placeholder);
     });
     $("#ttrym-site").trigger("change");
 
@@ -113,7 +160,7 @@
         try {
 
             const site = $("#ttrym-site").val();
-            const input = sites.filter(x => x.id == site)[0];
+            const input = sites.filter(x => x.name == site)[0];
             const link = $("#ttrym-link").val();
 
             if (!new RegExp(input.placeholder
@@ -135,9 +182,9 @@
 
                     $(data).find(input.parent).each(function (i) {
                         amount++;
-                        var index = $(this).find(input.index).children().remove().end().text().trim().replace(/^0+/, "") || i + 1;
-                        var title = $(this).find(input.title).children().remove().end().text().trim() || "";
-                        var length = $(this).find(input.length).children().remove().end().text().trim() || "";
+                        var index = $(this).find(input.index).first().clone().children().remove().end().text().trim().replace(/^0+/, "").replace(/\.$/, "") || i + 1;
+                        var title = $(this).find(input.title).first().clone().children().remove().end().text().trim() || "";
+                        var length = $(this).find(input.length).first().clone().children().remove().end().text().trim() || "";
                         result += index + "|" + title + "|" + length + "\n";
                     });
 
