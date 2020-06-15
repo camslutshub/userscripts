@@ -142,6 +142,7 @@ Imports an album's tracklist from various sources into Rate Your Music.
 - Add Metal Archives support
 - Add Musik-Sammler support
 - Modify modal width
+- Remove periods from indices
 - Only use first matched element
 - Clone to allow access to children
 - Use name instead of ID
