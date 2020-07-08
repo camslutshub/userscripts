@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           TracklistToRYM
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.6.1
+// @version        1.7.0
 // @description    Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @homepageURL    https://github.com/TheLastZombie/userscripts/
@@ -22,6 +22,7 @@
 // @connect        metal-archives.com
 // @connect        musicbrainz.org
 // @connect        musik-sammler.de
+// @connect        qobuz.com
 // @connect        *
 // @grant          GM.xmlHttpRequest
 // @grant          GM_xmlhttpRequest
@@ -137,6 +138,14 @@
             index: ".track-position",
             title: ".track-title span",
             length: ".track-time"
+        },
+        {
+            name: "Qobuz",
+            placeholder: "https://www.qobuz.com/*/album/*/*",
+            parent: ".track",
+            index: ".track__item--number span",
+            title: ".track__item--name span",
+            length: ".track__item--duration"
         }
     ];
 

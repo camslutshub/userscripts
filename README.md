@@ -134,6 +134,9 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Changelog</summary>
 
+### Version 1.7.0
+- Add Qobuz support
+
 ### Version 1.6.1
 - Add Greasemonkey 4 polyfill
 
