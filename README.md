@@ -35,6 +35,27 @@ Forces showing track instead of album covers on Bandcamp.
 
 </details>
 
+## [Collapsit](https://raw.github.com/TheLastZombie/userscripts/master/Collapsit.user.js)
+
+Enables collapsing (and expanding) of comments on Removeddit.
+
+<details>
+
+<summary>Screenshot</summary>
+
+![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/Collapsit.png)
+
+</details>
+
+<details>
+
+<summary>Changelog</summary>
+
+### Version 1.0.0
+- Initial release
+
+</details>
+
 ## [GeniusNowPlaying](https://raw.github.com/TheLastZombie/userscripts/master/GeniusNowPlaying.user.js)
 
 Displays a link to the lyrics of your currently playing song via Last.fm.
