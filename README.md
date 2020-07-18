@@ -155,6 +155,13 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Changelog</summary>
 
+### Version 1.8.0
+- Add Amazon support
+- Add Beatport Classic support
+- Add Free Music Archive support
+- Add Loot.co.za support
+- Add Naxos Records support
+
 ### Version 1.7.0
 - Add Qobuz support
 

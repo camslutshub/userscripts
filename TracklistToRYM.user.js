@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           TracklistToRYM
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.7.0
+// @version        1.8.0
 // @description    Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @homepageURL    https://github.com/TheLastZombie/userscripts/
@@ -10,18 +10,22 @@
 // @match          https://rateyourmusic.com/releases/ac
 // @match          https://rateyourmusic.com/releases/ac?*
 // @connect        allmusic.com
+// @connect        amazon.com
 // @connect        apple.com
 // @connect        bandcamp.com
 // @connect        beatport.com
 // @connect        deezer.com
 // @connect        discogs.com
+// @connect        freemusicarchive.org
 // @connect        genius.com
 // @connect        google.com
 // @connect        junodownload.com
 // @connect        last.fm
+// @connect        loot.co.za
 // @connect        metal-archives.com
 // @connect        musicbrainz.org
 // @connect        musik-sammler.de
+// @connect        naxos.com
 // @connect        qobuz.com
 // @connect        *
 // @grant          GM.xmlHttpRequest
@@ -42,6 +46,14 @@
             index: ".tracknum",
             title: ".title a",
             length: ".time"
+        },
+        {
+            name: "Amazon",
+            placeholder: "https://www.amazon.com/dp/*",
+            parent: "#dmusic_tracklist_content .a-text-left",
+            index: ".TrackNumber-Default-Color",
+            title: ".TitleLink",
+            length: ".a-size-small.a-color-secondary"
         },
         {
             name: "Apple Music",
@@ -68,6 +80,14 @@
             length: ".buk-track-length"
         },
         {
+            name: "Beatport Classic",
+            placeholder: "http://classic.beatport.com/release/*/*",
+            parent: ".track-grid-content",
+            index: ".playColumn .artWrapper",
+            title: ".titleColumn .txt-larger > span:not(.txt-grey)",
+            length: false
+        },
+        {
             name: "Deezer",
             placeholder: "https://deezer.com/album/*",
             parent: ".song",
@@ -82,6 +102,14 @@
             index: ".tracklist_track_pos",
             title: ".tracklist_track_title > span",
             length: ".tracklist_track_duration span"
+        },
+        {
+            name: "Free Music Archive",
+            placeholder: "https://freemusicarchive.org/music/*/*",
+            parent: ".play-item",
+            index: ".playtxt > b",
+            title: ".playtxt > a > b",
+            length: false
         },
         {
             name: "Genius",
@@ -116,6 +144,14 @@
             length: ".chartlist-duration"
         },
         {
+            name: "Loot.co.za",
+            placeholder: "https://www.loot.co.za/product/*/*",
+            parent: "#tabs div:nth-last-child(2) .productDetails tr:not([style])",
+            index: "td[width]",
+            title: "td:not([width])",
+            length: false
+        },
+        {
             name: "Metal Archives",
             placeholder: "https://www.metal-archives.com/albums/*/*/*",
             parent: ".table_lyrics .even, .table_lyrics .odd",
@@ -138,6 +174,14 @@
             index: ".track-position",
             title: ".track-title span",
             length: ".track-time"
+        },
+        {
+            name: "Naxos Records",
+            placeholder: "https://www.naxos.com/catalogue/item.asp?item_code=*",
+            parent: "table[valign='top']",
+            index: "td:first-child",
+            title: "td:nth-child(4) b",
+            length: "td:nth-child(4)"
         },
         {
             name: "Qobuz",
