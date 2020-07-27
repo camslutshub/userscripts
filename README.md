@@ -103,6 +103,27 @@ Displays a link to the lyrics of your currently playing song via Last.fm.
 
 </details>
 
+## [T3ResizableConsole](https://raw.github.com/TheLastZombie/userscripts/master/T3ResizableConsole.user.js)
+
+Makes TYPO3's debug console resizable.
+
+<details>
+
+<summary>Screenshot</summary>
+
+![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/T3ResizableConsole.png)
+
+</details>
+
+<details>
+
+<summary>Changelog</summary>
+
+### Version 1.0.0
+- Initial release
+
+</details>
+
 ## [T3Xtend](https://raw.github.com/TheLastZombie/userscripts/master/T3Xtend.user.js)
 
 Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
