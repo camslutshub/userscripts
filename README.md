@@ -119,6 +119,9 @@ Makes TYPO3's debug console resizable.
 
 <summary>Changelog</summary>
 
+### Version 1.0.1
+- Fix `resizestart` and `resizeend` events not working
+
 ### Version 1.0.0
 - Initial release
 
