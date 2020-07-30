@@ -56,6 +56,27 @@ Enables collapsing (and expanding) of comments on Removeddit.
 
 </details>
 
+## [ExpandExpandExpand++](https://raw.github.com/TheLastZombie/userscripts/master/ExpandExpandExpand++.user.js)
+
+odification of "GitHub PR: expand, expand, expand!" with multiple small improvements.
+
+<details>
+
+<summary>Screenshot</summary>
+
+![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/ExpandExpandExpand++.png)
+
+</details>
+
+<details>
+
+<summary>Changelog</summary>
+
+### Version 1.0.0
+- Initial release
+
+</details>
+
 ## [GeniusNowPlaying](https://raw.github.com/TheLastZombie/userscripts/master/GeniusNowPlaying.user.js)
 
 Displays a link to the lyrics of your currently playing song via Last.fm.
