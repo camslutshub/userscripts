@@ -7,7 +7,6 @@
 // @homepageURL    https://github.com/TheLastZombie/userscripts/
 // @downloadURL    https://raw.github.com/TheLastZombie/userscripts/master/ExpandExpandExpand++.user.js
 // @author         findepi, TheLastZombie
-// @license        MIT
 // @match          https://github.com/*/*/issues/*
 // @match          https://github.com/*/*/pull/*
 // @grant          none
