@@ -200,6 +200,14 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Changelog</summary>
 
+### Version 1.9.0
+- Add support for multiple extractors
+- Add `regex` extractor
+- Add YouTube Music support
+- Add advanced documentation
+- Add `@supportURL` to metadata block
+- Add MIT/Expat license and notice for LibreJS
+
 ### Version 1.8.0
 - Add Amazon support
 - Add Beatport Classic support
