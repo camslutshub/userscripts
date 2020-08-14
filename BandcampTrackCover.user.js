@@ -1,1 +1,0 @@
-BandcampTrackCover.user.js

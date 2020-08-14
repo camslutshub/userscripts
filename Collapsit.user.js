@@ -1,1 +1,0 @@
-Collapsit.user.js
