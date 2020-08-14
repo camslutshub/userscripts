@@ -2,7 +2,7 @@
 
 This is where I store all of my smaller userscripts that I think don't need their own repository.
 
-## [BandcampTrackCover](https://raw.github.com/TheLastZombie/userscripts/master/user/BandcampTrackCover.user.js)
+## [BandcampTrackCover](https://raw.github.com/TheLastZombie/userscripts/master/user/BandcampTrackCover.user.js) <img width="16px" height="16px" src="https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/BandcampTrackCover.png">
 
 Forces showing track instead of album covers on Bandcamp.
 
@@ -43,7 +43,7 @@ Forces showing track instead of album covers on Bandcamp.
 
 </details>
 
-## [Collapsit](https://raw.github.com/TheLastZombie/userscripts/master/user/Collapsit.user.js)
+## [Collapsit](https://raw.github.com/TheLastZombie/userscripts/master/user/Collapsit.user.js) <img width="16px" height="16px" src="https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/Collapsit.ico">
 
 Enables collapsing (and expanding) of comments on Removeddit.
 
@@ -72,7 +72,7 @@ Enables collapsing (and expanding) of comments on Removeddit.
 
 </details>
 
-## [ExpandExpandExpand++](https://raw.github.com/TheLastZombie/userscripts/master/user/ExpandExpandExpand++.user.js)
+## [ExpandExpandExpand++](https://raw.github.com/TheLastZombie/userscripts/master/user/ExpandExpandExpand++.user.js)  <img width="16px" height="16px" src="https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/ExpandExpandExpand++.png">
 
 odification of "GitHub PR: expand, expand, expand!" with multiple small improvements.
 
@@ -101,7 +101,7 @@ odification of "GitHub PR: expand, expand, expand!" with multiple small improvem
 
 </details>
 
-## [GeniusNowPlaying](https://raw.github.com/TheLastZombie/userscripts/master/user/GeniusNowPlaying.user.js)
+## [GeniusNowPlaying](https://raw.github.com/TheLastZombie/userscripts/master/user/GeniusNowPlaying.user.js) <img width="16px" height="16px" src="https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/GeniusNowPlaying.ico">
 
 Displays a link to the lyrics of your currently playing song via Last.fm.
 
@@ -156,7 +156,7 @@ Displays a link to the lyrics of your currently playing song via Last.fm.
 
 </details>
 
-## [T3ResizableConsole](https://raw.github.com/TheLastZombie/userscripts/master/user/T3ResizableConsole.user.js)
+## [T3ResizableConsole](https://raw.github.com/TheLastZombie/userscripts/master/user/T3ResizableConsole.user.js) <img width="16px" height="16px" src="https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/T3ResizableConsole.png">
 
 Makes TYPO3's debug console resizable.
 
@@ -188,7 +188,7 @@ Makes TYPO3's debug console resizable.
 
 </details>
 
-## [T3Xtend](https://raw.github.com/TheLastZombie/userscripts/master/user/T3Xtend.user.js)
+## [T3Xtend](https://raw.github.com/TheLastZombie/userscripts/master/user/T3Xtend.user.js) <img width="16px" height="16px" src="https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/T3Xtend.ico">
 
 Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
 
@@ -232,7 +232,7 @@ Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
 
 </details>
 
-## [TracklistToRYM](https://raw.github.com/TheLastZombie/userscripts/master/user/TracklistToRYM.user.js)
+## [TracklistToRYM](https://raw.github.com/TheLastZombie/userscripts/master/user/TracklistToRYM.user.js) <img width="16px" height="16px" src="https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/TracklistToRYM.png">
 
 Imports an album's tracklist from various sources into Rate Your Music.
 
@@ -354,7 +354,7 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 </details>
 
-## [ViewOnYP](https://raw.github.com/TheLastZombie/userscripts/master/user/ViewOnYP.user.js)
+## [ViewOnYP](https://raw.github.com/TheLastZombie/userscripts/master/user/ViewOnYP.user.js) <img width="16px" height="16px" src="https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/ViewOnYP.ico">
 
 Adds a YP button to the social links of Patreon artists.
 
