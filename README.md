@@ -2,7 +2,7 @@
 
 This is where I store all of my smaller userscripts that I think don't need their own repository.
 
-## [BandcampTrackCover](https://raw.github.com/TheLastZombie/userscripts/master/BandcampTrackCover.user.js)
+## [BandcampTrackCover](https://raw.github.com/TheLastZombie/userscripts/master/user/BandcampTrackCover.user.js)
 
 Forces showing track instead of album covers on Bandcamp.
 
@@ -10,13 +10,21 @@ Forces showing track instead of album covers on Bandcamp.
 
 <summary>Screenshot</summary>
 
-![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/BandcampTrackCover.png)
+![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/previews/BandcampTrackCover.png)
 
 </details>
 
 <details>
 
 <summary>Changelog</summary>
+
+### Version 1.0.4
+- Add `@supportURL` to metadata block
+- Add `@updateURL` to metadata block
+- Move script to subfolder (with symlink)
+- Add MIT/Expat license and notice for LibreJS
+- Move icon to GitHub repository
+- Use JavaScript Standard style
 
 ### Version 1.0.3
 - Add userscript icon
@@ -35,7 +43,7 @@ Forces showing track instead of album covers on Bandcamp.
 
 </details>
 
-## [Collapsit](https://raw.github.com/TheLastZombie/userscripts/master/Collapsit.user.js)
+## [Collapsit](https://raw.github.com/TheLastZombie/userscripts/master/user/Collapsit.user.js)
 
 Enables collapsing (and expanding) of comments on Removeddit.
 
@@ -43,7 +51,7 @@ Enables collapsing (and expanding) of comments on Removeddit.
 
 <summary>Screenshot</summary>
 
-![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/Collapsit.png)
+![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/previews/Collapsit.png)
 
 </details>
 
@@ -51,12 +59,20 @@ Enables collapsing (and expanding) of comments on Removeddit.
 
 <summary>Changelog</summary>
 
+### Version 1.0.1
+- Add `@supportURL` to metadata block
+- Add `@updateURL` to metadata block
+- Move script to subfolder (with symlink)
+- Add MIT/Expat license and notice for LibreJS
+- Move icon to GitHub repository
+- Use JavaScript Standard style
+
 ### Version 1.0.0
 - Initial release
 
 </details>
 
-## [ExpandExpandExpand++](https://raw.github.com/TheLastZombie/userscripts/master/ExpandExpandExpand++.user.js)
+## [ExpandExpandExpand++](https://raw.github.com/TheLastZombie/userscripts/master/user/ExpandExpandExpand++.user.js)
 
 odification of "GitHub PR: expand, expand, expand!" with multiple small improvements.
 
@@ -64,7 +80,7 @@ odification of "GitHub PR: expand, expand, expand!" with multiple small improvem
 
 <summary>Screenshot</summary>
 
-![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/ExpandExpandExpand++.png)
+![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/previews/ExpandExpandExpand++.png)
 
 </details>
 
@@ -72,12 +88,20 @@ odification of "GitHub PR: expand, expand, expand!" with multiple small improvem
 
 <summary>Changelog</summary>
 
+### Version 1.0.1
+- Add `@supportURL` to metadata block
+- Add `@updateURL` to metadata block
+- Move script to subfolder (with symlink)
+- Add MIT/Expat license and notice for LibreJS
+- Move icon to GitHub repository
+- Use JavaScript Standard style
+
 ### Version 1.0.0
 - Initial release
 
 </details>
 
-## [GeniusNowPlaying](https://raw.github.com/TheLastZombie/userscripts/master/GeniusNowPlaying.user.js)
+## [GeniusNowPlaying](https://raw.github.com/TheLastZombie/userscripts/master/user/GeniusNowPlaying.user.js)
 
 Displays a link to the lyrics of your currently playing song via Last.fm.
 
@@ -85,13 +109,21 @@ Displays a link to the lyrics of your currently playing song via Last.fm.
 
 <summary>Screenshot</summary>
 
-![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/GeniusNowPlaying.png)
+![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/previews/GeniusNowPlaying.png)
 
 </details>
 
 <details>
 
 <summary>Changelog</summary>
+
+### Version 1.0.9
+- Add `@supportURL` to metadata block
+- Add `@updateURL` to metadata block
+- Move script to subfolder (with symlink)
+- Add MIT/Expat license and notice for LibreJS
+- Move icon to GitHub repository
+- Use JavaScript Standard style
 
 ### Version 1.0.8
 - Fix [#5](https://github.com/TheLastZombie/userscripts/issues/5)
@@ -124,7 +156,7 @@ Displays a link to the lyrics of your currently playing song via Last.fm.
 
 </details>
 
-## [T3ResizableConsole](https://raw.github.com/TheLastZombie/userscripts/master/T3ResizableConsole.user.js)
+## [T3ResizableConsole](https://raw.github.com/TheLastZombie/userscripts/master/user/T3ResizableConsole.user.js)
 
 Makes TYPO3's debug console resizable.
 
@@ -132,13 +164,21 @@ Makes TYPO3's debug console resizable.
 
 <summary>Screenshot</summary>
 
-![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/T3ResizableConsole.png)
+![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/previews/T3ResizableConsole.png)
 
 </details>
 
 <details>
 
 <summary>Changelog</summary>
+
+### Version 1.0.2
+- Add `@supportURL` to metadata block
+- Add `@updateURL` to metadata block
+- Move script to subfolder (with symlink)
+- Add MIT/Expat license and notice for LibreJS
+- Move icon to GitHub repository
+- Use JavaScript Standard style
 
 ### Version 1.0.1
 - Fix `resizestart` and `resizeend` events not working
@@ -148,7 +188,7 @@ Makes TYPO3's debug console resizable.
 
 </details>
 
-## [T3Xtend](https://raw.github.com/TheLastZombie/userscripts/master/T3Xtend.user.js)
+## [T3Xtend](https://raw.github.com/TheLastZombie/userscripts/master/user/T3Xtend.user.js)
 
 Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
 
@@ -156,13 +196,21 @@ Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
 
 <summary>Screenshot</summary>
 
-![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/T3Xtend.png)
+![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/previews/T3Xtend.png)
 
 </details>
 
 <details>
 
 <summary>Changelog</summary>
+
+### Version 1.1.3
+- Add `@supportURL` to metadata block
+- Add `@updateURL` to metadata block
+- Move script to subfolder (with symlink)
+- Add MIT/Expat license and notice for LibreJS
+- Move icon to GitHub repository
+- Use JavaScript Standard style
 
 ### Version 1.1.2
 - Add userscript icon
@@ -184,7 +232,7 @@ Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
 
 </details>
 
-## [TracklistToRYM](https://raw.github.com/TheLastZombie/userscripts/master/TracklistToRYM.user.js)
+## [TracklistToRYM](https://raw.github.com/TheLastZombie/userscripts/master/user/TracklistToRYM.user.js)
 
 Imports an album's tracklist from various sources into Rate Your Music.
 
@@ -192,13 +240,19 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Screenshot</summary>
 
-![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/TracklistToRYM.gif)
+![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/previews/TracklistToRYM.gif)
 
 </details>
 
 <details>
 
 <summary>Changelog</summary>
+
+### Version 1.10.1
+- Add `@updateURL` to metadata block
+- Move script to subfolder (with symlink)
+- Move icon to GitHub repository
+- Use JavaScript Standard style
 
 ### Version 1.10.0
 - Add `json` extractor
@@ -300,7 +354,7 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 </details>
 
-## [ViewOnYP](https://raw.github.com/TheLastZombie/userscripts/master/ViewOnYP.user.js)
+## [ViewOnYP](https://raw.github.com/TheLastZombie/userscripts/master/user/ViewOnYP.user.js)
 
 Adds a YP button to the social links of Patreon artists.
 
@@ -308,13 +362,21 @@ Adds a YP button to the social links of Patreon artists.
 
 <summary>Screenshot</summary>
 
-![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/ViewOnYP.png)
+![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/previews/ViewOnYP.png)
 
 </details>
 
 <details>
 
 <summary>Changelog</summary>
+
+### Version 1.0.4
+- Add `@supportURL` to metadata block
+- Add `@updateURL` to metadata block
+- Move script to subfolder (with symlink)
+- Add MIT/Expat license and notice for LibreJS
+- Move icon to GitHub repository
+- Use JavaScript Standard style
 
 ### Version 1.0.3
 - Add userscript icon
