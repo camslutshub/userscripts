@@ -200,6 +200,16 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Changelog</summary>
 
+### Version 1.10.0
+- Add `json` extractor
+- Add length support for Beatport Classic
+- Add length support for Free Music Archive
+- Fix [#6](https://github.com/TheLastZombie/userscripts/issues/6)
+- Fix GitHub issue URL shown if extractor is invalid
+- Modularize common actions
+- Improve string parsing and conversion
+- Revert: Add advanced documentation
+
 ### Version 1.9.0
 - Add support for multiple extractors
 - Add `regex` extractor
