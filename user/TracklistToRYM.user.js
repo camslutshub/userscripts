@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           TracklistToRYM
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.10.1
+// @version        1.11.0
 // @description    Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @homepageURL    https://github.com/TheLastZombie/userscripts/
@@ -32,6 +32,7 @@
 // @connect        musik-sammler.de
 // @connect        naxos.com
 // @connect        qobuz.com
+// @connect        vinyl-digital.com
 // @connect        youtube.com
 // @connect        *
 // @grant          GM.xmlHttpRequest
@@ -44,7 +45,7 @@
 (function () {
   const parent = $("input[value='Copy Tracks']").parent()
 
-  const sites = [
+  const sitestmp = [
     {
       name: 'AllMusic',
       extractor: 'node',
@@ -217,6 +218,15 @@
       length: '.track__item--duration'
     },
     {
+      name: 'Vinyl Digital',
+      extractor: 'node',
+      placeholder: 'https://vinyl-digital.com/*/*',
+      parent: '#playlist_table tr:not(:first-child):not([style])',
+      index: '.track',
+      title: '.tracktitle span',
+      length: 'td:not([class])'
+    },
+    {
       name: 'YouTube Music',
       extractor: 'regex',
       placeholder: 'https://music.youtube.com/playlist?list=*',
@@ -227,12 +237,16 @@
     }
   ]
 
+  if (!localStorage.getItem('ttrym-sites')) localStorage.setItem('ttrym-sites', sitestmp.map(x => x.name))
+  var sites = sitestmp.filter(x => localStorage.getItem('ttrym-sites').includes(x.name))
+
   parent.width(489)
-  parent.append("<br><br>Or import tracklists from other sources using TracklistToRYM.<p style='display:flex'><select id='ttrym-site'>" +
-        sites.map(x => "<option value='" + x.name + "'>" + x.name + '</option>').join('') +
-        "</select><input id='ttrym-link' placeholder='Album URL' style='flex:1'></input><button id='ttrym-submit'>Import</button></p>" +
-        "<p><input id='ttrym-sources' name='ttrym-sources' type='checkbox' checked><label for='ttrym-sources'> Add URL to sources </label>" +
-        "<input id='ttrym-append' name='ttrym-append' type='checkbox'><label for='ttrym-append'> Append instead of replace </label></p>")
+  parent.append("<br><br>Or import tracklists from other sites using TracklistToRYM.<p style='display:flex'><select id='ttrym-site'>" +
+                sites.map(x => "<option value='" + x.name + "'>" + x.name + '</option>').join('') +
+                "</select><input id='ttrym-link' placeholder='Album URL' style='flex:1'></input><button id='ttrym-submit'>Import</button></p>" +
+                "<p><input id='ttrym-sources' name='ttrym-sources' type='checkbox' checked><label for='ttrym-sources'> Add URL to sources </label>" +
+                "<input id='ttrym-append' name='ttrym-append' type='checkbox'><label for='ttrym-append'> Append instead of replace </label>" +
+                "<button id='ttrym-sites' style='float:right'>Manage sites</button></p>")
 
   $('#ttrym-site').bind('change', function () {
     $('#ttrym-link').attr('placeholder', sites.filter(x => x.name === $(this).val())[0].placeholder)
@@ -333,6 +347,43 @@
     }
   })
 
+  $('#ttrym-sites').click(function () {
+    $('body').append("<div id='ttrym-sites-wrapper' style='box-sizing:border-box;width:100vw;height:100vh;position:fixed;top:0;background:rgba(255,255,255,0.75);padding:50px;z-index:80;'>" +
+                     "<div class='submit_step_box' style='padding:25px'><span class='submit_step_header' style='margin:0!important'>" +
+                     "TracklistToRYM: <span class='submit_step_header_title'>Manage sites</span></span>" +
+                     "<p style='margin-top:15px'>Below, you can choose which sites to show and which ones to hide in the TracklistToRYM selection box.<br>" +
+                     'A reload is required to apply any changes. If, when saving, no sites are selected, all of them will be enabled again.<br>' +
+                     "Note that newly added sites are disabled by default, so you may want to check this dialog when there's been an update.</p>" +
+                     sitestmp.map(x => "<input type='checkbox' class='ttrym-checkbox' name='" + x.name + "'><label style='position:relative;bottom:3px'> " + x.name + " <span style='opacity:0.5;font-weight:lighter'>" + x.placeholder + '</span></label><br>').join('') +
+                     "<div style='margin-top:15px'><button id='ttrym-enable'>Enable all sites</button><button id='ttrym-disable' style='margin-left:10px'>Disable all sites</button></div>" +
+                     "<div style='margin-top:10px'><button id='ttrym-save'>Save and reload page</button><button id='ttrym-discard' style='margin-left:10px'>Close window without saving</button></div>" +
+                     '</div></div>')
+
+    $('.ttrym-checkbox').each(function () {
+      if (sites.map(x => x.name).includes($(this).attr('name'))) $(this).prop('checked', true)
+    })
+
+    $('#ttrym-enable').click(function () {
+      $('.ttrym-checkbox').prop('checked', true)
+    })
+
+    $('#ttrym-disable').click(function () {
+      $('.ttrym-checkbox').prop('checked', false)
+    })
+
+    $('#ttrym-save').click(function () {
+      var sites = $('.ttrym-checkbox:checked').map(function () {
+        return $(this).attr('name')
+      }).get()
+      localStorage.setItem('ttrym-sites', sites)
+      location.reload()
+    })
+
+    $('#ttrym-discard').click(function () {
+      $('#ttrym-sites-wrapper').remove()
+    })
+  })
+
   function clearMessages (levels) {
     if (!Array.isArray(levels)) levels = [levels]
     $(levels.map(x => '#ttrym-' + x).join(', ')).remove()
@@ -351,7 +402,9 @@
   }
 
   function parseLength (length) {
-    return length.match(/(\d+:)+\d+/)[0].replace(/^0+/, '')
+    var matches = length.match(/(\d+:)+\d+/)
+    if (matches) return matches[0].replace(/^0+/, '')
+    return length
   }
 
   function parseNode (node) {

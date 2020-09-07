@@ -248,6 +248,12 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Changelog</summary>
 
+### Version 1.11.0
+- Add Vinyl Digital support
+- Add enabling/disabling of sites
+- Improve confusing wording (sites/sources)
+- Fix error parsing undefined length
+
 ### Version 1.10.1
 - Add `@updateURL` to metadata block
 - Move script to subfolder (with symlink)
