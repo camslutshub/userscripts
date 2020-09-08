@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           TracklistToRYM
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.11.0
+// @version        1.11.1
 // @description    Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @homepageURL    https://github.com/TheLastZombie/userscripts/
@@ -349,14 +349,14 @@
 
   $('#ttrym-sites').click(function () {
     $('body').append("<div id='ttrym-sites-wrapper' style='box-sizing:border-box;width:100vw;height:100vh;position:fixed;top:0;background:rgba(255,255,255,0.75);padding:50px;z-index:80;'>" +
-                     "<div class='submit_step_box' style='padding:25px'><span class='submit_step_header' style='margin:0!important'>" +
+                     "<div class='submit_step_box' style='padding:25px;height:calc(100% - 50px);overflow:auto'><span class='submit_step_header' style='margin:0!important'>" +
                      "TracklistToRYM: <span class='submit_step_header_title'>Manage sites</span></span>" +
                      "<p style='margin-top:15px'>Below, you can choose which sites to show and which ones to hide in the TracklistToRYM selection box.<br>" +
                      'A reload is required to apply any changes. If, when saving, no sites are selected, all of them will be enabled again.<br>' +
                      "Note that newly added sites are disabled by default, so you may want to check this dialog when there's been an update.</p>" +
                      sitestmp.map(x => "<input type='checkbox' class='ttrym-checkbox' name='" + x.name + "'><label style='position:relative;bottom:3px'> " + x.name + " <span style='opacity:0.5;font-weight:lighter'>" + x.placeholder + '</span></label><br>').join('') +
                      "<div style='margin-top:15px'><button id='ttrym-enable'>Enable all sites</button><button id='ttrym-disable' style='margin-left:10px'>Disable all sites</button></div>" +
-                     "<div style='margin-top:10px'><button id='ttrym-save'>Save and reload page</button><button id='ttrym-discard' style='margin-left:10px'>Close window without saving</button></div>" +
+                     "<div style='margin-top:10px;margin-bottom:25px'><button id='ttrym-save'>Save and reload page</button><button id='ttrym-discard' style='margin-left:10px'>Close window without saving</button></div>" +
                      '</div></div>')
 
     $('.ttrym-checkbox').each(function () {

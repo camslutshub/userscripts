@@ -248,6 +248,9 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Changelog</summary>
 
+### Version 1.11.1
+- Allow scrolling in site selection menu
+
 ### Version 1.11.0
 - Add Vinyl Digital support
 - Add enabling/disabling of sites
