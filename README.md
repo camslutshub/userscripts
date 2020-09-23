@@ -248,6 +248,15 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Changelog</summary>
 
+### Version 1.12.0
+- Add Rate Your Music support
+- Rewrite site selection to settings menu
+- Add setting for default site
+- Make automatic site guessing optional
+- Improve message format, style and code
+- Store preferences in userscript storage
+- Add support for URL transformers
+
 ### Version 1.11.1
 - Allow scrolling in site selection menu
 

@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           TracklistToRYM
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.11.1
+// @version        1.12.0
 // @description    Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @homepageURL    https://github.com/TheLastZombie/userscripts/
@@ -31,10 +31,15 @@
 // @connect        musicbrainz.org
 // @connect        musik-sammler.de
 // @connect        naxos.com
+// @connect        rateyourmusic.com
 // @connect        qobuz.com
 // @connect        vinyl-digital.com
 // @connect        youtube.com
 // @connect        *
+// @grant          GM.getValue
+// @grant          GM_getValue
+// @grant          GM.setValue
+// @grant          GM_setValue
 // @grant          GM.xmlHttpRequest
 // @grant          GM_xmlhttpRequest
 // @require        https://greasemonkey.github.io/gm4-polyfill/gm4-polyfill.js
@@ -42,7 +47,7 @@
 // @license        MIT
 // ==/UserScript==
 
-(function () {
+(async function () {
   const parent = $("input[value='Copy Tracks']").parent()
 
   const sitestmp = [
@@ -218,6 +223,15 @@
       length: '.track__item--duration'
     },
     {
+      name: 'Rate Your Music',
+      extractor: 'node',
+      placeholder: 'https://rateyourmusic.com/release/album/*/*',
+      parent: "#tracks .track:not([style='text-align:right;'])",
+      index: '.tracklist_num',
+      title: "[itemprop='name']",
+      length: '.tracklist_duration'
+    },
+    {
       name: 'Vinyl Digital',
       extractor: 'node',
       placeholder: 'https://vinyl-digital.com/*/*',
@@ -237,26 +251,36 @@
     }
   ]
 
-  if (!localStorage.getItem('ttrym-sites')) localStorage.setItem('ttrym-sites', sitestmp.map(x => x.name))
-  var sites = sitestmp.filter(x => localStorage.getItem('ttrym-sites').includes(x.name))
+  if (localStorage.getItem('ttrym-sites')) {
+    await GM.setValue('sites', localStorage.getItem('ttrym-sites').split(','))
+    await GM.setValue('default', localStorage.getItem('ttrym-sites').split(',').sort()[0])
+    localStorage.removeItem('ttrym-sites')
+  }
+
+  if (await GM.getValue('sites') === undefined) await GM.setValue('sites', sitestmp.map(x => x.name))
+  if (await GM.getValue('default') === undefined) await GM.setValue('default', 'Rate Your Music')
+  if (await GM.getValue('guess') === undefined) await GM.setValue('guess', true)
+  if (await GM.getValue('append') === undefined) await GM.setValue('append', false)
+  if (await GM.getValue('sources') === undefined) await GM.setValue('sources', true)
+
+  var asyncFilterHelper = await GM.getValue('sites')
+  var sites = sitestmp.filter(x => asyncFilterHelper.includes(x.name))
 
   parent.width(489)
-  parent.append("<br><br>Or import tracklists from other sites using TracklistToRYM.<p style='display:flex'><select id='ttrym-site'>" +
-                sites.map(x => "<option value='" + x.name + "'>" + x.name + '</option>').join('') +
-                "</select><input id='ttrym-link' placeholder='Album URL' style='flex:1'></input><button id='ttrym-submit'>Import</button></p>" +
-                "<p><input id='ttrym-sources' name='ttrym-sources' type='checkbox' checked><label for='ttrym-sources'> Add URL to sources </label>" +
-                "<input id='ttrym-append' name='ttrym-append' type='checkbox'><label for='ttrym-append'> Append instead of replace </label>" +
-                "<button id='ttrym-sites' style='float:right'>Manage sites</button></p>")
+  parent.append("<br><br><p style='margin-bottom:2px'>Or import tracklists from other sites using TracklistToRYM.<button type='button' id='ttrym-settings' style='float:right'>Settings</button></p>" +
+                "<p style='display:flex'><select id='ttrym-site'>" + sites.map(x => "<option value='" + x.name + "'>" + x.name + '</option>').join('') + '</select>' +
+                "<input id='ttrym-link' placeholder='Album URL' style='flex:1'></input><button id='ttrym-submit'>Import</button></p>")
 
-  $('#ttrym-site').bind('change', function () {
+  $('#ttrym-site').bind('guess', function () {
     $('#ttrym-link').attr('placeholder', sites.filter(x => x.name === $(this).val())[0].placeholder)
   })
-  $('#ttrym-site').trigger('change')
+  $('#ttrym-site').val(await GM.getValue('default'))
+  $('#ttrym-site').trigger('guess')
 
-  $('#ttrym-submit').click(function () {
-    clearMessages(['success', 'warning', 'error'])
+  $('#ttrym-submit').click(async function () {
+    clearMessages()
     if (!$('#ttrym-link').val()) return printMessage('error', 'No URL specified! Please enter one and try again.')
-    printMessage('info', 'Importing, please wait...')
+    printMessage('progress', 'Importing, please wait...')
 
     try {
       var site = $('#ttrym-site').val()
@@ -265,18 +289,18 @@
 
       if (!globToRegex(input.placeholder).test(link)) {
         var suggestion = sites.filter(x => globToRegex(x.placeholder).test(link))[0]
-        if (suggestion) {
+        if (suggestion && await GM.getValue('guess')) {
           input = suggestion
           $('#ttrym-site').val(input.name)
         } else {
-          printMessage('warning', "Warning: Entered URL does not match the selected site's placeholder. Request may not succeed.")
+          printMessage('warning', "Entered URL does not match the selected site's placeholder. Request may not succeed.")
         }
       }
 
       GM.xmlHttpRequest({
         method: 'GET',
-        url: link,
-        onload: (response) => {
+        url: input.transformer ? input.transformer(link) : link,
+        onload: async (response) => {
           var data = response.responseText
 
           var result = ''
@@ -314,54 +338,77 @@
               break
 
             default:
-              clearMessages(['info', 'warning'])
-              return printMessage('error', 'Error: ' + input.extractor + " is not a valid extractor. This is (probably) not your fault, please report this on <a href='https://github.com/TheLastZombie/userscripts/issues/new?title=" + input.extractor + "%20is%20not%20a%20valid%20extractor&labels=TracklistToRYM'>GitHub</a>.")
+              return printMessage('error', input.extractor + " is not a valid extractor. This is (probably) not your fault, please report this on <a href='https://github.com/TheLastZombie/userscripts/issues/new?title=" + input.extractor + "%20is%20not%20a%20valid%20extractor&labels=TracklistToRYM'>GitHub</a>.")
           }
 
           if (amount === 0) {
-            clearMessages('info')
             return printMessage('warning', 'Did not find any tracks. Please check your URL and try again.')
           }
 
           goAdvanced()
-          $('#track_advanced').val($('#ttrym-append').prop('checked') ? $('#track_advanced').val() + result : result)
+          $('#track_advanced').val(await GM.getValue('append') ? $('#track_advanced').val() + result : result)
           goSimple()
 
-          if ($('#ttrym-sources').prop('checked') && !$('#notes').val().includes($('#ttrym-link').val())) {
+          if (await GM.getValue('sources') && !$('#notes').val().includes($('#ttrym-link').val())) {
             $('#notes').val($('#notes').val() + ($('#notes').val() === '' ? '' : '\n') + $('#ttrym-link').val())
           }
           $('#ttrym-link').val('')
 
-          printMessage('success', 'Successfully imported ' + amount + ' tracks.')
-          clearMessages('info')
+          printMessage('success', 'Imported ' + amount + ' tracks.')
         },
 
         onerror: () => {
           printMessage('error', response.responseText)
-          clearMessages('info')
         }
       })
     } catch (e) {
       printMessage('error', e.toString())
-      clearMessages('info')
     }
   })
 
-  $('#ttrym-sites').click(function () {
-    $('body').append("<div id='ttrym-sites-wrapper' style='box-sizing:border-box;width:100vw;height:100vh;position:fixed;top:0;background:rgba(255,255,255,0.75);padding:50px;z-index:80;'>" +
+  $('#ttrym-settings').click(async function () {
+    $('body').append("<div id='ttrym-settings-wrapper' style='box-sizing:border-box;width:100vw;height:100vh;position:fixed;top:0;background:rgba(255,255,255,0.75);padding:50px;z-index:80'>" +
                      "<div class='submit_step_box' style='padding:25px;height:calc(100% - 50px);overflow:auto'><span class='submit_step_header' style='margin:0!important'>" +
-                     "TracklistToRYM: <span class='submit_step_header_title'>Manage sites</span></span>" +
-                     "<p style='margin-top:15px'>Below, you can choose which sites to show and which ones to hide in the TracklistToRYM selection box.<br>" +
-                     'A reload is required to apply any changes. If, when saving, no sites are selected, all of them will be enabled again.<br>' +
+                     "TracklistToRYM: <span class='submit_step_header_title'>Settings</span></span>" +
+                     "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
+                     "<p><b class='submit_field_header'>Manage sites</b><br>" +
+                     'Choose which sites to show and which ones to hide in the TracklistToRYM selection box.<br>' +
                      "Note that newly added sites are disabled by default, so you may want to check this dialog when there's been an update.</p>" +
-                     sitestmp.map(x => "<input type='checkbox' class='ttrym-checkbox' name='" + x.name + "'><label style='position:relative;bottom:3px'> " + x.name + " <span style='opacity:0.5;font-weight:lighter'>" + x.placeholder + '</span></label><br>').join('') +
+                     sitestmp.map(x => "<input type='checkbox' class='ttrym-checkbox' name='" + x.name + "'><label style='position:relative;bottom:2px'> " + x.name + " <span style='opacity:0.5;font-weight:lighter'>" + x.placeholder + '</span></label><br>').join('') +
                      "<div style='margin-top:15px'><button id='ttrym-enable'>Enable all sites</button><button id='ttrym-disable' style='margin-left:10px'>Disable all sites</button></div>" +
-                     "<div style='margin-top:10px;margin-bottom:25px'><button id='ttrym-save'>Save and reload page</button><button id='ttrym-discard' style='margin-left:10px'>Close window without saving</button></div>" +
+                     "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
+                     "<p><b class='submit_field_header'>Set default site</b><br>" +
+                     'Choose which site should be selected by default; you may choose the site that you use the most.<br>' +
+                     "If the chosen site isn't already, it will be enabled automatically.</p>" +
+                     "<select id='ttrym-default'>" + sitestmp.map(x => "<option value='" + x.name + "'>" + x.name + '</option>').join('') + '</select>' +
+                     "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
+                     "<p><b class='submit_field_header'>Auto-select sites</b><br>" +
+                     'Select whether to guess sites from their URL and automatically select them.<br>' +
+                     'This has been the default behavior since version 1.10.0.</p>' +
+                     "<input id='ttrym-change' name='ttrym-change' type='checkbox'></input><label for='ttrym-change' style='position:relative;bottom:2px'> Guess and automatically select sites</label>" +
+                     "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
+                     "<p><b class='submit_field_header'>Append instead of replace</b><br>" +
+                     'Enabling this will allow you to combine multiple releases into one by keeping previous tracks when inserting new ones.</p>' +
+                     "<input id='ttrym-append' name='ttrym-append' type='checkbox'></input><label for='ttrym-append' style='position:relative;bottom:2px'> Append tracks to list</label>" +
+                     "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
+                     "<p><b class='submit_field_header'>Add URL to sources</b><br>" +
+                     'Select whether to automatically add the entered URL to the submission sources in step five.<br>' +
+                     'This has been the default behavior since version 1.3.0.</p>' +
+                     "<input id='ttrym-sources' name='ttrym-sources' type='checkbox'></input><label for='ttrym-sources' style='position:relative;bottom:2px'> Automatically add URLs to sources</label>" +
+                     "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
+                     '<p>FYI: You can also directly edit these settings in your userscript manager:</p>' +
+                     '<p><b>Tampermonkey:</b> Dashboard → Installed userscripts → TracklistToRYM → Edit → Storage<br>' +
+                     '<b>Violentmonkey:</b> Open Dashboard → Installed scripts → TracklistToRYM → Edit → Values</p>' +
+                     "<div style='margin-bottom:25px'><button id='ttrym-save'>Save and reload page</button><button id='ttrym-discard' style='margin-left:10px'>Close window without saving</button></div>" +
                      '</div></div>')
 
     $('.ttrym-checkbox').each(function () {
       if (sites.map(x => x.name).includes($(this).attr('name'))) $(this).prop('checked', true)
     })
+    $('#ttrym-default').val(await GM.getValue('default'))
+    $('#ttrym-change').prop('checked', await GM.getValue('guess'))
+    $('#ttrym-append').prop('checked', await GM.getValue('append'))
+    $('#ttrym-sources').prop('checked', await GM.getValue('sources'))
 
     $('#ttrym-enable').click(function () {
       $('.ttrym-checkbox').prop('checked', true)
@@ -371,20 +418,29 @@
       $('.ttrym-checkbox').prop('checked', false)
     })
 
-    $('#ttrym-save').click(function () {
+    $('#ttrym-save').click(async function () {
       var sites = $('.ttrym-checkbox:checked').map(function () {
         return $(this).attr('name')
       }).get()
-      localStorage.setItem('ttrym-sites', sites)
+
+      await GM.setValue('sites', sites)
+      await GM.setValue('default', $('#ttrym-default').val())
+      await GM.setValue('guess', $('#ttrym-change').is(':checked'))
+      await GM.setValue('append', $('#ttrym-append').is(':checked'))
+      await GM.setValue('sources', $('#ttrym-sources').is(':checked'))
+
+      if (!sites.includes($('#ttrym-default').val())) await GM.setValue('sites', sites.concat($('#ttrym-default').val()))
+
       location.reload()
     })
 
     $('#ttrym-discard').click(function () {
-      $('#ttrym-sites-wrapper').remove()
+      $('#ttrym-settings-wrapper').remove()
     })
   })
 
   function clearMessages (levels) {
+    if (!levels) levels = ['progress', 'success', 'warning', 'error']
     if (!Array.isArray(levels)) levels = [levels]
     $(levels.map(x => '#ttrym-' + x).join(', ')).remove()
   }
@@ -413,12 +469,12 @@
 
   function printMessage (level, message) {
     var colors = {
-      info: '#777',
+      progress: '#777',
       success: 'green',
       warning: 'orange',
       error: 'red'
     }
-    parent.append("<p id='ttrym-" + level + "' style='color:" + colors[level] + "'>" + message + '</p>')
+    parent.append("<p id='ttrym-" + level + "' style='color:" + colors[level] + "'>" + level.charAt(0).toUpperCase() + level.slice(1) + ': ' + message + '</p>')
   }
 
   function reduceJson (object, path) {
