@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           GeniusNowPlaying
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.0.9
+// @version        1.1.0
 // @description    Displays a link to the lyrics of your currently playing song via Last.fm.
 // @description:de Zeigt einen Link zu dem Text des momentan spielenden Songs via Last.fm.
 // @homepageURL    https://github.com/TheLastZombie/userscripts/
@@ -13,16 +13,33 @@
 // @updateURL      https://raw.github.com/TheLastZombie/userscripts/master/meta/GeniusNowPlaying.meta.js
 // @author         TheLastZombie
 // @match          https://genius.com/
-// @grant          none
+// @grant          GM.getValue
+// @grant          GM_getValue
+// @grant          GM.setValue
+// @grant          GM_setValue
 // @require        https://code.jquery.com/jquery-3.5.1.js
+// @require        https://greasemonkey.github.io/gm4-polyfill/gm4-polyfill.js
 // @icon           https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/GeniusNowPlaying.ico
 // @license        MIT
 // ==/UserScript==
 
-$(function () {
-  var username = window.localStorage.getItem('gnp-username')
-  var fmkey = window.localStorage.getItem('gnp-fmkey')
-  var geniuskey = window.localStorage.getItem('gnp-geniuskey')
+$(async function () {
+  if (localStorage.getItem('gnp-username')) {
+    await GM.setValue('username', localStorage.getItem('gnp-username'))
+    localStorage.removeItem('gnp-username')
+  }
+  if (localStorage.getItem('gnp-fmkey')) {
+    await GM.setValue('fmkey', localStorage.getItem('gnp-fmkey'))
+    localStorage.removeItem('gnp-fmkey')
+  }
+  if (localStorage.getItem('gnp-geniuskey')) {
+    await GM.setValue('geniuskey', localStorage.getItem('gnp-geniuskey'))
+    localStorage.removeItem('gnp-geniuskey')
+  }
+
+  var username = await GM.getValue('username')
+  var fmkey = await GM.getValue('fmkey')
+  var geniuskey = await GM.getValue('geniuskey')
 
   if (!username || !fmkey || !geniuskey) {
     $('.HomeContentdesktop__CenteredFlexColumn-sc-1xfg7l1-1').prepend("<div id='gnp-config' style='padding-top: 72px; text-align: center;'><p>Thank you for installing GeniusNowPlaying! To get started, please enter the following values:</p></div>")
@@ -44,17 +61,17 @@ $(function () {
 
   $('#gnp-button-username').click(function () {
     if ($(this).prev().val() === '') return
-    window.localStorage.setItem('gnp-username', $(this).prev().val())
+    await GM.setValue('username', $(this).prev().val())
     $(this).parent().hide()
   })
   $('#gnp-button-fmkey').click(function () {
     if ($(this).prev().val() === '') return
-    window.localStorage.setItem('gnp-fmkey', $(this).prev().val())
+    await GM.setValue('fmkey', $(this).prev().val())
     $(this).parent().hide()
   })
   $('#gnp-button-geniuskey').click(function () {
     if ($(this).prev().val() === '') return
-    window.localStorage.setItem('gnp-geniuskey', $(this).prev().val())
+    await GM.setValue('geniuskey', $(this).prev().val())
     $(this).parent().hide()
   })
 

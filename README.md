@@ -121,6 +121,9 @@ Displays a link to the lyrics of your currently playing song via Last.fm.
 
 <summary>Changelog</summary>
 
+### Version 1.1.0
+- Store preferences in userscript storage
+
 ### Version 1.0.9
 - Add `@supportURL` to metadata block
 - Add `@updateURL` to metadata block
