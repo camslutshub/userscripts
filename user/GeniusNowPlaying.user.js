@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           GeniusNowPlaying
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.1.0
+// @version        1.1.1
 // @description    Displays a link to the lyrics of your currently playing song via Last.fm.
 // @description:de Zeigt einen Link zu dem Text des momentan spielenden Songs via Last.fm.
 // @homepageURL    https://github.com/TheLastZombie/userscripts/
@@ -59,17 +59,17 @@ $(async function () {
     $('#gnp-config').append("<p style='margin-top: 25px;'>After saving all values, simply reload this page and you should be good to go. Enjoy!</p>")
   }
 
-  $('#gnp-button-username').click(function () {
+  $('#gnp-button-username').click(async function () {
     if ($(this).prev().val() === '') return
     await GM.setValue('username', $(this).prev().val())
     $(this).parent().hide()
   })
-  $('#gnp-button-fmkey').click(function () {
+  $('#gnp-button-fmkey').click(async function () {
     if ($(this).prev().val() === '') return
     await GM.setValue('fmkey', $(this).prev().val())
     $(this).parent().hide()
   })
-  $('#gnp-button-geniuskey').click(function () {
+  $('#gnp-button-geniuskey').click(async function () {
     if ($(this).prev().val() === '') return
     await GM.setValue('geniuskey', $(this).prev().val())
     $(this).parent().hide()
