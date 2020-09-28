@@ -2,8 +2,8 @@
 
 Various userscripts for various sites that do various things.
 
-GitHub: https://github.com/TheLastZombie/userscripts
-Greasy Fork: https://greasyfork.org/users/216460
+GitHub: https://github.com/TheLastZombie/userscripts  
+Greasy Fork: https://greasyfork.org/users/216460  
 OpenUserJS: https://openuserjs.org/users/TheLastZombie
 
 ## [BandcampTrackCover](https://raw.github.com/TheLastZombie/userscripts/master/user/BandcampTrackCover.user.js) <img width="16px" height="16px" src="https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/BandcampTrackCover.png">
