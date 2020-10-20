@@ -384,19 +384,28 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 ## [ViewOnYP](https://raw.github.com/TheLastZombie/userscripts/master/user/ViewOnYP.user.js) <img width="16px" height="16px" src="https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/ViewOnYP.ico">
 
-Adds a YP button to the social links of Patreon artists.
+Links membership platforms to yiff.party and Kemono.
 
 <details>
 
 <summary>Screenshot</summary>
 
-![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/previews/ViewOnYP.png)
+![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/previews/ViewOnYP.gif)
 
 </details>
 
 <details>
 
 <summary>Changelog</summary>
+
+### Version 2.0.0
+- Use overlay instead of inserting (fixes Patreon → yiff.party)
+- Add DLsite → Kemono support
+- Add Fantia → yiff.party support
+- Add Gumroad → Kemono support
+- Add pixivFANBOX → Kemono support
+- Add SubscribeStar → Kemono support
+- Use native JS instead of jQuery
 
 ### Version 1.0.4
 - Add `@supportURL` to metadata block
