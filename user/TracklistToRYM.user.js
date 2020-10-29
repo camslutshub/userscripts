@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           TracklistToRYM
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.12.0
+// @version        1.12.1
 // @description    Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @homepageURL    https://github.com/TheLastZombie/userscripts/
@@ -271,11 +271,11 @@
                 "<p style='display:flex'><select id='ttrym-site'>" + sites.map(x => "<option value='" + x.name + "'>" + x.name + '</option>').join('') + '</select>' +
                 "<input id='ttrym-link' placeholder='Album URL' style='flex:1'></input><button id='ttrym-submit'>Import</button></p>")
 
-  $('#ttrym-site').bind('guess', function () {
+  $('#ttrym-site').bind('change', function () {
     $('#ttrym-link').attr('placeholder', sites.filter(x => x.name === $(this).val())[0].placeholder)
   })
   $('#ttrym-site').val(await GM.getValue('default'))
-  $('#ttrym-site').trigger('guess')
+  $('#ttrym-site').trigger('change')
 
   $('#ttrym-submit').click(async function () {
     clearMessages()

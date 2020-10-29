@@ -258,6 +258,9 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Changelog</summary>
 
+### Version 1.12.1
+- Fix placeholder not updating
+
 ### Version 1.12.0
 - Add Rate Your Music support
 - Rewrite site selection to settings menu
