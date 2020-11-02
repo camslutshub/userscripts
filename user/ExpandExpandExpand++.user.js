@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           ExpandExpandExpand++
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.0.1
+// @version        1.0.2
 // @description    Modification of "GitHub PR: expand, expand, expand!" with multiple small improvements.
 // @description:de Modifikation von "GitHub PR: expand, expand, expand!" mit mehreren kleinen Verbesserungen.
 // @homepageURL    https://github.com/TheLastZombie/userscripts/
@@ -15,30 +15,29 @@
 // @match          https://github.com/*/*/issues/*
 // @match          https://github.com/*/*/pull/*
 // @grant          none
-// @require        https://code.jquery.com/jquery-3.5.1.min.js
 // @icon           https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/ExpandExpandExpand++.png
 // @license        MIT
 // ==/UserScript==
 
 (function () {
-  if ($('.ajax-pagination-btn').length) $('.pagehead-actions').prepend("<li><a id='_f_expand_expand' class='btn btn-sm'>Expand all</a></li>")
-  $('#_f_expand_expand').click(expand)
+  if (document.getElementsByClassName('ajax-pagination-btn').length) document.getElementsByClassName('pagehead-actions')[0].insertAdjacentHTML('afterbegin', "<li><a id='_f_expand_expand' class='btn btn-sm'>Expand all</a></li>")
+  document.getElementById('_f_expand_expand').onclick = expand
 
-  function expand () {
-    var btnMeta = $('#_f_expand_expand')
-    var btnLoad = $('.ajax-pagination-btn:visible:contains(Load more)')
-    var btnWait = $('.ajax-pagination-btn:visible:contains(Loading)')
+  function expand() {
+    var btnMeta = document.getElementById('_f_expand_expand')
+    var btnLoad = Array.from(document.querySelectorAll('.ajax-pagination-btn')).filter(x => x.textContent.includes('Load more'))[0]
+    var btnWait = Array.from(document.querySelectorAll('.ajax-pagination-btn')).filter(x => x.textContent.includes('Loading'))[0]
 
-    btnMeta.attr('aria-disabled', 'true')
+    btnMeta.setAttribute('aria-disabled', 'true')
 
-    if (btnLoad.length) {
-      btnMeta.text('Expanding ' + btnLoad.prev().text().match(/\d+/).toString() + ' items...')
+    if (btnLoad) {
+      btnMeta.innerHTML = 'Expanding ' + btnLoad.previousElementSibling.textContent.match(/\d+/).toString() + ' items...'
       btnLoad.click()
       setTimeout(expand, 25)
-    } else if (btnWait.length) {
+    } else if (btnWait) {
       setTimeout(expand, 25)
     } else {
-      btnMeta.remove()
+      btnMeta.parentNode.removeChild(btnMeta)
     }
   }
 })()

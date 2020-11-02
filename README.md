@@ -92,6 +92,9 @@ odification of "GitHub PR: expand, expand, expand!" with multiple small improvem
 
 <summary>Changelog</summary>
 
+### Version 1.0.2
+- Remove jQuery dependency
+
 ### Version 1.0.1
 - Add `@supportURL` to metadata block
 - Add `@updateURL` to metadata block
