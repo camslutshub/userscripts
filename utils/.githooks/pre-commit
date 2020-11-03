@@ -2,6 +2,10 @@
 
 git stash -k -u
 
+cd utils
+npm i
+cd ..
+
 node utils/lint.js
 node utils/meta.js
 
