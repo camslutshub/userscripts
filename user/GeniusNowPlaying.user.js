@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           GeniusNowPlaying
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.1.1
+// @version        1.1.2
 // @description    Displays a link to the lyrics of your currently playing song via Last.fm.
 // @description:de Zeigt einen Link zu dem Text des momentan spielenden Songs via Last.fm.
 // @homepageURL    https://github.com/TheLastZombie/userscripts/
@@ -37,9 +37,9 @@ $(async function () {
     localStorage.removeItem('gnp-geniuskey')
   }
 
-  var username = await GM.getValue('username')
-  var fmkey = await GM.getValue('fmkey')
-  var geniuskey = await GM.getValue('geniuskey')
+  const username = await GM.getValue('username')
+  const fmkey = await GM.getValue('fmkey')
+  const geniuskey = await GM.getValue('geniuskey')
 
   if (!username || !fmkey || !geniuskey) {
     $('.HomeContentdesktop__CenteredFlexColumn-sc-1xfg7l1-1').prepend("<div id='gnp-config' style='padding-top: 72px; text-align: center;'><p>Thank you for installing GeniusNowPlaying! To get started, please enter the following values:</p></div>")

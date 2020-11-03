@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           ExpandExpandExpand++
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.0.2
+// @version        1.0.3
 // @description    Modification of "GitHub PR: expand, expand, expand!" with multiple small improvements.
 // @description:de Modifikation von "GitHub PR: expand, expand, expand!" mit mehreren kleinen Verbesserungen.
 // @homepageURL    https://github.com/TheLastZombie/userscripts/

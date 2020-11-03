@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           ExpandExpandExpand++
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.0.2
+// @version        1.0.3
 // @description    Modification of "GitHub PR: expand, expand, expand!" with multiple small improvements.
 // @description:de Modifikation von "GitHub PR: expand, expand, expand!" mit mehreren kleinen Verbesserungen.
 // @homepageURL    https://github.com/TheLastZombie/userscripts/
@@ -23,10 +23,10 @@
   if (document.getElementsByClassName('ajax-pagination-btn').length) document.getElementsByClassName('pagehead-actions')[0].insertAdjacentHTML('afterbegin', "<li><a id='_f_expand_expand' class='btn btn-sm'>Expand all</a></li>")
   document.getElementById('_f_expand_expand').onclick = expand
 
-  function expand() {
-    var btnMeta = document.getElementById('_f_expand_expand')
-    var btnLoad = Array.from(document.querySelectorAll('.ajax-pagination-btn')).filter(x => x.textContent.includes('Load more'))[0]
-    var btnWait = Array.from(document.querySelectorAll('.ajax-pagination-btn')).filter(x => x.textContent.includes('Loading'))[0]
+  function expand () {
+    const btnMeta = document.getElementById('_f_expand_expand')
+    const btnLoad = Array.from(document.querySelectorAll('.ajax-pagination-btn')).filter(x => x.textContent.includes('Load more'))[0]
+    const btnWait = Array.from(document.querySelectorAll('.ajax-pagination-btn')).filter(x => x.textContent.includes('Loading'))[0]
 
     btnMeta.setAttribute('aria-disabled', 'true')
 

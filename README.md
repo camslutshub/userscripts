@@ -92,6 +92,9 @@ odification of "GitHub PR: expand, expand, expand!" with multiple small improvem
 
 <summary>Changelog</summary>
 
+### Version 1.0.3
+- Re-lint using JavaScript Standard style 16
+
 ### Version 1.0.2
 - Remove jQuery dependency
 
@@ -123,6 +126,9 @@ Displays a link to the lyrics of your currently playing song via Last.fm.
 <details>
 
 <summary>Changelog</summary>
+
+### Version 1.1.2
+- Re-lint using JavaScript Standard style 16
 
 ### Version 1.1.1
 - Fix await outside of async function
@@ -217,6 +223,10 @@ Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
 
 <summary>Changelog</summary>
 
+### Version 1.1.4
+- Remove jQuery dependency
+- Re-lint using JavaScript Standard style 16
+
 ### Version 1.1.3
 - Add `@supportURL` to metadata block
 - Add `@updateURL` to metadata block
@@ -260,6 +270,9 @@ Imports an album's tracklist from various sources into Rate Your Music.
 <details>
 
 <summary>Changelog</summary>
+
+### Version 1.12.2
+- Re-lint using JavaScript Standard style 16
 
 ### Version 1.12.1
 - Fix placeholder not updating

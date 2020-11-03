@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           TracklistToRYM
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.12.1
+// @version        1.12.2
 // @description    Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @homepageURL    https://github.com/TheLastZombie/userscripts/
@@ -263,8 +263,8 @@
   if (await GM.getValue('append') === undefined) await GM.setValue('append', false)
   if (await GM.getValue('sources') === undefined) await GM.setValue('sources', true)
 
-  var asyncFilterHelper = await GM.getValue('sites')
-  var sites = sitestmp.filter(x => asyncFilterHelper.includes(x.name))
+  const asyncFilterHelper = await GM.getValue('sites')
+  const sites = sitestmp.filter(x => asyncFilterHelper.includes(x.name))
 
   parent.width(489)
   parent.append("<br><br><p style='margin-bottom:2px'>Or import tracklists from other sites using TracklistToRYM.<button type='button' id='ttrym-settings' style='float:right'>Settings</button></p>" +
@@ -283,12 +283,12 @@
     printMessage('progress', 'Importing, please wait...')
 
     try {
-      var site = $('#ttrym-site').val()
-      var input = sites.filter(x => x.name === site)[0]
-      var link = $('#ttrym-link').val()
+      const site = $('#ttrym-site').val()
+      let input = sites.filter(x => x.name === site)[0]
+      const link = $('#ttrym-link').val()
 
       if (!globToRegex(input.placeholder).test(link)) {
-        var suggestion = sites.filter(x => globToRegex(x.placeholder).test(link))[0]
+        const suggestion = sites.filter(x => globToRegex(x.placeholder).test(link))[0]
         if (suggestion && await GM.getValue('guess')) {
           input = suggestion
           $('#ttrym-site').val(input.name)
@@ -301,18 +301,18 @@
         method: 'GET',
         url: input.transformer ? input.transformer(link) : link,
         onload: async (response) => {
-          var data = response.responseText
+          const data = response.responseText
 
-          var result = ''
-          var amount = 0
+          let result = ''
+          let amount = 0
 
           switch (input.extractor) {
             case 'json':
               JSON.parse(data).forEach(element => {
                 amount++
-                var index = input.index ? reduceJson(element[input.parent], input.index) : amount
-                var title = input.title ? reduceJson(element[input.parent], input.title) : ''
-                var length = input.length ? reduceJson(element[input.parent], input.length) : ''
+                const index = input.index ? reduceJson(element[input.parent], input.index) : amount
+                const title = input.title ? reduceJson(element[input.parent], input.title) : ''
+                const length = input.length ? reduceJson(element[input.parent], input.length) : ''
                 result += getResult(index, title, length)
               })
               break
@@ -320,9 +320,9 @@
             case 'node':
               $(data).find(input.parent).each(function () {
                 amount++
-                var index = parseNode($(this).find(input.index)) || amount
-                var title = parseNode($(this).find(input.title)) || ''
-                var length = parseNode($(this).find(input.length)) || ''
+                const index = parseNode($(this).find(input.index)) || amount
+                const title = parseNode($(this).find(input.title)) || ''
+                const length = parseNode($(this).find(input.length)) || ''
                 result += getResult(index, title, length)
               })
               break
@@ -330,9 +330,9 @@
             case 'regex':
               data.match(input.parent).forEach(function (i) {
                 amount++
-                var index = input.index ? i.match(input.index).toString() : amount
-                var title = input.title ? i.match(input.title) : ''
-                var length = input.length ? i.match(input.length) : ''
+                const index = input.index ? i.match(input.index).toString() : amount
+                const title = input.title ? i.match(input.title) : ''
+                const length = input.length ? i.match(input.length) : ''
                 result += getResult(index, title, length)
               })
               break
@@ -419,7 +419,7 @@
     })
 
     $('#ttrym-save').click(async function () {
-      var sites = $('.ttrym-checkbox:checked').map(function () {
+      const sites = $('.ttrym-checkbox:checked').map(function () {
         return $(this).attr('name')
       }).get()
 
@@ -458,7 +458,7 @@
   }
 
   function parseLength (length) {
-    var matches = length.match(/(\d+:)+\d+/)
+    const matches = length.match(/(\d+:)+\d+/)
     if (matches) return matches[0].replace(/^0+/, '')
     return length
   }
@@ -468,7 +468,7 @@
   }
 
   function printMessage (level, message) {
-    var colors = {
+    const colors = {
       progress: '#777',
       success: 'green',
       warning: 'orange',
