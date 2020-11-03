@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+git stash -k -u
+
+node utils/lint.js
+node utils/meta.js
+
+git add -A
+git stash pop
