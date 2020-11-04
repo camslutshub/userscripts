@@ -277,6 +277,14 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Changelog</summary>
 
+### Version 1.13.0
+- Fix Amazon support
+- Fix Rate Your Music support
+- Improve length parsing
+- Prefix URLs with https:// if neccessary
+- Remove Beatport Classic support
+- Remove Google Play support
+
 ### Version 1.12.2
 - Re-lint using JavaScript Standard style 16
 

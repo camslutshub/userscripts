@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           TracklistToRYM
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.12.2
+// @version        1.13.0
 // @description    Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @homepageURL    https://github.com/TheLastZombie/userscripts/
@@ -64,10 +64,10 @@
       name: 'Amazon',
       extractor: 'node',
       placeholder: 'https://www.amazon.com/dp/*',
-      parent: '#dmusic_tracklist_content .a-text-left',
-      index: '.TrackNumber-Default-Color',
+      parent: '#dmusic_tracklist_content tbody > .a-text-left',
+      index: 'div.TrackNumber-Default-Color',
       title: '.TitleLink',
-      length: '.a-size-small.a-color-secondary'
+      length: '.a-size-base-plus.a-color-secondary'
     },
     {
       name: 'Apple Music',
@@ -95,15 +95,6 @@
       index: '.buk-track-num',
       title: '.buk-track-primary-title',
       length: '.buk-track-length'
-    },
-    {
-      name: 'Beatport Classic',
-      extractor: 'node',
-      placeholder: 'http://classic.beatport.com/release/*/*',
-      parent: '.track-grid-content',
-      index: '.playColumn .artWrapper',
-      title: '.titleColumn .txt-larger > span:not(.txt-grey)',
-      length: 'td:not(.playColumn):not(.titleColumn):not(.cartColumn) span:not(.genreList)'
     },
     {
       name: 'Deezer',
@@ -140,15 +131,6 @@
       index: 'chart_row-number_container-number',
       title: '.chart_row-content-title',
       length: false
-    },
-    {
-      name: 'Google Play',
-      extractor: 'node',
-      placeholder: 'https://play.google.com/store/music/album/*',
-      parent: '[data-album-is-available]',
-      index: '[data-update-url-on-play] div',
-      title: "[itemprop='name']",
-      length: '[aria-label]'
     },
     {
       name: 'Juno Download',
@@ -268,8 +250,8 @@
 
   parent.width(489)
   parent.append("<br><br><p style='margin-bottom:2px'>Or import tracklists from other sites using TracklistToRYM.<button type='button' id='ttrym-settings' style='float:right'>Settings</button></p>" +
-                "<p style='display:flex'><select id='ttrym-site'>" + sites.map(x => "<option value='" + x.name + "'>" + x.name + '</option>').join('') + '</select>' +
-                "<input id='ttrym-link' placeholder='Album URL' style='flex:1'></input><button id='ttrym-submit'>Import</button></p>")
+    "<p style='display:flex'><select id='ttrym-site'>" + sites.map(x => "<option value='" + x.name + "'>" + x.name + '</option>').join('') + '</select>' +
+    "<input id='ttrym-link' placeholder='Album URL' style='flex:1'></input><button id='ttrym-submit'>Import</button></p>")
 
   $('#ttrym-site').bind('change', function () {
     $('#ttrym-link').attr('placeholder', sites.filter(x => x.name === $(this).val())[0].placeholder)
@@ -285,7 +267,10 @@
     try {
       const site = $('#ttrym-site').val()
       let input = sites.filter(x => x.name === site)[0]
-      const link = $('#ttrym-link').val()
+      let link = $('#ttrym-link').val()
+
+      link = input.transformer ? input.transformer(link) : link
+      if (!link.match(/^https?:\/\//)) link = 'https://' + link
 
       if (!globToRegex(input.placeholder).test(link)) {
         const suggestion = sites.filter(x => globToRegex(x.placeholder).test(link))[0]
@@ -299,7 +284,7 @@
 
       GM.xmlHttpRequest({
         method: 'GET',
-        url: input.transformer ? input.transformer(link) : link,
+        url: link,
         onload: async (response) => {
           const data = response.responseText
 
@@ -368,39 +353,39 @@
 
   $('#ttrym-settings').click(async function () {
     $('body').append("<div id='ttrym-settings-wrapper' style='box-sizing:border-box;width:100vw;height:100vh;position:fixed;top:0;background:rgba(255,255,255,0.75);padding:50px;z-index:80'>" +
-                     "<div class='submit_step_box' style='padding:25px;height:calc(100% - 50px);overflow:auto'><span class='submit_step_header' style='margin:0!important'>" +
-                     "TracklistToRYM: <span class='submit_step_header_title'>Settings</span></span>" +
-                     "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
-                     "<p><b class='submit_field_header'>Manage sites</b><br>" +
-                     'Choose which sites to show and which ones to hide in the TracklistToRYM selection box.<br>' +
-                     "Note that newly added sites are disabled by default, so you may want to check this dialog when there's been an update.</p>" +
-                     sitestmp.map(x => "<input type='checkbox' class='ttrym-checkbox' name='" + x.name + "'><label style='position:relative;bottom:2px'> " + x.name + " <span style='opacity:0.5;font-weight:lighter'>" + x.placeholder + '</span></label><br>').join('') +
-                     "<div style='margin-top:15px'><button id='ttrym-enable'>Enable all sites</button><button id='ttrym-disable' style='margin-left:10px'>Disable all sites</button></div>" +
-                     "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
-                     "<p><b class='submit_field_header'>Set default site</b><br>" +
-                     'Choose which site should be selected by default; you may choose the site that you use the most.<br>' +
-                     "If the chosen site isn't already, it will be enabled automatically.</p>" +
-                     "<select id='ttrym-default'>" + sitestmp.map(x => "<option value='" + x.name + "'>" + x.name + '</option>').join('') + '</select>' +
-                     "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
-                     "<p><b class='submit_field_header'>Auto-select sites</b><br>" +
-                     'Select whether to guess sites from their URL and automatically select them.<br>' +
-                     'This has been the default behavior since version 1.10.0.</p>' +
-                     "<input id='ttrym-change' name='ttrym-change' type='checkbox'></input><label for='ttrym-change' style='position:relative;bottom:2px'> Guess and automatically select sites</label>" +
-                     "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
-                     "<p><b class='submit_field_header'>Append instead of replace</b><br>" +
-                     'Enabling this will allow you to combine multiple releases into one by keeping previous tracks when inserting new ones.</p>' +
-                     "<input id='ttrym-append' name='ttrym-append' type='checkbox'></input><label for='ttrym-append' style='position:relative;bottom:2px'> Append tracks to list</label>" +
-                     "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
-                     "<p><b class='submit_field_header'>Add URL to sources</b><br>" +
-                     'Select whether to automatically add the entered URL to the submission sources in step five.<br>' +
-                     'This has been the default behavior since version 1.3.0.</p>' +
-                     "<input id='ttrym-sources' name='ttrym-sources' type='checkbox'></input><label for='ttrym-sources' style='position:relative;bottom:2px'> Automatically add URLs to sources</label>" +
-                     "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
-                     '<p>FYI: You can also directly edit these settings in your userscript manager:</p>' +
-                     '<p><b>Tampermonkey:</b> Dashboard → Installed userscripts → TracklistToRYM → Edit → Storage<br>' +
-                     '<b>Violentmonkey:</b> Open Dashboard → Installed scripts → TracklistToRYM → Edit → Values</p>' +
-                     "<div style='margin-bottom:25px'><button id='ttrym-save'>Save and reload page</button><button id='ttrym-discard' style='margin-left:10px'>Close window without saving</button></div>" +
-                     '</div></div>')
+      "<div class='submit_step_box' style='padding:25px;height:calc(100% - 50px);overflow:auto'><span class='submit_step_header' style='margin:0!important'>" +
+      "TracklistToRYM: <span class='submit_step_header_title'>Settings</span></span>" +
+      "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
+      "<p><b class='submit_field_header'>Manage sites</b><br>" +
+      'Choose which sites to show and which ones to hide in the TracklistToRYM selection box.<br>' +
+      "Note that newly added sites are disabled by default, so you may want to check this dialog when there's been an update.</p>" +
+      sitestmp.map(x => "<input type='checkbox' class='ttrym-checkbox' name='" + x.name + "'><label style='position:relative;bottom:2px'> " + x.name + " <span style='opacity:0.5;font-weight:lighter'>" + x.placeholder + '</span></label><br>').join('') +
+      "<div style='margin-top:15px'><button id='ttrym-enable'>Enable all sites</button><button id='ttrym-disable' style='margin-left:10px'>Disable all sites</button></div>" +
+      "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
+      "<p><b class='submit_field_header'>Set default site</b><br>" +
+      'Choose which site should be selected by default; you may choose the site that you use the most.<br>' +
+      "If the chosen site isn't already, it will be enabled automatically.</p>" +
+      "<select id='ttrym-default'>" + sitestmp.map(x => "<option value='" + x.name + "'>" + x.name + '</option>').join('') + '</select>' +
+      "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
+      "<p><b class='submit_field_header'>Auto-select sites</b><br>" +
+      'Select whether to guess sites from their URL and automatically select them.<br>' +
+      'This has been the default behavior since version 1.10.0.</p>' +
+      "<input id='ttrym-change' name='ttrym-change' type='checkbox'></input><label for='ttrym-change' style='position:relative;bottom:2px'> Guess and automatically select sites</label>" +
+      "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
+      "<p><b class='submit_field_header'>Append instead of replace</b><br>" +
+      'Enabling this will allow you to combine multiple releases into one by keeping previous tracks when inserting new ones.</p>' +
+      "<input id='ttrym-append' name='ttrym-append' type='checkbox'></input><label for='ttrym-append' style='position:relative;bottom:2px'> Append tracks to list</label>" +
+      "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
+      "<p><b class='submit_field_header'>Add URL to sources</b><br>" +
+      'Select whether to automatically add the entered URL to the submission sources in step five.<br>' +
+      'This has been the default behavior since version 1.3.0.</p>' +
+      "<input id='ttrym-sources' name='ttrym-sources' type='checkbox'></input><label for='ttrym-sources' style='position:relative;bottom:2px'> Automatically add URLs to sources</label>" +
+      "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
+      '<p>FYI: You can also directly edit these settings in your userscript manager:</p>' +
+      '<p><b>Tampermonkey:</b> Dashboard → Installed userscripts → TracklistToRYM → Edit → Storage<br>' +
+      '<b>Violentmonkey:</b> Open Dashboard → Installed scripts → TracklistToRYM → Edit → Values</p>' +
+      "<div style='margin-bottom:25px'><button id='ttrym-save'>Save and reload page</button><button id='ttrym-discard' style='margin-left:10px'>Close window without saving</button></div>" +
+      '</div></div>')
 
     $('.ttrym-checkbox').each(function () {
       if (sites.map(x => x.name).includes($(this).attr('name'))) $(this).prop('checked', true)
@@ -446,7 +431,7 @@
   }
 
   function getResult (index, title, length) {
-    return parseIndex(index.toString()) + '|' + title.trim() + '|' + parseLength(length) + '\n'
+    return parseIndex(index.toString()) + '|' + parseTitle(title) + '|' + parseLength(length) + '\n'
   }
 
   function globToRegex (glob) {
@@ -459,12 +444,16 @@
 
   function parseLength (length) {
     const matches = length.match(/(\d+:)+\d+/)
-    if (matches) return matches[0].replace(/^0+/, '')
+    if (matches) return matches[0].replace(/^0+/, '').replace(/^:/, '0:')
     return length
   }
 
   function parseNode (node) {
     return node.first().clone().children().remove().end().text()
+  }
+
+  function parseTitle (title) {
+    return title.trim().replace(/(& {2})?(- )/, '')
   }
 
   function printMessage (level, message) {
