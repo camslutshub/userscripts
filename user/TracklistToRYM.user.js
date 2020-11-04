@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           TracklistToRYM
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.13.0
+// @version        1.13.1
 // @description    Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @homepageURL    https://github.com/TheLastZombie/userscripts/
@@ -240,7 +240,7 @@
   }
 
   if (await GM.getValue('sites') === undefined) await GM.setValue('sites', sitestmp.map(x => x.name))
-  if (await GM.getValue('default') === undefined) await GM.setValue('default', 'Rate Your Music')
+  if (await GM.getValue('default') === undefined || !(await GM.getValue('sites')).includes(await GM.getValue('default'))) await GM.setValue('default', 'Rate Your Music')
   if (await GM.getValue('guess') === undefined) await GM.setValue('guess', true)
   if (await GM.getValue('append') === undefined) await GM.setValue('append', false)
   if (await GM.getValue('sources') === undefined) await GM.setValue('sources', true)

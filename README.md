@@ -277,6 +277,9 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Changelog</summary>
 
+### Version 1.13.1
+- Fix script breaking if unsupported site is set as default
+
 ### Version 1.13.0
 - Fix Amazon support
 - Fix Rate Your Music support
