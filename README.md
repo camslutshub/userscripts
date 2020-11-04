@@ -428,6 +428,7 @@ Links membership platforms to yiff.party and Kemono.
 - Add DLsite → Kemono support
 - Add Fantia → yiff.party support
 - Add Gumroad → Kemono support
+- Add Patreon → Kemono support
 - Add pixivFANBOX → Kemono support
 - Add SubscribeStar → Kemono support
 - Use native JS instead of jQuery
