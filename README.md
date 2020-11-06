@@ -28,6 +28,9 @@ Forces showing track instead of album covers on Bandcamp.
 
 <summary>Changelog</summary>
 
+### Version 1.0.5
+- Remove jQuery dependency
+
 ### Version 1.0.4
 - Add `@supportURL` to metadata block
 - Add `@updateURL` to metadata block

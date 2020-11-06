@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           BandcampTrackCover
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.0.4
+// @version        1.0.5
 // @description    Forces showing track instead of album covers on Bandcamp.
 // @description:de Ersetzt gegebenenfalls Album- mit Trackcovern auf Bandcamp.
 // @homepageURL    https://github.com/TheLastZombie/userscripts/
@@ -10,7 +10,9 @@
 // @updateURL      https://raw.github.com/TheLastZombie/userscripts/master/meta/BandcampTrackCover.meta.js
 // @author         TheLastZombie
 // @match          https://*.bandcamp.com/*
-// @grant          none
+// @grant          GM.xmlHttpRequest
+// @grant          GM_xmlhttpRequest
+// @require        https://greasemonkey.github.io/gm4-polyfill/gm4-polyfill.js
 // @icon           https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/BandcampTrackCover.png
 // @license        MIT
 // ==/UserScript==

@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           BandcampTrackCover
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.0.4
+// @version        1.0.5
 // @description    Forces showing track instead of album covers on Bandcamp.
 // @description:de Ersetzt gegebenenfalls Album- mit Trackcovern auf Bandcamp.
 // @homepageURL    https://github.com/TheLastZombie/userscripts/
@@ -13,21 +13,32 @@
 // @updateURL      https://raw.github.com/TheLastZombie/userscripts/master/meta/BandcampTrackCover.meta.js
 // @author         TheLastZombie
 // @match          https://*.bandcamp.com/*
-// @grant          none
+// @grant          GM.xmlHttpRequest
+// @grant          GM_xmlhttpRequest
+// @require        https://greasemonkey.github.io/gm4-polyfill/gm4-polyfill.js
 // @icon           https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/BandcampTrackCover.png
 // @license        MIT
 // ==/UserScript==
 
-$(function () {
-  $('body').on('DOMSubtreeModified', '.play_cell', function () {
-    $.ajax({
-      url: $('.title_link.primaryText').attr('href'),
-      success: function (result) {
-        $('#tralbumArt a').attr('href', $(result).find('#tralbumArt a').attr('href'))
-        $('#tralbumArt a img').attr('src', $(result).find('#tralbumArt a img').attr('src'))
+(function () {
+  const observer = new MutationObserver(() => {
+    GM.xmlHttpRequest({
+      url: document.querySelector('.title_link.primaryText').getAttribute('href'),
+      onload: response => {
+        const result = document.createElement('html')
+        result.innerHTML = response.responseText
+
+        document.querySelector('#tralbumArt a').setAttribute('href', result.querySelector('#tralbumArt a').getAttribute('href'))
+        document.querySelector('#tralbumArt a img').setAttribute('src', result.querySelector('#tralbumArt a img').getAttribute('src'))
       }
     })
   })
-})
+
+  observer.observe(document.getElementsByClassName('play_cell')[0], {
+    attributes: true,
+    childList: true,
+    subtree: true
+  })
+})()
 
 // @license-end
