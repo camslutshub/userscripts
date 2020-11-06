@@ -87,7 +87,7 @@ Enables collapsing (and expanding) of comments on Removeddit.
 
 ## [ExpandExpandExpand++](https://raw.github.com/TheLastZombie/userscripts/master/user/ExpandExpandExpand++.user.js)  <img width="16px" height="16px" src="https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/ExpandExpandExpand++.png">
 
-odification of "GitHub PR: expand, expand, expand!" with multiple small improvements.
+Modification of "GitHub PR: expand, expand, expand!" with multiple small improvements.
 
 <details>
 
