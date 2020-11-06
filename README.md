@@ -93,7 +93,7 @@ odification of "GitHub PR: expand, expand, expand!" with multiple small improvem
 
 <summary>Screenshot</summary>
 
-![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/previews/ExpandExpandExpand++.png)
+![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/previews/ExpandExpandExpand++.gif)
 
 </details>
 
