@@ -136,6 +136,9 @@ Displays a link to the lyrics of your currently playing song via Last.fm.
 
 <summary>Changelog</summary>
 
+### Version 1.1.3
+- Remove jQuery dependency
+
 ### Version 1.1.2
 - Re-lint using JavaScript Standard style 16
 
