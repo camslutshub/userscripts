@@ -283,6 +283,14 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Changelog</summary>
 
+### Version 1.14.0
+- Add VGMdb support
+- Improve length parsing
+- Fix `regex` extractor
+- Fix MusicBrainz track number extraction
+- Fix MusicBrainz unknown length extraction
+- Remove unused `@connect` rule
+
 ### Version 1.13.1
 - Fix script breaking if unsupported site is set as default
 

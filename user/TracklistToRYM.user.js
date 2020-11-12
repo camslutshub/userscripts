@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           TracklistToRYM
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.13.1
+// @version        1.14.0
 // @description    Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @homepageURL    https://github.com/TheLastZombie/userscripts/
@@ -23,7 +23,6 @@
 // @connect        discogs.com
 // @connect        freemusicarchive.org
 // @connect        genius.com
-// @connect        google.com
 // @connect        junodownload.com
 // @connect        last.fm
 // @connect        loot.co.za
@@ -33,6 +32,7 @@
 // @connect        naxos.com
 // @connect        rateyourmusic.com
 // @connect        qobuz.com
+// @connect        vgmdb.net
 // @connect        vinyl-digital.com
 // @connect        youtube.com
 // @connect        *
@@ -173,7 +173,7 @@
       extractor: 'node',
       placeholder: 'https://musicbrainz.org/release/*',
       parent: '#content tr.odd, #content tr.even',
-      index: 'td.pos',
+      index: 'td.pos a',
       title: 'td > a bdi, td .name-variation > a bdi',
       length: 'td.treleases'
     },
@@ -212,6 +212,15 @@
       index: '.tracklist_num',
       title: "[itemprop='name']",
       length: '.tracklist_duration'
+    },
+    {
+      name: 'VGMdb',
+      extractor: 'node',
+      placeholder: 'https://vgmdb.net/album/*',
+      parent: '.tl:first-child .rolebit',
+      index: '.label',
+      title: "[colspan='2']",
+      length: '.time'
     },
     {
       name: 'Vinyl Digital',
@@ -315,9 +324,9 @@
             case 'regex':
               data.match(input.parent).forEach(function (i) {
                 amount++
-                const index = input.index ? i.match(input.index).toString() : amount
-                const title = input.title ? i.match(input.title) : ''
-                const length = input.length ? i.match(input.length) : ''
+                const index = input.index ? i.match(input.index)[0].toString() : amount
+                const title = input.title ? i.match(input.title)[0] : ''
+                const length = input.length ? i.match(input.length)[0] : ''
                 result += getResult(index, title, length)
               })
               break
@@ -431,7 +440,7 @@
   }
 
   function getResult (index, title, length) {
-    return parseIndex(index.toString()) + '|' + parseTitle(title) + '|' + parseLength(length) + '\n'
+    return parseIndex(index) + '|' + parseTitle(title) + '|' + parseLength(length) + '\n'
   }
 
   function globToRegex (glob) {
@@ -439,12 +448,20 @@
   }
 
   function parseIndex (index) {
-    return index.trim().replace(/^0+/, '').replace(/\.$/, '')
+    return index.toString().trim().replace(/^0+/, '').replace(/\.$/, '')
   }
 
   function parseLength (length) {
-    const matches = length.match(/(\d+:)+\d+/)
-    if (matches) return matches[0].replace(/^0+/, '').replace(/^:/, '0:')
+    if (length === '?:??') return ''
+    let matches = length.match(/(\d+:)+\d+/)
+    if (matches) {
+      matches = matches[0].replace(/^(0+:?)+/, '')
+      if (!matches.includes(':')) {
+        if (matches < 10) matches = '0' + matches
+        matches = '0:' + matches
+      }
+      return matches
+    }
     return length
   }
 
