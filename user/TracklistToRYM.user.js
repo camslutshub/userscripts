@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           TracklistToRYM
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.14.0
+// @version        1.15.0
 // @description    Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @homepageURL    https://github.com/TheLastZombie/userscripts/
@@ -55,6 +55,8 @@
       name: 'AllMusic',
       extractor: 'node',
       placeholder: 'https://www.allmusic.com/album/*',
+      artist: '.album-artist a',
+      album: '.album-title',
       parent: '.track',
       index: '.tracknum',
       title: '.title a',
@@ -64,6 +66,8 @@
       name: 'Amazon',
       extractor: 'node',
       placeholder: 'https://www.amazon.com/dp/*',
+      artist: '#ProductInfoArtistLink',
+      album: 'h1',
       parent: '#dmusic_tracklist_content tbody > .a-text-left',
       index: 'div.TrackNumber-Default-Color',
       title: '.TitleLink',
@@ -73,6 +77,8 @@
       name: 'Apple Music',
       extractor: 'node',
       placeholder: 'https://music.apple.com/*/album/*',
+      artist: '.product-creator a',
+      album: 'h1',
       parent: '.row.song',
       index: '.song-index .column-data',
       title: '.song-name',
@@ -82,6 +88,8 @@
       name: 'Bandcamp',
       extractor: 'node',
       placeholder: 'https://*.bandcamp.com/album/*',
+      artist: '#name-section h3 a',
+      album: 'h2',
       parent: '.title-col',
       index: false,
       title: '.track-title',
@@ -91,6 +99,8 @@
       name: 'Beatport',
       extractor: 'node',
       placeholder: 'https://www.beatport.com/release/*/*',
+      artist: '.interior-release-chart-content-item--desktop [data-label]',
+      album: 'h1',
       parent: '.track',
       index: '.buk-track-num',
       title: '.buk-track-primary-title',
@@ -100,6 +110,8 @@
       name: 'Deezer',
       extractor: 'node',
       placeholder: 'https://deezer.com/album/*',
+      artist: '#naboo_album_artist a span',
+      album: '#naboo_album_title',
       parent: '.song',
       index: '.number',
       title: "[itemprop='name']",
@@ -109,6 +121,8 @@
       name: 'Discogs',
       extractor: 'node',
       placeholder: 'https://discogs.com/release/*',
+      artist: '#profile_title a',
+      album: '#profile_title > span:last-child',
       parent: '.tracklist_track:not(.track_heading)',
       index: '.tracklist_track_pos',
       title: '.tracklist_track_title > span',
@@ -118,6 +132,8 @@
       name: 'Free Music Archive',
       extractor: 'node',
       placeholder: 'https://freemusicarchive.org/music/*/*',
+      artist: '.bcrumb > a:last-of-type',
+      album: 'h1',
       parent: '.play-item',
       index: '.playtxt > b',
       title: '.playtxt > a > b',
@@ -127,6 +143,8 @@
       name: 'Genius',
       extractor: 'node',
       placeholder: 'https://genius.com/albums/*/*',
+      artist: 'h2 a',
+      album: 'h1',
       parent: '.chart_row',
       index: 'chart_row-number_container-number',
       title: '.chart_row-content-title',
@@ -136,6 +154,8 @@
       name: 'Juno Download',
       extractor: 'node',
       placeholder: 'https://www.junodownload.com/products/*',
+      artist: '.product-artist a',
+      album: 'h1',
       parent: '.product-tracklist-track',
       index: '.track-title',
       title: "[itemprop='name']",
@@ -145,6 +165,8 @@
       name: 'Last.fm',
       extractor: 'node',
       placeholder: 'https://www.last.fm/music/*/*',
+      artist: '.header-new-crumb span',
+      album: 'h1',
       parent: '.chartlist-row',
       index: '.chartlist-index',
       title: '.chartlist-name a',
@@ -154,6 +176,8 @@
       name: 'Loot.co.za',
       extractor: 'node',
       placeholder: 'https://www.loot.co.za/product/*/*',
+      artist: 'h2 a',
+      album: false,
       parent: '#tabs div:nth-last-child(2) .productDetails tr:not([style])',
       index: 'td[width]',
       title: 'td:not([width])',
@@ -163,6 +187,8 @@
       name: 'Metal Archives',
       extractor: 'node',
       placeholder: 'https://www.metal-archives.com/albums/*/*/*',
+      artist: '#album_sidebar > a',
+      album: '.album_name > a',
       parent: '.table_lyrics .even, .table_lyrics .odd',
       index: 'td',
       title: '.wrapWords',
@@ -172,6 +198,8 @@
       name: 'MusicBrainz',
       extractor: 'node',
       placeholder: 'https://musicbrainz.org/release/*',
+      artist: '.subheader bdi',
+      album: '.releaseheader bdi',
       parent: '#content tr.odd, #content tr.even',
       index: 'td.pos a',
       title: 'td > a bdi, td .name-variation > a bdi',
@@ -181,6 +209,8 @@
       name: 'Musik-Sammler',
       extractor: 'node',
       placeholder: 'https://www.musik-sammler.de/release/*',
+      artist: '.header-span a',
+      album: "h1 span[itemprop='name']",
       parent: "[itemprop='track'] tbody tr",
       index: '.track-position',
       title: '.track-title span',
@@ -190,6 +220,8 @@
       name: 'Naxos Records',
       extractor: 'node',
       placeholder: 'https://www.naxos.com/catalogue/item.asp?item_code=*',
+      artist: '.composers a',
+      album: false,
       parent: "table[valign='top']",
       index: 'td:first-child',
       title: 'td:nth-child(4) b',
@@ -199,6 +231,8 @@
       name: 'Qobuz',
       extractor: 'node',
       placeholder: 'https://www.qobuz.com/*/album/*/*',
+      artist: '.album-meta__artist',
+      album: '.album-meta__title',
       parent: '.track',
       index: '.track__item--number span',
       title: '.track__item--name span',
@@ -208,6 +242,8 @@
       name: 'Rate Your Music',
       extractor: 'node',
       placeholder: 'https://rateyourmusic.com/release/album/*/*',
+      artist: '.album_artist_small a',
+      album: '.album_title',
       parent: "#tracks .track:not([style='text-align:right;'])",
       index: '.tracklist_num',
       title: "[itemprop='name']",
@@ -217,6 +253,8 @@
       name: 'VGMdb',
       extractor: 'node',
       placeholder: 'https://vgmdb.net/album/*',
+      artist: "td .artistname[style='display:inline']:not([title='Composer'])",
+      album: "h1 .albumtitle[lang='en']",
       parent: '.tl:first-child .rolebit',
       index: '.label',
       title: "[colspan='2']",
@@ -226,6 +264,8 @@
       name: 'Vinyl Digital',
       extractor: 'node',
       placeholder: 'https://vinyl-digital.com/*/*',
+      artist: '#test_othersartist',
+      album: '#test_product_name',
       parent: '#playlist_table tr:not(:first-child):not([style])',
       index: '.track',
       title: '.tracktitle span',
@@ -235,6 +275,8 @@
       name: 'YouTube Music',
       extractor: 'regex',
       placeholder: 'https://music.youtube.com/playlist?list=*',
+      artist: /(?<=\\"musicArtist\\".*?\\"name\\":\\").*?(?=\\",)/g,
+      album: /(?<=\\"musicAlbumRelease\\".*?\\"title\\":\\").*?(?=\\",)/g,
       parent: /{\\"musicTrack\\":.*?}}}},/g,
       index: /(?<=\\"albumTrackIndex\\":\\").*?(?=\\",)/,
       title: /(?<=\\"title\\":\\").*?(?=\\",)/,
@@ -297,6 +339,8 @@
         onload: async (response) => {
           const data = response.responseText
 
+          let artist = ''
+          let album = ''
           let result = ''
           let amount = 0
 
@@ -309,6 +353,8 @@
                 const length = input.length ? reduceJson(element[input.parent], input.length) : ''
                 result += getResult(index, title, length)
               })
+              artist = input.artist ? reduceJson(JSON.parse(data)[input.parent], input.artist) : ''
+              album = input.album ? reduceJson(JSON.parse(data)[input.parent], input.album) : ''
               break
 
             case 'node':
@@ -319,6 +365,8 @@
                 const length = parseNode($(this).find(input.length)) || ''
                 result += getResult(index, title, length)
               })
+              artist = parseNode($(data).find(input.artist)) || ''
+              album = parseNode($(data).find(input.album)) || ''
               break
 
             case 'regex':
@@ -329,6 +377,8 @@
                 const length = input.length ? i.match(input.length)[0] : ''
                 result += getResult(index, title, length)
               })
+              artist = input.artist ? data.match(input.artist)[0] : ''
+              album = input.album ? data.match(input.album)[0] : ''
               break
 
             default:
@@ -338,6 +388,9 @@
           if (amount === 0) {
             return printMessage('warning', 'Did not find any tracks. Please check your URL and try again.')
           }
+
+          artist = parseArtist(artist)
+          album = parseAlbum(album)
 
           goAdvanced()
           $('#track_advanced').val(await GM.getValue('append') ? $('#track_advanced').val() + result : result)
@@ -445,6 +498,14 @@
 
   function globToRegex (glob) {
     return new RegExp(glob.replace(/[.+\-?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*'))
+  }
+
+  function parseAlbum (album) {
+    return album.trim().replace(/^–\s/, '')
+  }
+
+  function parseArtist (artist) {
+    return artist.trim()
   }
 
   function parseIndex (index) {

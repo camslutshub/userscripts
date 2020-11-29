@@ -283,6 +283,10 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Changelog</summary>
 
+### Version 1.15.0
+- Add artist extraction (not used yet)
+- Add album extraction (not used yet)
+
 ### Version 1.14.0
 - Add VGMdb support
 - Improve length parsing
