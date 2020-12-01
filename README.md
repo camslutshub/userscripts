@@ -283,6 +283,11 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Changelog</summary>
 
+### Version 1.16.0
+- Add automatic input of artist name
+- Add automatic input of release title
+- Make site selection labels clickable
+
 ### Version 1.15.0
 - Add artist extraction (not used yet)
 - Add album extraction (not used yet)

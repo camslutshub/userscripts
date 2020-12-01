@@ -1,10 +1,10 @@
 // @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&dn=expat.txt MIT
-/* eslint-disable no-undef */
+/* eslint-disable no-eval, no-undef */
 
 // ==UserScript==
 // @name           TracklistToRYM
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.15.0
+// @version        1.16.0
 // @description    Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @homepageURL    https://github.com/TheLastZombie/userscripts/
@@ -290,6 +290,8 @@
     localStorage.removeItem('ttrym-sites')
   }
 
+  if (await GM.getValue('artist') === undefined) await GM.setValue('artist', false)
+  if (await GM.getValue('release') === undefined) await GM.setValue('release', false)
   if (await GM.getValue('sites') === undefined) await GM.setValue('sites', sitestmp.map(x => x.name))
   if (await GM.getValue('default') === undefined || !(await GM.getValue('sites')).includes(await GM.getValue('default'))) await GM.setValue('default', 'Rate Your Music')
   if (await GM.getValue('guess') === undefined) await GM.setValue('guess', true)
@@ -392,6 +394,17 @@
           artist = parseArtist(artist)
           album = parseAlbum(album)
 
+          if (await GM.getValue('artist')) {
+            GM.xmlHttpRequest({
+              method: 'GET',
+              url: 'https://rateyourmusic.com/go/searchcredits?target=filedunder&searchterm=' + artist,
+              onload: async (response) => {
+                eval($($(response.responseText)[3]).attr('onClick').replace('window.parent.', ''))
+              }
+            })
+          }
+          if (await GM.getValue('release')) $('#title').val(album)
+
           goAdvanced()
           $('#track_advanced').val(await GM.getValue('append') ? $('#track_advanced').val() + result : result)
           goSimple()
@@ -418,10 +431,16 @@
       "<div class='submit_step_box' style='padding:25px;height:calc(100% - 50px);overflow:auto'><span class='submit_step_header' style='margin:0!important'>" +
       "TracklistToRYM: <span class='submit_step_header_title'>Settings</span></span>" +
       "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
+      "<p><b class='submit_field_header'>Supply additional data</b><br>" +
+      "While TracklistToRYM's main goal is to fill in tracklists, it can also enter additional metadata.<br>" +
+      'Keep in mind that if enabled and used, any previously input data will be replaced.</p>' +
+      "<input id='ttrym-artist' name='ttrym-artist' type='checkbox'></input><label for='ttrym-artist' style='position:relative;bottom:2px'> Artist name <span style='opacity:0.5;font-weight:lighter'>Step 1.3 (“File under”)</span></label><br>" +
+      "<input id='ttrym-release' name='ttrym-release' type='checkbox'></input><label for='ttrym-release' style='position:relative;bottom:2px'> Release title <span style='opacity:0.5;font-weight:lighter'>Step 2.1 (“Title”)</span></label>" +
+      "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
       "<p><b class='submit_field_header'>Manage sites</b><br>" +
       'Choose which sites to show and which ones to hide in the TracklistToRYM selection box.<br>' +
       "Note that newly added sites are disabled by default, so you may want to check this dialog when there's been an update.</p>" +
-      sitestmp.map(x => "<input type='checkbox' class='ttrym-checkbox' name='" + x.name + "'><label style='position:relative;bottom:2px'> " + x.name + " <span style='opacity:0.5;font-weight:lighter'>" + x.placeholder + '</span></label><br>').join('') +
+      sitestmp.map(x => "<input type='checkbox' class='ttrym-checkbox' id='ttrym-site-" + x.name.replace(/\s/g, '') + "' name='" + x.name + "'><label for='ttrym-site-" + x.name.replace(/\s/g, '') + "' style='position:relative;bottom:2px'> " + x.name + " <span style='opacity:0.5;font-weight:lighter'>" + x.placeholder + '</span></label><br>').join('') +
       "<div style='margin-top:15px'><button id='ttrym-enable'>Enable all sites</button><button id='ttrym-disable' style='margin-left:10px'>Disable all sites</button></div>" +
       "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
       "<p><b class='submit_field_header'>Set default site</b><br>" +
@@ -449,6 +468,8 @@
       "<div style='margin-bottom:25px'><button id='ttrym-save'>Save and reload page</button><button id='ttrym-discard' style='margin-left:10px'>Close window without saving</button></div>" +
       '</div></div>')
 
+    $('#ttrym-artist').prop('checked', await GM.getValue('artist'))
+    $('#ttrym-release').prop('checked', await GM.getValue('release'))
     $('.ttrym-checkbox').each(function () {
       if (sites.map(x => x.name).includes($(this).attr('name'))) $(this).prop('checked', true)
     })
@@ -470,6 +491,8 @@
         return $(this).attr('name')
       }).get()
 
+      await GM.setValue('artist', $('#ttrym-artist').is(':checked'))
+      await GM.setValue('release', $('#ttrym-release').is(':checked'))
       await GM.setValue('sites', sites)
       await GM.setValue('default', $('#ttrym-default').val())
       await GM.setValue('guess', $('#ttrym-change').is(':checked'))
