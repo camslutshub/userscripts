@@ -443,7 +443,7 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 ## [ViewOnYP](https://raw.github.com/TheLastZombie/userscripts/master/user/ViewOnYP.user.js) <img width="16px" height="16px" src="https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/ViewOnYP.ico">
 
-Links membership platforms to yiff.party and Kemono.
+Links various membership platforms to Kemono.
 
 <details>
 
@@ -456,6 +456,11 @@ Links membership platforms to yiff.party and Kemono.
 <details>
 
 <summary>Changelog</summary>
+
+### Version 2.1.0
+- Fix [#9](https://github.com/TheLastZombie/userscripts/issues/9)
+- Fix compatibility with Dark Reader
+- Remove yiff.party support
 
 ### Version 2.0.0
 - Use overlay instead of inserting (fixes Patreon → yiff.party)
