@@ -235,6 +235,9 @@ Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
 
 <summary>Changelog</summary>
 
+### Version 1.2.0
+- Replace to-be-deleted documentation links
+
 ### Version 1.1.4
 - Remove jQuery dependency
 - Re-lint using JavaScript Standard style 16

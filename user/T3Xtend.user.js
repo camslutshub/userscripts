@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           T3Xtend
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.1.4
+// @version        1.2.0
 // @description    Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
 // @description:de Zeigt sowohl T3X- als auch Download-Links zu alten Versionen von TYPO3-Extensions.
 // @homepageURL    https://github.com/TheLastZombie/userscripts/
@@ -13,7 +13,10 @@
 // @updateURL      https://raw.github.com/TheLastZombie/userscripts/master/meta/T3Xtend.meta.js
 // @author         TheLastZombie
 // @match          https://extensions.typo3.org/extension/*
-// @grant          none
+// @connect        ia601405.us.archive.org
+// @grant          GM.xmlHttpRequest
+// @grant          GM_xmlhttpRequest
+// @require        https://greasemonkey.github.io/gm4-polyfill/gm4-polyfill.js
 // @icon           https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/T3Xtend.ico
 // @license        MIT
 // ==/UserScript==
@@ -71,6 +74,17 @@
     x.parentNode.style.justifyContent = 'space-around'
     x.parentNode.style.position = 'relative'
     x.parentNode.style.top = '-1px'
+  })
+
+  // Replace to-be-deleted documentation links
+
+  const x = document.getElementsByClassName('btn-info')[0].getAttribute('href').split('/')
+  const y = 'https://ia601405.us.archive.org/view_archive.php?archive=/0/items/ter-archive/docs.zip&file=' + x[5] + '%20' + x[6] + '.html'
+  if (x.length !== 7) return
+  GM.xmlHttpRequest({
+    method: 'GET',
+    url: y,
+    onload: response => response.responseText ? document.getElementsByClassName('btn-info')[0].setAttribute('href', y) : ''
   })
 })()
 
