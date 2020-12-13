@@ -286,6 +286,10 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Changelog</summary>
 
+### Version 1.17.0
+- Add a-tisket support
+- Improve length parsing
+
 ### Version 1.16.0
 - Add automatic input of artist name
 - Add automatic input of release title
