@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           TracklistToRYM
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.17.0
+// @version        1.17.1
 // @description    Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @homepageURL    https://github.com/TheLastZombie/userscripts/
@@ -17,7 +17,7 @@
 // @connect        allmusic.com
 // @connect        amazon.com
 // @connect        apple.com
-// @connect        marlonob.info
+// @connect        pulsewidth.org.uk
 // @connect        bandcamp.com
 // @connect        beatport.com
 // @connect        deezer.com
@@ -88,7 +88,7 @@
     {
       name: 'a-tisket',
       extractor: 'node',
-      placeholder: 'https://etc.marlonob.info/atisket/*',
+      placeholder: 'https://atisket.pulsewidth.org.uk/*',
       artist: '.artist',
       album: '.album-title cite',
       parent: '.track',

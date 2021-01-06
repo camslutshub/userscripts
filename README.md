@@ -286,6 +286,9 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Changelog</summary>
 
+### Version 1.17.1
+- Update a-tisket URL
+
 ### Version 1.17.0
 - Add a-tisket support
 - Improve length parsing
