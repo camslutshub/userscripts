@@ -450,7 +450,7 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 ## [ViewOnYP](https://raw.github.com/TheLastZombie/userscripts/master/user/ViewOnYP.user.js) <img width="16px" height="16px" src="https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/ViewOnYP.ico">
 
-Links various membership platforms to Kemono.
+Links various membership platforms to Kemono and OFans.party.
 
 <details>
 
@@ -463,6 +463,11 @@ Links various membership platforms to Kemono.
 <details>
 
 <summary>Changelog</summary>
+
+### Version 2.2.0
+- Add OnlyFans → OFans.party support
+- Add menu option to clear cache
+- Under-the-hood simplifications and improvements
 
 ### Version 2.1.0
 - Fix [#9](https://github.com/TheLastZombie/userscripts/issues/9)

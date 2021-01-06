@@ -4,9 +4,9 @@
 // ==UserScript==
 // @name           ViewOnYP
 // @namespace      https://github.com/TheLastZombie/
-// @version        2.1.0
-// @description    Links various membership platforms to Kemono.
-// @description:de Vernetzt verschiedene Mitgliedschaftsplattformen mit Kemono.
+// @version        2.2.0
+// @description    Links various membership platforms to Kemono and OFans.party.
+// @description:de Vernetzt verschiedene Mitgliedschaftsplattformen mit Kemono und OFans.party.
 // @homepageURL    https://github.com/TheLastZombie/userscripts/
 // @supportURL     https://github.com/TheLastZombie/userscripts/issues/new?labels=ViewOnYP
 // @downloadURL    https://raw.github.com/TheLastZombie/userscripts/master/user/ViewOnYP.user.js
@@ -15,13 +15,19 @@
 // @match          *://www.dlsite.com/*/circle/profile/=/maker_id/*
 // @match          *://*.fanbox.cc/
 // @match          *://gumroad.com/*
+// @match          *://onlyfans.com/*
 // @match          *://www.patreon.com/*
 // @match          *://www.subscribestar.com/*
 // @match          *://subscribestar.adult/*
 // @connect        kemono.party
+// @connect        ofans.party
 // @connect        api.fanbox.cc
+// @grant          GM.deleteValue
+// @grant          GM_deleteValue
 // @grant          GM.getValue
 // @grant          GM_getValue
+// @grant          GM.registerMenuCommand
+// @grant          GM_registerMenuCommand
 // @grant          GM.setValue
 // @grant          GM_setValue
 // @grant          GM.xmlHttpRequest
@@ -32,8 +38,38 @@
 // ==/UserScript==
 
 (async function () {
-  if (!await GM.getValue('cache')) await GM.setValue('cache', {})
-  const cache = await GM.getValue('cache')
+  GM.registerMenuCommand('Clear cache', () => {
+    GM.deleteValue('cache2')
+      .then(alert('Cache cleared successfully.'))
+  })
+
+  if (!await GM.getValue('cache2')) await GM.setValue('cache2', {})
+  const cache = await GM.getValue('cache2')
+
+  if (await GM.getValue('cache')) {
+    cache.Kemono = await GM.getValue('cache')
+    await GM.deleteValue('cache')
+  }
+
+  const sites = [
+    {
+      name: 'Kemono',
+      url: 'https://kemono.party/$HOST/user/$USER',
+      test: {
+        match: '<h1 class="subtitle">Nobody here but us chickens!</h1>',
+        invert: true
+      }
+    },
+    {
+      name: 'OFans.party',
+      url: 'https://ofans.party/#/creator/$USER',
+      test: {
+        url: 'https://api.ofans.party/creators',
+        match: '"name":"$USER"',
+        invert: false
+      }
+    }
+  ]
 
   document.getElementsByTagName('head')[0].insertAdjacentHTML('beforeend', `
     <style>
@@ -84,6 +120,7 @@
       case 'patreon':
         resolve(document.querySelector('script:not([src]):not(.darkreader)').innerHTML.match(/https:\/\/www\.patreon\.com\/api\/user\/\d+/)[0].slice(33))
         break
+      case 'onlyfans':
       case 'subscribestar':
         resolve(document.location.pathname.split('/')[1])
         break
@@ -91,24 +128,31 @@
   })
 
   p.then(user => {
-    const url = 'https://kemono.party/' + host + '/user/' + user
+    sites.forEach(x => {
+      if (cache[x.name] && cache[x.name][host] && cache[x.name][host].includes(user)) return show(x, host, user)
 
-    if (cache[host] && cache[host].includes(user)) return document.getElementsByTagName('body')[0].insertAdjacentHTML('beforeend', '<div id="voyp"><div>ViewOnYP</div>Kemono: <a href="' + url + '">' + url + '</a></div>')
-
-    GM.xmlHttpRequest({
-      method: 'GET',
-      url: url,
-      onload: response => {
-        if (!response.responseText.includes('<h1 class="subtitle">Nobody here but us chickens!</h1>')) {
-          document.getElementsByTagName('body')[0].insertAdjacentHTML('beforeend', '<div id="voyp"><div>ViewOnYP</div>Kemono: <a href="' + url + '">' + url + '</a></div>')
-
-          if (!cache[host]) cache[host] = []
-          if (!cache[host].includes(user)) cache[host].push(user)
-          GM.setValue('cache', cache)
+      GM.xmlHttpRequest({
+        url: (x.test.url || x.url).replace('$HOST', host).replace('$USER', user),
+        onload: response => {
+          if (!response.responseText.includes(x.test.match.replace('$HOST', host).replace('$USER', user)) === x.test.invert) show(x, host, user)
         }
-      }
+      })
     })
   })
+
+  function show (site, host, user) {
+    if (!document.getElementById('voyp')) document.getElementsByTagName('body')[0].insertAdjacentHTML('beforeend', '<div id="voyp"><div>ViewOnYP</div></div>')
+
+    const name = site.name
+    const url = site.url.replace('$HOST', host).replace('$USER', user)
+
+    document.getElementById('voyp').insertAdjacentHTML('beforeend', name + ': <a href="' + url + '">' + url + '</a>')
+
+    if (!cache[site.name]) cache[site.name] = {}
+    if (!cache[site.name][host]) cache[site.name][host] = []
+    if (!cache[site.name][host].includes(user)) cache[site.name][host].push(user)
+    GM.setValue('cache2', cache)
+  }
 })()
 
 // @license-end
