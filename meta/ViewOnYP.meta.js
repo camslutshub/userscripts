@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name           ViewOnYP
 // @namespace      https://github.com/TheLastZombie/
-// @version        2.2.0
+// @version        2.2.1
 // @description    Links various membership platforms to Kemono and OFans.party.
 // @description:de Vernetzt verschiedene Mitgliedschaftsplattformen mit Kemono und OFans.party.
-// @homepageURL    https://github.com/TheLastZombie/userscripts/
+// @homepageURL    https://github.com/TheLastZombie/userscripts#viewonyp-
 // @supportURL     https://github.com/TheLastZombie/userscripts/issues/new?labels=ViewOnYP
 // @downloadURL    https://raw.github.com/TheLastZombie/userscripts/master/user/ViewOnYP.user.js
 // @updateURL      https://raw.github.com/TheLastZombie/userscripts/master/meta/ViewOnYP.meta.js
@@ -31,5 +31,6 @@
 // @grant          GM_xmlhttpRequest
 // @require        https://greasemonkey.github.io/gm4-polyfill/gm4-polyfill.js
 // @icon           https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/ViewOnYP.ico
-// @license        MIT
+// @copyright      2020-2021, TheLastZombie (https://github.com/TheLastZombie/)
+// @license        MIT; https://github.com/TheLastZombie/userscripts/blob/master/LICENSE
 // ==/UserScript==

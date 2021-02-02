@@ -28,6 +28,12 @@ Forces showing track instead of album covers on Bandcamp.
 
 <summary>Changelog</summary>
 
+### Version 1.0.6
+- Add `@copyright` to metadata block
+- Add URL to `@license` in metadata block
+- Add anchor to homepage URL
+- Add OpenUserJS metadata block
+
 ### Version 1.0.5
 - Remove jQuery dependency
 
@@ -72,6 +78,12 @@ Enables collapsing (and expanding) of comments on Removeddit.
 
 <summary>Changelog</summary>
 
+### Version 1.0.2
+- Add `@copyright` to metadata block
+- Add URL to `@license` in metadata block
+- Add anchor to homepage URL
+- Add OpenUserJS metadata block
+
 ### Version 1.0.1
 - Add `@supportURL` to metadata block
 - Add `@updateURL` to metadata block
@@ -100,6 +112,12 @@ Modification of "GitHub PR: expand, expand, expand!" with multiple small improve
 <details>
 
 <summary>Changelog</summary>
+
+### Version 1.0.4
+- Add `@copyright` to metadata block
+- Add URL to `@license` in metadata block
+- Add anchor to homepage URL
+- Add OpenUserJS metadata block
 
 ### Version 1.0.3
 - Re-lint using JavaScript Standard style 16
@@ -135,6 +153,12 @@ Displays a link to the lyrics of your currently playing song via Last.fm.
 <details>
 
 <summary>Changelog</summary>
+
+### Version 1.1.4
+- Add `@copyright` to metadata block
+- Add URL to `@license` in metadata block
+- Add anchor to homepage URL
+- Add OpenUserJS metadata block
 
 ### Version 1.1.3
 - Remove jQuery dependency
@@ -203,6 +227,12 @@ Makes TYPO3's debug console resizable.
 
 <summary>Changelog</summary>
 
+### Version 1.0.3
+- Add `@copyright` to metadata block
+- Add URL to `@license` in metadata block
+- Add anchor to homepage URL
+- Add OpenUserJS metadata block
+
 ### Version 1.0.2
 - Add `@supportURL` to metadata block
 - Add `@updateURL` to metadata block
@@ -234,6 +264,12 @@ Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
 <details>
 
 <summary>Changelog</summary>
+
+### Version 1.2.1
+- Add `@copyright` to metadata block
+- Add URL to `@license` in metadata block
+- Add anchor to homepage URL
+- Add OpenUserJS metadata block
 
 ### Version 1.2.0
 - Replace to-be-deleted documentation links
@@ -285,6 +321,15 @@ Imports an album's tracklist from various sources into Rate Your Music.
 <details>
 
 <summary>Changelog</summary>
+
+### Version 1.18.0
+- Add button to reset settings
+- Prevent scrolling of page while settings are open
+- Fix settings menu position for site redesign
+- Add `@copyright` to metadata block
+- Add URL to `@license` in metadata block
+- Add anchor to homepage URL
+- Add OpenUserJS metadata block
 
 ### Version 1.17.1
 - Update a-tisket URL
@@ -466,6 +511,12 @@ Links various membership platforms to Kemono and OFans.party.
 <details>
 
 <summary>Changelog</summary>
+
+### Version 2.2.1
+- Add `@copyright` to metadata block
+- Add URL to `@license` in metadata block
+- Add anchor to homepage URL
+- Add OpenUserJS metadata block
 
 ### Version 2.2.0
 - Add OnlyFans → OFans.party support

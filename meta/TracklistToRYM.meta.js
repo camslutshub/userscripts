@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name           TracklistToRYM
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.17.1
+// @version        1.18.0
 // @description    Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
-// @homepageURL    https://github.com/TheLastZombie/userscripts/
+// @homepageURL    https://github.com/TheLastZombie/userscripts#tracklisttorym-
 // @supportURL     https://github.com/TheLastZombie/userscripts/issues/new?labels=TracklistToRYM
 // @downloadURL    https://raw.github.com/TheLastZombie/userscripts/master/user/TracklistToRYM.user.js
 // @updateURL      https://raw.github.com/TheLastZombie/userscripts/master/meta/TracklistToRYM.meta.js
@@ -34,13 +34,18 @@
 // @connect        vinyl-digital.com
 // @connect        youtube.com
 // @connect        *
+// @grant          GM.deleteValue
+// @grant          GM_deleteValue
 // @grant          GM.getValue
 // @grant          GM_getValue
+// @grant          GM.listValues
+// @grant          GM_listValues
 // @grant          GM.setValue
 // @grant          GM_setValue
 // @grant          GM.xmlHttpRequest
 // @grant          GM_xmlhttpRequest
 // @require        https://greasemonkey.github.io/gm4-polyfill/gm4-polyfill.js
 // @icon           https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/TracklistToRYM.png
-// @license        MIT
+// @copyright      2020-2021, TheLastZombie (https://github.com/TheLastZombie/)
+// @license        MIT; https://github.com/TheLastZombie/userscripts/blob/master/LICENSE
 // ==/UserScript==

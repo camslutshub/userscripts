@@ -4,10 +4,10 @@
 // ==UserScript==
 // @name           ExpandExpandExpand++
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.0.3
+// @version        1.0.4
 // @description    Modification of "GitHub PR: expand, expand, expand!" with multiple small improvements.
 // @description:de Modifikation von "GitHub PR: expand, expand, expand!" mit mehreren kleinen Verbesserungen.
-// @homepageURL    https://github.com/TheLastZombie/userscripts/
+// @homepageURL    https://github.com/TheLastZombie/userscripts#expandexpandexpand--
 // @supportURL     https://github.com/TheLastZombie/userscripts/issues/new?labels=ExpandExpandExpand%2B%2B
 // @downloadURL    https://raw.github.com/TheLastZombie/userscripts/master/user/ExpandExpandExpand++.user.js
 // @updateURL      https://raw.github.com/TheLastZombie/userscripts/master/meta/ExpandExpandExpand++.meta.js
@@ -16,8 +16,13 @@
 // @match          https://github.com/*/*/pull/*
 // @grant          none
 // @icon           https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/ExpandExpandExpand++.png
-// @license        MIT
+// @copyright      2020-2021, TheLastZombie (https://github.com/TheLastZombie/)
+// @license        MIT; https://github.com/TheLastZombie/userscripts/blob/master/LICENSE
 // ==/UserScript==
+
+// ==OpenUserJS==
+// @author         TheLastZombie
+// ==/OpenUserJS==
 
 (function () {
   if (document.getElementsByClassName('ajax-pagination-btn').length) document.getElementsByClassName('pagehead-actions')[0].insertAdjacentHTML('afterbegin', "<li><a id='_f_expand_expand' class='btn btn-sm'>Expand all</a></li>")

@@ -4,10 +4,10 @@
 // ==UserScript==
 // @name           TracklistToRYM
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.17.1
+// @version        1.18.0
 // @description    Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
-// @homepageURL    https://github.com/TheLastZombie/userscripts/
+// @homepageURL    https://github.com/TheLastZombie/userscripts#tracklisttorym-
 // @supportURL     https://github.com/TheLastZombie/userscripts/issues/new?labels=TracklistToRYM
 // @downloadURL    https://raw.github.com/TheLastZombie/userscripts/master/user/TracklistToRYM.user.js
 // @updateURL      https://raw.github.com/TheLastZombie/userscripts/master/meta/TracklistToRYM.meta.js
@@ -37,16 +37,25 @@
 // @connect        vinyl-digital.com
 // @connect        youtube.com
 // @connect        *
+// @grant          GM.deleteValue
+// @grant          GM_deleteValue
 // @grant          GM.getValue
 // @grant          GM_getValue
+// @grant          GM.listValues
+// @grant          GM_listValues
 // @grant          GM.setValue
 // @grant          GM_setValue
 // @grant          GM.xmlHttpRequest
 // @grant          GM_xmlhttpRequest
 // @require        https://greasemonkey.github.io/gm4-polyfill/gm4-polyfill.js
 // @icon           https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/TracklistToRYM.png
-// @license        MIT
+// @copyright      2020-2021, TheLastZombie (https://github.com/TheLastZombie/)
+// @license        MIT; https://github.com/TheLastZombie/userscripts/blob/master/LICENSE
 // ==/UserScript==
+
+// ==OpenUserJS==
+// @author         TheLastZombie
+// ==/OpenUserJS==
 
 (async function () {
   const parent = $("input[value='Copy Tracks']").parent()
@@ -439,7 +448,9 @@
   })
 
   $('#ttrym-settings').click(async function () {
-    $('body').append("<div id='ttrym-settings-wrapper' style='box-sizing:border-box;width:100vw;height:100vh;position:fixed;top:0;background:rgba(255,255,255,0.75);padding:50px;z-index:80'>" +
+    $('body').css('overflow', 'hidden')
+
+    $('body').append("<div id='ttrym-settings-wrapper' style='box-sizing:border-box;width:100vw;height:100vh;position:fixed;top:45px;background:rgba(255,255,255,0.75);padding:50px;z-index:80'>" +
       "<div class='submit_step_box' style='padding:25px;height:calc(100% - 50px);overflow:auto'><span class='submit_step_header' style='margin:0!important'>" +
       "TracklistToRYM: <span class='submit_step_header_title'>Settings</span></span>" +
       "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
@@ -477,7 +488,7 @@
       '<p>FYI: You can also directly edit these settings in your userscript manager:</p>' +
       '<p><b>Tampermonkey:</b> Dashboard → Installed userscripts → TracklistToRYM → Edit → Storage<br>' +
       '<b>Violentmonkey:</b> Open Dashboard → Installed scripts → TracklistToRYM → Edit → Values</p>' +
-      "<div style='margin-bottom:25px'><button id='ttrym-save'>Save and reload page</button><button id='ttrym-discard' style='margin-left:10px'>Close window without saving</button></div>" +
+      "<div style='margin-bottom:25px'><button id='ttrym-save'>Save and reload page</button><button id='ttrym-discard' style='margin-left:10px'>Close window without saving</button><button id='ttrym-reset' style='margin-left:10px'>Reset and reload page</button></div>" +
       '</div></div>')
 
     $('#ttrym-artist').prop('checked', await GM.getValue('artist'))
@@ -496,6 +507,13 @@
 
     $('#ttrym-disable').click(function () {
       $('.ttrym-checkbox').prop('checked', false)
+    })
+
+    $('#ttrym-reset').click(async function () {
+      if (confirm('Do you really want to reset all preferences?')) {
+        (await GM.listValues()).forEach(async setting => await GM.deleteValue(setting))
+        location.reload()
+      }
     })
 
     $('#ttrym-save').click(async function () {
@@ -517,6 +535,7 @@
     })
 
     $('#ttrym-discard').click(function () {
+      $('body').css('overflow', 'initial')
       $('#ttrym-settings-wrapper').remove()
     })
   })
