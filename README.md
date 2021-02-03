@@ -512,6 +512,9 @@ Links various membership platforms to Kemono and OFans.party.
 
 <summary>Changelog</summary>
 
+### Version 2.3.0
+- Add OnlyFans OFans.party → (.onion) support
+
 ### Version 2.2.1
 - Add `@copyright` to metadata block
 - Add URL to `@license` in metadata block

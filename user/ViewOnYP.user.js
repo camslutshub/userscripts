@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           ViewOnYP
 // @namespace      https://github.com/TheLastZombie/
-// @version        2.2.1
+// @version        2.3.0
 // @description    Links various membership platforms to Kemono and OFans.party.
 // @description:de Vernetzt verschiedene Mitgliedschaftsplattformen mit Kemono und OFans.party.
 // @homepageURL    https://github.com/TheLastZombie/userscripts#viewonyp-
@@ -68,6 +68,15 @@
     {
       name: 'OFans.party',
       url: 'https://ofans.party/#/creator/$USER',
+      test: {
+        url: 'https://api.ofans.party/creators',
+        match: '"name":"$USER"',
+        invert: false
+      }
+    },
+    {
+      name: 'OFans.party (.onion)',
+      url: 'http://pkhksfrum4bwtvn6komioijrnblsbmalhytmmbt6teheuqsigeyeoeqd.onion/#/creator/$USER',
       test: {
         url: 'https://api.ofans.party/creators',
         match: '"name":"$USER"',

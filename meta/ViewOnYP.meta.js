@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           ViewOnYP
 // @namespace      https://github.com/TheLastZombie/
-// @version        2.2.1
+// @version        2.3.0
 // @description    Links various membership platforms to Kemono and OFans.party.
 // @description:de Vernetzt verschiedene Mitgliedschaftsplattformen mit Kemono und OFans.party.
 // @homepageURL    https://github.com/TheLastZombie/userscripts#viewonyp-
