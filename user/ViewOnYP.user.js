@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           ViewOnYP
 // @namespace      https://github.com/TheLastZombie/
-// @version        2.3.0
+// @version        2.3.1
 // @description    Links various membership platforms to Kemono and OFans.party.
 // @description:de Vernetzt verschiedene Mitgliedschaftsplattformen mit Kemono und OFans.party.
 // @homepageURL    https://github.com/TheLastZombie/userscripts#viewonyp-
@@ -132,7 +132,7 @@
         resolve(document.querySelector('.creator-profile-wrapper').getAttribute('data-username'))
         break
       case 'patreon':
-        resolve(document.querySelector('script:not([src]):not(.darkreader)').innerHTML.match(/https:\/\/www\.patreon\.com\/api\/user\/\d+/)[0].slice(33))
+        resolve(document.head.innerHTML.match(/https:\/\/www\.patreon\.com\/api\/user\/\d+/)[0].slice(33))
         break
       case 'onlyfans':
       case 'subscribestar':

@@ -512,6 +512,9 @@ Links various membership platforms to Kemono and OFans.party.
 
 <summary>Changelog</summary>
 
+### Version 2.3.1
+- Fix Patreon support
+
 ### Version 2.3.0
 - Add OnlyFans → OFans.party (.onion) support
 
