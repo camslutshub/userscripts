@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           ViewOnYP
 // @namespace      https://github.com/TheLastZombie/
-// @version        2.3.1
+// @version        2.3.2
 // @description    Links various membership platforms to Kemono and OFans.party.
 // @description:de Vernetzt verschiedene Mitgliedschaftsplattformen mit Kemono und OFans.party.
 // @homepageURL    https://github.com/TheLastZombie/userscripts#viewonyp-
@@ -160,7 +160,7 @@
     const name = site.name
     const url = site.url.replace('$HOST', host).replace('$USER', user)
 
-    document.getElementById('voyp').insertAdjacentHTML('beforeend', name + ': <a href="' + url + '">' + url + '</a>')
+    document.getElementById('voyp').insertAdjacentHTML('beforeend', name + ': <a href="' + url + '">' + url + '</a><br>')
 
     if (!cache[site.name]) cache[site.name] = {}
     if (!cache[site.name][host]) cache[site.name][host] = []

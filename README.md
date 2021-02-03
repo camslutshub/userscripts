@@ -512,6 +512,9 @@ Links various membership platforms to Kemono and OFans.party.
 
 <summary>Changelog</summary>
 
+### Version 2.3.2
+- Fix pop-up line breaks
+
 ### Version 2.3.1
 - Fix Patreon support
 
