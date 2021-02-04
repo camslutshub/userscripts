@@ -322,6 +322,12 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Changelog</summary>
 
+### Version 1.19.0
+- Add Napster support
+- Add Sonemic support
+- Discard current artists on new import
+- Disable import button while import is in progress
+
 ### Version 1.18.0
 - Add button to reset settings
 - Prevent scrolling of page while settings are open

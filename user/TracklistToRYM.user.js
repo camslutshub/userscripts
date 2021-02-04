@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           TracklistToRYM
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.18.0
+// @version        1.19.0
 // @description    Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @homepageURL    https://github.com/TheLastZombie/userscripts#tracklisttorym-
@@ -30,8 +30,10 @@
 // @connect        metal-archives.com
 // @connect        musicbrainz.org
 // @connect        musik-sammler.de
+// @connect        napster.com
 // @connect        naxos.com
 // @connect        rateyourmusic.com
+// @connect        sonemic.com
 // @connect        qobuz.com
 // @connect        vgmdb.net
 // @connect        vinyl-digital.com
@@ -238,6 +240,17 @@
       length: '.track-time'
     },
     {
+      name: 'Napster',
+      extractor: 'node',
+      placeholder: 'https://napster.com/artist/*/album/*',
+      artist: '.show-for-medium .artist-link',
+      album: '#page-name',
+      parent: '.track-item',
+      index: '.track-number div',
+      title: '.track-title',
+      length: false
+    },
+    {
       name: 'Naxos Records',
       extractor: 'node',
       placeholder: 'https://www.naxos.com/catalogue/item.asp?item_code=*',
@@ -269,6 +282,17 @@
       index: '.tracklist_num',
       title: "[itemprop='name']",
       length: '.tracklist_duration'
+    },
+    {
+      name: 'Sonemic',
+      extractor: 'node',
+      placeholder: 'https://sonemic.com/release/album/*/*',
+      artist: '#page_object_header .music_artist',
+      album: '.page_object_header_title',
+      parent: '.page_fragment_track_track',
+      index: '.page_fragment_track_num',
+      title: '.page_fragment_track_title .song',
+      length: '.page_fragment_track_duration'
     },
     {
       name: 'VGMdb',
@@ -337,6 +361,11 @@
     clearMessages()
     if (!$('#ttrym-link').val()) return printMessage('error', 'No URL specified! Please enter one and try again.')
     printMessage('progress', 'Importing, please wait...')
+    $('#ttrym-submit').attr('disabled', true)
+
+    $('.filed_under_delete a').each(function () {
+      deleteFiledUnder(Number($(this).attr('href').match(/\d+/)))
+    })
 
     try {
       const site = $('#ttrym-site').val()
@@ -405,10 +434,12 @@
               break
 
             default:
+              $('#ttrym-submit').attr('disabled', false)
               return printMessage('error', input.extractor + " is not a valid extractor. This is (probably) not your fault, please report this on <a href='https://github.com/TheLastZombie/userscripts/issues/new?title=" + input.extractor + "%20is%20not%20a%20valid%20extractor&labels=TracklistToRYM'>GitHub</a>.")
           }
 
           if (amount === 0) {
+            $('#ttrym-submit').attr('disabled', false)
             return printMessage('warning', 'Did not find any tracks. Please check your URL and try again.')
           }
 
@@ -435,14 +466,17 @@
           }
           $('#ttrym-link').val('')
 
+          $('#ttrym-submit').attr('disabled', false)
           printMessage('success', 'Imported ' + amount + ' tracks.')
         },
 
         onerror: () => {
+          $('#ttrym-submit').attr('disabled', false)
           printMessage('error', response.responseText)
         }
       })
     } catch (e) {
+      $('#ttrym-submit').attr('disabled', false)
       printMessage('error', e.toString())
     }
   })
