@@ -322,6 +322,10 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Changelog</summary>
 
+### Version 1.20.0
+- Add Kingdom Hearts Insider support
+- Add Internet Archive support
+
 ### Version 1.19.0
 - Add Napster support
 - Add Sonemic support

@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           TracklistToRYM
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.19.0
+// @version        1.20.0
 // @description    Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @homepageURL    https://github.com/TheLastZombie/userscripts#tracklisttorym-
@@ -24,7 +24,9 @@
 // @connect        discogs.com
 // @connect        freemusicarchive.org
 // @connect        genius.com
+// @connect        archive.org
 // @connect        junodownload.com
+// @connect        khinsider.com
 // @connect        last.fm
 // @connect        loot.co.za
 // @connect        metal-archives.com
@@ -174,6 +176,17 @@
       length: false
     },
     {
+      name: 'Internet Archive',
+      extractor: 'node',
+      placeholder: 'https://archive.org/details/*',
+      artist: '.metadata-definition span a',
+      album: '.item-title .breaker-breaker',
+      parent: '.related-track-row',
+      index: false,
+      title: '.track-title',
+      length: false
+    },
+    {
       name: 'Juno Download',
       extractor: 'node',
       placeholder: 'https://www.junodownload.com/products/*',
@@ -183,6 +196,17 @@
       index: '.track-title',
       title: "[itemprop='name']",
       length: '.col-1'
+    },
+    {
+      name: 'Kingdom Hearts Insider',
+      extractor: 'node',
+      placeholder: 'https://downloads.khinsider.com/game-soundtracks/album/*',
+      artist: false,
+      album: 'h2',
+      parent: '#songlist tr:not(#songlist_header):not(#songlist_footer)',
+      index: "td[style='padding-right: 8px;']",
+      title: ".clickable-row:not([align='right']) a",
+      length: ".clickable-row[align='right'] a"
     },
     {
       name: 'Last.fm',
