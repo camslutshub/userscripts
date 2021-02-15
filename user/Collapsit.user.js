@@ -1,10 +1,10 @@
 // @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&dn=expat.txt MIT
-/* eslint-disable no-undef */
+/* eslint-disable no-return-assign */
 
 // ==UserScript==
 // @name           Collapsit
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.0.2
+// @version        1.0.3
 // @description    Enables collapsing (and expanding) of comments on Removeddit.
 // @description:de Ermöglicht das Ein- und Ausklappen von Kommentaren auf Removeddit.
 // @homepageURL    https://github.com/TheLastZombie/userscripts#collapsit-
@@ -14,7 +14,6 @@
 // @author         TheLastZombie
 // @match          *://*.removeddit.com/r/*/comments/*
 // @grant          none
-// @require        https://code.jquery.com/jquery-3.5.1.js
 // @icon           https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/Collapsit.ico
 // @copyright      2020-2021, TheLastZombie (https://github.com/TheLastZombie/)
 // @license        MIT; https://github.com/TheLastZombie/userscripts/blob/master/LICENSE
@@ -24,16 +23,19 @@
 // @author         TheLastZombie
 // ==/OpenUserJS==
 
-$(function () {
-  $(document).on('click', '.comment-head .author:not(.comment-author)', function (event) {
-    if ($(this).text() === '[–]') {
-      $(this).parentsUntil('.comment').siblings('div:not(.comment-head)').hide()
-      $(this).text('[+]')
-    } else {
-      $(this).parentsUntil('.comment').siblings('div:not(.comment-head)').show()
-      $(this).text('[–]')
+(function () {
+  document.addEventListener('click', function (event) {
+    if (event.target && event.target.matches('.comment-head .author:not(.comment-author)')) {
+      event.preventDefault()
+      if (event.target.textContent === '[–]') {
+        Array.from(event.target.parentNode.parentNode.children).slice(1).forEach(x => x.style.display = 'none')
+        event.target.textContent = '[+]'
+      } else {
+        Array.from(event.target.parentNode.parentNode.children).slice(1).forEach(x => x.style.display = '')
+        event.target.textContent = '[–]'
+      }
     }
   })
-})
+})()
 
 // @license-end

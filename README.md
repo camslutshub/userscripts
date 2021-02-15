@@ -78,6 +78,10 @@ Enables collapsing (and expanding) of comments on Removeddit.
 
 <summary>Changelog</summary>
 
+### Version 1.0.3
+- Fix scrolling to top on click
+- Remove jQuery dependency
+
 ### Version 1.0.2
 - Add `@copyright` to metadata block
 - Add URL to `@license` in metadata block

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Collapsit
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.0.2
+// @version        1.0.3
 // @description    Enables collapsing (and expanding) of comments on Removeddit.
 // @description:de Ermöglicht das Ein- und Ausklappen von Kommentaren auf Removeddit.
 // @homepageURL    https://github.com/TheLastZombie/userscripts#collapsit-
@@ -11,7 +11,6 @@
 // @author         TheLastZombie
 // @match          *://*.removeddit.com/r/*/comments/*
 // @grant          none
-// @require        https://code.jquery.com/jquery-3.5.1.js
 // @icon           https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/Collapsit.ico
 // @copyright      2020-2021, TheLastZombie (https://github.com/TheLastZombie/)
 // @license        MIT; https://github.com/TheLastZombie/userscripts/blob/master/LICENSE
