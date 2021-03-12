@@ -326,6 +326,13 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Changelog</summary>
 
+### Version 1.21.0
+- Redesign main interface
+- Improve margins in settings
+- Allow dismissal of messages
+- Add invert selection button to site management
+- Notify when switching sites
+
 ### Version 1.20.0
 - Add Kingdom Hearts Insider support
 - Add Internet Archive support

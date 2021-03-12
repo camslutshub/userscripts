@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           TracklistToRYM
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.20.0
+// @version        1.21.0
 // @description    Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @homepageURL    https://github.com/TheLastZombie/userscripts#tracklisttorym-
@@ -63,6 +63,7 @@
 
 (async function () {
   const parent = $("input[value='Copy Tracks']").parent()
+  let msgPosted = false
 
   const sitestmp = [
     {
@@ -371,15 +372,22 @@
   const sites = sitestmp.filter(x => asyncFilterHelper.includes(x.name))
 
   parent.width(489)
-  parent.append("<br><br><p style='margin-bottom:2px'>Or import tracklists from other sites using TracklistToRYM.<button type='button' id='ttrym-settings' style='float:right'>Settings</button></p>" +
-    "<p style='display:flex'><select id='ttrym-site'>" + sites.map(x => "<option value='" + x.name + "'>" + x.name + '</option>').join('') + '</select>' +
-    "<input id='ttrym-link' placeholder='Album URL' style='flex:1'></input><button id='ttrym-submit'>Import</button></p>")
+  parent.append("<br><hr style='margin-top:1em;margin-bottom:1em;border:none;height:1px;background:var(--mono-d);width:calc(100% + 20px);position:relative;left:-10px'>" +
+    "<p style='display:flex;margin-bottom:0'><a href='https://github.com/TheLastZombie/userscripts#tracklisttorym-' target='_blank' style='position:relative;top:3px;color:inherit'>TTRYM</a>" +
+    "<select id='ttrym-site' style='max-width:0;margin-left:.5em;border-radius:3px 0 0 3px'>" + sites.map(x => "<option value='" + x.name + "'>" + x.name + '</option>').join('') + '</select>' +
+    "<input id='ttrym-link' placeholder='Album URL' style='flex:1;border-left:none;border-radius:0 3px 3px 0;padding-left:5px'></input>" +
+    "<button id='ttrym-submit' style='font-family:\"Font Awesome 5 Free\";border:none;background:none;color:inherit;font-size:1.5em;margin-left:.5em;cursor:pointer' title='Import'>&#xf00c;</button>" +
+    "<button id='ttrym-settings' style='font-family:\"Font Awesome 5 Free\";border:none;background:none;color:inherit;font-size:1.5em;margin-left:.5em;cursor:pointer' title='Settings'>&#xf013;</button></p>")
 
   $('#ttrym-site').bind('change', function () {
     $('#ttrym-link').attr('placeholder', sites.filter(x => x.name === $(this).val())[0].placeholder)
   })
   $('#ttrym-site').val(await GM.getValue('default'))
   $('#ttrym-site').trigger('change')
+
+  $(document).on('click', '#ttrym-dismiss', function () {
+    clearMessages()
+  })
 
   $('#ttrym-submit').click(async function () {
     clearMessages()
@@ -402,6 +410,7 @@
       if (!globToRegex(input.placeholder).test(link)) {
         const suggestion = sites.filter(x => globToRegex(x.placeholder).test(link))[0]
         if (suggestion && await GM.getValue('guess')) {
+          printMessage('progress', 'Using ' + suggestion.name + ' instead of ' + input.name + '.')
           input = suggestion
           $('#ttrym-site').val(input.name)
         } else {
@@ -512,36 +521,36 @@
       "<div class='submit_step_box' style='padding:25px;height:calc(100% - 50px);overflow:auto'><span class='submit_step_header' style='margin:0!important'>" +
       "TracklistToRYM: <span class='submit_step_header_title'>Settings</span></span>" +
       "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
-      "<p><b class='submit_field_header'>Supply additional data</b><br>" +
+      "<p><b class='submit_field_header' style='display:block;margin-bottom:-1em'>Supply additional data</b><br>" +
       "While TracklistToRYM's main goal is to fill in tracklists, it can also enter additional metadata.<br>" +
       'Keep in mind that if enabled and used, any previously input data will be replaced.</p>' +
-      "<input id='ttrym-artist' name='ttrym-artist' type='checkbox'></input><label for='ttrym-artist' style='position:relative;bottom:2px'> Artist name <span style='opacity:0.5;font-weight:lighter'>Step 1.3 (“File under”)</span></label><br>" +
-      "<input id='ttrym-release' name='ttrym-release' type='checkbox'></input><label for='ttrym-release' style='position:relative;bottom:2px'> Release title <span style='opacity:0.5;font-weight:lighter'>Step 2.1 (“Title”)</span></label>" +
+      "<input id='ttrym-artist' name='ttrym-artist' type='checkbox' style='margin-bottom:.25em'></input><label for='ttrym-artist' style='position:relative;bottom:1px'> Artist name <span style='opacity:0.5;font-weight:lighter'>Step 1.3 (“File under”)</span></label><br>" +
+      "<input id='ttrym-release' name='ttrym-release' type='checkbox' style='margin-bottom:.25em'></input><label for='ttrym-release' style='position:relative;bottom:1px'> Release title <span style='opacity:0.5;font-weight:lighter'>Step 2.1 (“Title”)</span></label>" +
       "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
-      "<p><b class='submit_field_header'>Manage sites</b><br>" +
+      "<p><b class='submit_field_header' style='display:block;margin-bottom:-1em'>Manage sites</b><br>" +
       'Choose which sites to show and which ones to hide in the TracklistToRYM selection box.<br>' +
       "Note that newly added sites are disabled by default, so you may want to check this dialog when there's been an update.</p>" +
-      sitestmp.map(x => "<input type='checkbox' class='ttrym-checkbox' id='ttrym-site-" + x.name.replace(/\s/g, '') + "' name='" + x.name + "'><label for='ttrym-site-" + x.name.replace(/\s/g, '') + "' style='position:relative;bottom:2px'> " + x.name + " <span style='opacity:0.5;font-weight:lighter'>" + x.placeholder + '</span></label><br>').join('') +
-      "<div style='margin-top:15px'><button id='ttrym-enable'>Enable all sites</button><button id='ttrym-disable' style='margin-left:10px'>Disable all sites</button></div>" +
+      sitestmp.map(x => "<input type='checkbox' style='margin-bottom:.25em' class='ttrym-checkbox' id='ttrym-site-" + x.name.replace(/\s/g, '') + "' name='" + x.name + "'><label for='ttrym-site-" + x.name.replace(/\s/g, '') + "' style='position:relative;bottom:1px'> " + x.name + " <span style='opacity:0.5;font-weight:lighter'>" + x.placeholder + '</span></label><br>').join('') +
+      "<div style='margin-top:15px'><button id='ttrym-enable'>Enable all sites</button><button id='ttrym-invert' style='margin-left:10px'>Invert selection</button><button id='ttrym-disable' style='margin-left:10px'>Disable all sites</button></div>" +
       "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
-      "<p><b class='submit_field_header'>Set default site</b><br>" +
+      "<p><b class='submit_field_header' style='display:block;margin-bottom:-1em'>Set default site</b><br>" +
       'Choose which site should be selected by default; you may choose the site that you use the most.<br>' +
       "If the chosen site isn't already, it will be enabled automatically.</p>" +
       "<select id='ttrym-default'>" + sitestmp.map(x => "<option value='" + x.name + "'>" + x.name + '</option>').join('') + '</select>' +
       "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
-      "<p><b class='submit_field_header'>Auto-select sites</b><br>" +
+      "<p><b class='submit_field_header' style='display:block;margin-bottom:-1em'>Auto-select sites</b><br>" +
       'Select whether to guess sites from their URL and automatically select them.<br>' +
       'This has been the default behavior since version 1.10.0.</p>' +
-      "<input id='ttrym-change' name='ttrym-change' type='checkbox'></input><label for='ttrym-change' style='position:relative;bottom:2px'> Guess and automatically select sites</label>" +
+      "<input id='ttrym-change' name='ttrym-change' type='checkbox' style='margin-bottom:.25em'></input><label for='ttrym-change' style='position:relative;bottom:1px'> Guess and automatically select sites</label>" +
       "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
-      "<p><b class='submit_field_header'>Append instead of replace</b><br>" +
+      "<p><b class='submit_field_header' style='display:block;margin-bottom:-1em'>Append instead of replace</b><br>" +
       'Enabling this will allow you to combine multiple releases into one by keeping previous tracks when inserting new ones.</p>' +
-      "<input id='ttrym-append' name='ttrym-append' type='checkbox'></input><label for='ttrym-append' style='position:relative;bottom:2px'> Append tracks to list</label>" +
+      "<input id='ttrym-append' name='ttrym-append' type='checkbox' style='margin-bottom:.25em'></input><label for='ttrym-append' style='position:relative;bottom:1px'> Append tracks to list</label>" +
       "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
-      "<p><b class='submit_field_header'>Add URL to sources</b><br>" +
+      "<p><b class='submit_field_header' style='display:block;margin-bottom:-1em'>Add URL to sources</b><br>" +
       'Select whether to automatically add the entered URL to the submission sources in step five.<br>' +
       'This has been the default behavior since version 1.3.0.</p>' +
-      "<input id='ttrym-sources' name='ttrym-sources' type='checkbox'></input><label for='ttrym-sources' style='position:relative;bottom:2px'> Automatically add URLs to sources</label>" +
+      "<input id='ttrym-sources' name='ttrym-sources' type='checkbox' style='margin-bottom:.25em'></input><label for='ttrym-sources' style='position:relative;bottom:1px'> Automatically add URLs to sources</label>" +
       "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
       '<p>FYI: You can also directly edit these settings in your userscript manager:</p>' +
       '<p><b>Tampermonkey:</b> Dashboard → Installed userscripts → TracklistToRYM → Edit → Storage<br>' +
@@ -561,6 +570,12 @@
 
     $('#ttrym-enable').click(function () {
       $('.ttrym-checkbox').prop('checked', true)
+    })
+
+    $('#ttrym-invert').click(function () {
+      $('.ttrym-checkbox').each(function () {
+        $(this).prop('checked', !$(this).prop('checked'))
+      })
     })
 
     $('#ttrym-disable').click(function () {
@@ -602,6 +617,8 @@
     if (!levels) levels = ['progress', 'success', 'warning', 'error']
     if (!Array.isArray(levels)) levels = [levels]
     $(levels.map(x => '#ttrym-' + x).join(', ')).remove()
+    msgPosted = false
+    $('#ttrym-dismiss').remove()
   }
 
   function getResult (index, title, length) {
@@ -654,7 +671,9 @@
       warning: 'orange',
       error: 'red'
     }
-    parent.append("<p id='ttrym-" + level + "' style='color:" + colors[level] + "'>" + level.charAt(0).toUpperCase() + level.slice(1) + ': ' + message + '</p>')
+    parent.append("<p id='ttrym-" + level + "' style='color:" + colors[level] + ';' + (msgPosted ? '' : 'margin-top:.5em;') + "margin-bottom:0'>" + level.charAt(0).toUpperCase() + level.slice(1) + ': ' + message + '</p>')
+    msgPosted = true
+    if (!$('#ttrym-dismiss').length) $('#ttrym-settings').before("<button id='ttrym-dismiss' style='font-family:\"Font Awesome 5 Free\";border:none;background:none;color:inherit;font-size:1.5em;margin-left:.5em;cursor:pointer' title='Dismiss'>&#xf0c9;</button>")
   }
 
   function reduceJson (object, path) {
