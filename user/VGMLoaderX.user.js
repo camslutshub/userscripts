@@ -1,0 +1,93 @@
+// @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&dn=expat.txt MIT
+/* eslint-disable no-eval, no-undef */
+
+// ==UserScript==
+// @name           VGMLoaderX
+// @namespace      https://github.com/TheLastZombie/
+// @version        1.0.0
+// @description    Automatically downloads albums from KHInsider without an account.
+// @description:de Lädt Alben von KHInsider automatisch und ohne Account herunter.
+// @homepageURL    https://github.com/TheLastZombie/userscripts#vgmloaderx-
+// @supportURL     https://github.com/TheLastZombie/userscripts/issues/new?labels=VGMLoaderX
+// @downloadURL    https://raw.github.com/TheLastZombie/userscripts/master/user/VGMLoaderX.user.js
+// @updateURL      https://raw.github.com/TheLastZombie/userscripts/master/meta/VGMLoaderX.meta.js
+// @author         TheLastZombie
+// @match          https://downloads.khinsider.com/game-soundtracks/album/*
+// @connect        vgmsite.com
+// @grant          GM.xmlHttpRequest
+// @grant          GM_xmlhttpRequest
+// @require        https://gildas-lormeau.github.io/zip.js/demos/lib/zip.min.js
+// @require        https://raw.githubusercontent.com/eligrey/FileSaver.js/master/dist/FileSaver.min.js
+// @require        https://greasemonkey.github.io/gm4-polyfill/gm4-polyfill.js
+// @icon           https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/VGMLoaderX.ico
+// @copyright      2021, TheLastZombie (https://github.com/TheLastZombie/)
+// @license        MIT; https://github.com/TheLastZombie/userscripts/blob/master/LICENSE
+// ==/UserScript==
+
+// ==OpenUserJS==
+// @author         TheLastZombie
+// ==/OpenUserJS==
+
+(function () {
+  document.querySelectorAll('a[href^="https://downloads.khinsider.com/cp/add_album/"]').forEach(x => {
+    x.addEventListener('click', e => {
+      e.preventDefault()
+
+      let format = Array(...document.querySelectorAll('#songlist_header th[align=right]')).map(x => x.textContent)
+      if (format.length === 1) {
+        format = format[0]
+      } else {
+        const input = prompt('Please enter your desired format (one of ' + format.join(', ') + '):', format[0])
+        if (!format.includes(input.toUpperCase())) {
+          format = format[0]
+          alert('Invalid format supplied. Using ' + format + ' instead.')
+        } else {
+          format = input
+        }
+      }
+
+      const element = document.getElementsByClassName('albumMassDownload')[0]
+      element.style.height = 'auto'
+      element.style.marginBottom = '2em'
+
+      const input = eval(document
+        .querySelector('#EchoTopic script')
+        .textContent
+        .slice(5, -3)
+        .replace('function', 'function x')
+        .replace('return p}', 'return p}x')
+      )
+      const mediaPath = input.match(/mediaPath='(.+?)'/)[1]
+      const tracks = JSON.parse(input.match(/tracks=(\[.+?\])/)[1].replace(',]', ']'))
+      const output = tracks.map(x => mediaPath + x.file.split('.').slice(0, -1).join('.') + '.' + format.toLowerCase())
+      const names = tracks.map(x => x.name)
+
+      const blobWriter = new zip.BlobWriter('application/zip')
+      const writer = new zip.ZipWriter(blobWriter)
+
+      function forSync (i) {
+        element.innerHTML = 'Downloading track ' + (i + 1) + ' of ' + output.length + ' (' + names[i] + ')…'
+        GM.xmlHttpRequest({
+          method: 'GET',
+          url: output[i],
+          responseType: 'blob',
+          onload: async response => {
+            await writer.add(decodeURIComponent(output[i].split('/').pop()), new zip.BlobReader(response.response))
+
+            if (output[i + 1]) {
+              forSync(i + 1)
+            } else {
+              await writer.close()
+              const blob = await blobWriter.getData()
+              saveAs(blob, document.getElementsByTagName('h2')[0].textContent + '.zip')
+              element.innerHTML = 'Album successfully downloaded. ZIP file has been passed to the browser.'
+            }
+          }
+        })
+      }
+      forSync(0)
+    })
+  })
+})()
+
+// @license-end

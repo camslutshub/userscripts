@@ -517,6 +517,27 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 </details>
 
+## [VGMLoaderX](https://raw.github.com/TheLastZombie/userscripts/master/user/VGMLoaderX.user.js) <img width="16px" height="16px" src="https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/VGMLoaderX.ico">
+
+Automatically downloads albums from KHInsider without an account.
+
+<details>
+
+<summary>Screenshot</summary>
+
+![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/previews/VGMLoaderX.gif)
+
+</details>
+
+<details>
+
+<summary>Changelog</summary>
+
+### Version 1.0.0
+- Initial release
+
+</details>
+
 ## [ViewOnYP](https://raw.github.com/TheLastZombie/userscripts/master/user/ViewOnYP.user.js) <img width="16px" height="16px" src="https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/ViewOnYP.ico">
 
 Links various membership platforms to Kemono and OFans.party.
