@@ -6,11 +6,17 @@ GitHub: https://github.com/TheLastZombie/userscripts
 Greasy Fork: https://greasyfork.org/users/216460  
 OpenUserJS: https://openuserjs.org/users/TheLastZombie
 
+<details>
+
+<summary>Development</summary>
+
 ```Bash
 git config core.hooksPath utils/.githooks # Automatically lint and update .meta.js files (requires Node.js)
 editor user/Example.user.js               # Edit any userscript (.user.js) files
 editor README.md                          # Add or update the README descriptions and changelogs
 ```
+
+</details>
 
 ## [BandcampTrackCover](https://raw.github.com/TheLastZombie/userscripts/master/user/BandcampTrackCover.user.js) <img width="16px" height="16px" src="https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/BandcampTrackCover.png">
 
