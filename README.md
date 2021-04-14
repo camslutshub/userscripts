@@ -332,6 +332,9 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 <summary>Changelog</summary>
 
+### Version 1.21.1
+- Fix Rate Your Music track title extraction
+
 ### Version 1.21.0
 - Redesign main interface
 - Improve margins in settings

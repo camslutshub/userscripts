@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           TracklistToRYM
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.21.0
+// @version        1.21.1
 // @description    Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @homepageURL    https://github.com/TheLastZombie/userscripts#tracklisttorym-
@@ -305,7 +305,7 @@
       album: '.album_title',
       parent: "#tracks .track:not([style='text-align:right;'])",
       index: '.tracklist_num',
-      title: "[itemprop='name']",
+      title: "[itemprop='name'] .rendered_text",
       length: '.tracklist_duration'
     },
     {
