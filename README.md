@@ -526,6 +526,27 @@ Imports an album's tracklist from various sources into Rate Your Music.
 
 </details>
 
+## [TXTClickableLinks](https://raw.github.com/TheLastZombie/userscripts/master/user/TXTClickableLinks.user.js) <img width="16px" height="16px" src="https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/TXTClickableLinks.png">
+
+Converts URLs in plain text files to clickable links.
+
+<details>
+
+<summary>Screenshot</summary>
+
+![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/previews/TXTClickableLinks.gif)
+
+</details>
+
+<details>
+
+<summary>Changelog</summary>
+
+### Version 1.0.0
+- Initial release
+
+</details>
+
 ## [VGMLoaderX](https://raw.github.com/TheLastZombie/userscripts/master/user/VGMLoaderX.user.js) <img width="16px" height="16px" src="https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/VGMLoaderX.ico">
 
 Automatically downloads albums from KHInsider without an account.
