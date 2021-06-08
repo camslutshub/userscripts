@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           TracklistToRYM
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.21.1
+// @version        1.21.2
 // @description    Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @homepageURL    https://github.com/TheLastZombie/userscripts#tracklisttorym-
@@ -94,10 +94,10 @@
       placeholder: 'https://music.apple.com/*/album/*',
       artist: '.product-creator a',
       album: 'h1',
-      parent: '.row.song',
-      index: '.song-index .column-data',
-      title: '.song-name',
-      length: '.time-data'
+      parent: '.songs-list-row--song',
+      index: '.songs-list-row__column-data',
+      title: '.songs-list-row__song-name',
+      length: '.songs-list-row__length'
     },
     {
       name: 'a-tisket',
