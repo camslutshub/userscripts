@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           T3Xtend
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.2.1
+// @version        1.2.2
 // @description    Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
 // @description:de Zeigt sowohl T3X- als auch Download-Links zu alten Versionen von TYPO3-Extensions.
 // @homepageURL    https://github.com/TheLastZombie/userscripts#t3xtend-

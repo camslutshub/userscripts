@@ -275,6 +275,10 @@ Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
 
 <summary>Changelog</summary>
 
+### Version 1.2.2
+- Fix buttons not containing any text
+- Fix download URLs not being replaced
+
 ### Version 1.2.1
 - Add `@copyright` to metadata block
 - Add URL to `@license` in metadata block

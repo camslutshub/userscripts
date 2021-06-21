@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           T3Xtend
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.2.1
+// @version        1.2.2
 // @description    Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
 // @description:de Zeigt sowohl T3X- als auch Download-Links zu alten Versionen von TYPO3-Extensions.
 // @homepageURL    https://github.com/TheLastZombie/userscripts#t3xtend-
@@ -30,7 +30,7 @@
   // Shorten button text
 
   document.querySelectorAll('.ter-ext-single-versionhistory .btn-primary').forEach(x => {
-    x.textContent = x.textContent.replace('Download', '').replace('Archive', '')
+    x.textContent = x.textContent.replace('Download', 'ZIP')
   })
 
   // Add buttons to old versions
@@ -44,14 +44,14 @@
         window.location.pathname.split('/')[2] +
         '/' +
         x.textContent +
-        "/zip/'>ZIP</a>")
+        "/zip'>ZIP</a>")
   })
 
   // Add T3X download buttons
 
   document.querySelectorAll('.ter-ext-single-versionhistory .btn-primary:first-child').forEach(x => {
     const button = x.cloneNode(true)
-    button.setAttribute('href', x.getAttribute('href').replace('/zip/', '/t3x/'))
+    button.setAttribute('href', x.getAttribute('href').replace('/zip', '/t3x'))
     button.setAttribute('title', '')
     button.textContent = 'T3X'
     x.insertAdjacentElement('afterend', button)
