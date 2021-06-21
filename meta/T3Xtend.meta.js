@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           T3Xtend
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.2.2
+// @version        1.2.3
 // @description    Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
 // @description:de Zeigt sowohl T3X- als auch Download-Links zu alten Versionen von TYPO3-Extensions.
 // @homepageURL    https://github.com/TheLastZombie/userscripts#t3xtend-
@@ -10,7 +10,7 @@
 // @updateURL      https://raw.github.com/TheLastZombie/userscripts/master/meta/T3Xtend.meta.js
 // @author         TheLastZombie
 // @match          https://extensions.typo3.org/extension/*
-// @connect        ia601405.us.archive.org
+// @connect        ia801807.us.archive.org
 // @grant          GM.xmlHttpRequest
 // @grant          GM_xmlhttpRequest
 // @require        https://greasemonkey.github.io/gm4-polyfill/gm4-polyfill.js
