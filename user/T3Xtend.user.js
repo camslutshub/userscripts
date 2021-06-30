@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           T3Xtend
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.2.3
+// @version        1.2.4
 // @description    Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
 // @description:de Zeigt sowohl T3X- als auch Download-Links zu alten Versionen von TYPO3-Extensions.
 // @homepageURL    https://github.com/TheLastZombie/userscripts#t3xtend-
@@ -65,6 +65,7 @@
       button.setAttribute('href', 'javascript:void(0)')
       button.setAttribute('onclick', 'copyToClipboard(this)')
       button.setAttribute('title', '')
+      button.setAttribute('data-message', 'Composer require command is in your clipboard now')
       button.innerHTML = '<svg style="width:18px;height:18px;position:relative;top:-1px" viewBox="0 0 24 24"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" /></svg><span style="display:none">' + document.querySelectorAll('#install-composer kbd')[0].textContent + ':' + x.parentNode.parentNode.firstElementChild.firstElementChild.textContent + '</span>'
       x.insertAdjacentElement('afterend', button)
     })

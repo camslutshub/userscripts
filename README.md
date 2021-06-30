@@ -275,6 +275,9 @@ Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
 
 <summary>Changelog</summary>
 
+### Version 1.2.4
+- Fix undefined alert message on command copy
+
 ### Version 1.2.3
 - Fix replacement of documentation links
 
