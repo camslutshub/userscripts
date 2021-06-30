@@ -11,7 +11,7 @@ OpenUserJS: https://openuserjs.org/users/TheLastZombie
 <summary>Development</summary>
 
 ```Bash
-git config core.hooksPath utils/.githooks # Automatically lint and update .meta.js files (requires Node.js)
+git config core.hooksPath utils/.githooks # Automatically lint files (requires Node.js)
 editor user/Example.user.js               # Edit any userscript (.user.js) files
 editor README.md                          # Add or update the README descriptions and changelogs
 ```

@@ -7,7 +7,6 @@ npm i
 cd ..
 
 node utils/lint.js
-node utils/meta.js
 
 git add -A
 git stash pop
