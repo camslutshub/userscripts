@@ -209,6 +209,27 @@ Displays a link to the lyrics of your currently playing song via Last.fm.
 
 </details>
 
+## [StreetVoiceLoader](https://raw.github.com/TheLastZombie/userscripts/master/user/StreetVoiceLoader.user.js) <img width="16px" height="16px" src="https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/StreetVoiceLoader.ico">
+
+Enables downloading of tracks (and hopefully soon albums) from StreetVoice.
+
+<details>
+
+<summary>Screenshot</summary>
+
+![](https://raw.githubusercontent.com/TheLastZombie/userscripts/master/previews/StreetVoiceLoader.png)
+
+</details>
+
+<details>
+
+<summary>Changelog</summary>
+
+### Version 1.0.0
+- Initial release
+
+</details>
+
 ## [T3ResizableConsole](https://raw.github.com/TheLastZombie/userscripts/master/user/T3ResizableConsole.user.js) <img width="16px" height="16px" src="https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/T3ResizableConsole.png">
 
 Makes TYPO3's debug console resizable.
