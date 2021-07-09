@@ -2,7 +2,7 @@
 
 Various userscripts for various sites that do various things.
 
-GitHub: https://github.com/TheLastZombie/userscripts  
+GitHub: https://thelastzombie.github.io/userscripts/  
 Greasy Fork: https://greasyfork.org/users/216460  
 OpenUserJS: https://openuserjs.org/users/TheLastZombie
 
