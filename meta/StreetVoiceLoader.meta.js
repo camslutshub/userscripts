@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           StreetVoiceLoader
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.0.0
+// @version        1.1.0
 // @description    Enables downloading of tracks (and hopefully soon albums) from StreetVoice.
 // @description:de Erlaubt das Herunterladen von Liedern (und hoffentlich bald Alben) von StreetVoice.
 // @homepageURL    https://github.com/TheLastZombie/userscripts#streetvoiceloader-

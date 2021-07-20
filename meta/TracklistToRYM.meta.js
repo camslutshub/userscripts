@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           TracklistToRYM
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.21.2
+// @version        1.22.0
 // @description    Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @homepageURL    https://github.com/TheLastZombie/userscripts#tracklisttorym-
@@ -33,6 +33,7 @@
 // @connect        naxos.com
 // @connect        rateyourmusic.com
 // @connect        sonemic.com
+// @connect        streetvoice.com
 // @connect        qobuz.com
 // @connect        vgmdb.net
 // @connect        vinyl-digital.com
