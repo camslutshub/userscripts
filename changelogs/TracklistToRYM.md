@@ -1,3 +1,6 @@
+### Version 1.22.0
+- Add StreetVoice support
+
 ### Version 1.21.2
 - Fix Apple Music support
 

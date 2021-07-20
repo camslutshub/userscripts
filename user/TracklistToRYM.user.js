@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           TracklistToRYM
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.21.2
+// @version        1.22.0
 // @description    Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @homepageURL    https://github.com/TheLastZombie/userscripts#tracklisttorym-
@@ -36,6 +36,7 @@
 // @connect        naxos.com
 // @connect        rateyourmusic.com
 // @connect        sonemic.com
+// @connect        streetvoice.com
 // @connect        qobuz.com
 // @connect        vgmdb.net
 // @connect        vinyl-digital.com
@@ -318,6 +319,17 @@
       index: '.page_fragment_track_num',
       title: '.page_fragment_track_title .song',
       length: '.page_fragment_track_duration'
+    },
+    {
+      name: 'StreetVoice',
+      extractor: 'node',
+      placeholder: 'https://streetvoice.com/*/songs/album/*',
+      artist: '.user-info a',
+      album: 'h1',
+      parent: '#item_box_list > li',
+      index: '.work-item-number h4',
+      title: '.work-item-info h4 a',
+      length: false
     },
     {
       name: 'VGMdb',
