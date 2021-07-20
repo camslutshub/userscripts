@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           StreetVoiceLoader
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.0.0
+// @version        1.1.0
 // @description    Enables downloading of tracks (and hopefully soon albums) from StreetVoice.
 // @description:de Erlaubt das Herunterladen von Liedern (und hoffentlich bald Alben) von StreetVoice.
 // @homepageURL    https://github.com/TheLastZombie/userscripts#streetvoiceloader-
@@ -37,6 +37,24 @@
 
       wrapper.insertAdjacentHTML('afterbegin', '<li class="list-inline-item"><a href="' + file + '" download class="btn btn-circle btn-outline-white btn-lg"><span>⬇</span></a></li>')
     }
+  })
+
+  const links = document.querySelectorAll('#item_box_list > li')
+
+  links.forEach(x => {
+    const wrapper = x.getElementsByClassName('list-item-buttons')[0]
+    const song = x.getElementsByTagName('a')[0].getAttribute('href').split('/')[3]
+
+    GM.xmlHttpRequest({
+      method: 'POST',
+      url: 'https://streetvoice.com/api/v3/songs/' + song + '/file/',
+      onload: response => {
+        const file = JSON.parse(response.response).file
+
+        wrapper.style.width = 'max-content'
+        wrapper.insertAdjacentHTML('beforeend', '<li class="list-inline-item"><a href="' + file + '" download class="btn btn-circle btn-white"><span>⬇</span></a></li>')
+      }
+    })
   })
 })()
 
