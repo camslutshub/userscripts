@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           TXTClickableLinks
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.0.1
+// @version        1.1.0
 // @description    Converts URLs in plain text files to clickable links.
 // @description:de Konvertiert URLs in Textdateien zu anklickbaren Links.
 // @homepageURL    https://github.com/TheLastZombie/userscripts#txtclickablelinks-
