@@ -4,7 +4,7 @@
 // ==UserScript==
 // @name           ExpandExpandExpand++
 // @namespace      https://github.com/TheLastZombie/
-// @version        1.0.4
+// @version        1.0.5
 // @description    Modification of "GitHub PR: expand, expand, expand!" with multiple small improvements.
 // @description:de Modifikation von "GitHub PR: expand, expand, expand!" mit mehreren kleinen Verbesserungen.
 // @homepageURL    https://github.com/TheLastZombie/userscripts#expandexpandexpand--
@@ -42,7 +42,7 @@
     } else if (btnWait) {
       setTimeout(expand, 25)
     } else {
-      btnMeta.parentNode.removeChild(btnMeta)
+      btnMeta.parentNode.remove()
     }
   }
 })()

@@ -1,3 +1,6 @@
+### Version 1.0.5
+- Fix removal of button once expanded
+
 ### Version 1.0.4
 - Add `@copyright` to metadata block
 - Add URL to `@license` in metadata block
