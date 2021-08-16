@@ -1,3 +1,9 @@
+### Version 1.0.7
+- Add English and German names to metadata block
+- Add English description to metadata block
+- Add `@contributionURL` to metadata block
+- Specify ESLint environments instead of disabling rules
+
 ### Version 1.0.6
 - Add `@copyright` to metadata block
 - Add URL to `@license` in metadata block

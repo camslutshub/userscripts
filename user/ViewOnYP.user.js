@@ -1,45 +1,49 @@
 // @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&dn=expat.txt MIT
-/* eslint-disable no-undef, prefer-promise-reject-errors */
+/* eslint-env browser, greasemonkey */
 
 // ==UserScript==
-// @name           ViewOnYP
-// @namespace      https://github.com/TheLastZombie/
-// @version        2.3.2
-// @description    Links various membership platforms to Kemono and OFans.party.
-// @description:de Vernetzt verschiedene Mitgliedschaftsplattformen mit Kemono und OFans.party.
-// @homepageURL    https://github.com/TheLastZombie/userscripts#viewonyp-
-// @supportURL     https://github.com/TheLastZombie/userscripts/issues/new?labels=ViewOnYP
-// @downloadURL    https://raw.github.com/TheLastZombie/userscripts/master/user/ViewOnYP.user.js
-// @updateURL      https://raw.github.com/TheLastZombie/userscripts/master/meta/ViewOnYP.meta.js
-// @author         TheLastZombie
-// @match          *://www.dlsite.com/*/circle/profile/=/maker_id/*
-// @match          *://*.fanbox.cc/
-// @match          *://gumroad.com/*
-// @match          *://onlyfans.com/*
-// @match          *://www.patreon.com/*
-// @match          *://www.subscribestar.com/*
-// @match          *://subscribestar.adult/*
-// @connect        kemono.party
-// @connect        ofans.party
-// @connect        api.fanbox.cc
-// @grant          GM.deleteValue
-// @grant          GM_deleteValue
-// @grant          GM.getValue
-// @grant          GM_getValue
-// @grant          GM.registerMenuCommand
-// @grant          GM_registerMenuCommand
-// @grant          GM.setValue
-// @grant          GM_setValue
-// @grant          GM.xmlHttpRequest
-// @grant          GM_xmlhttpRequest
-// @require        https://greasemonkey.github.io/gm4-polyfill/gm4-polyfill.js
-// @icon           https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/ViewOnYP.ico
-// @copyright      2020-2021, TheLastZombie (https://github.com/TheLastZombie/)
-// @license        MIT; https://github.com/TheLastZombie/userscripts/blob/master/LICENSE
+// @name            ViewOnYP
+// @name:de         ViewOnYP
+// @name:en         ViewOnYP
+// @namespace       https://github.com/TheLastZombie/
+// @version         2.3.3
+// @description     Links various membership platforms to Kemono and OFans.party.
+// @description:de  Vernetzt verschiedene Mitgliedschaftsplattformen mit Kemono und OFans.party.
+// @description:en  Links various membership platforms to Kemono and OFans.party.
+// @homepageURL     https://github.com/TheLastZombie/userscripts#viewonyp-
+// @supportURL      https://github.com/TheLastZombie/userscripts/issues/new?labels=ViewOnYP
+// @contributionURL https://ko-fi.com/rcrsch
+// @downloadURL     https://raw.github.com/TheLastZombie/userscripts/master/user/ViewOnYP.user.js
+// @updateURL       https://raw.github.com/TheLastZombie/userscripts/master/meta/ViewOnYP.meta.js
+// @author          TheLastZombie
+// @match           *://www.dlsite.com/*/circle/profile/=/maker_id/*
+// @match           *://*.fanbox.cc/
+// @match           *://gumroad.com/*
+// @match           *://onlyfans.com/*
+// @match           *://www.patreon.com/*
+// @match           *://www.subscribestar.com/*
+// @match           *://subscribestar.adult/*
+// @connect         kemono.party
+// @connect         ofans.party
+// @connect         api.fanbox.cc
+// @grant           GM.deleteValue
+// @grant           GM_deleteValue
+// @grant           GM.getValue
+// @grant           GM_getValue
+// @grant           GM.registerMenuCommand
+// @grant           GM_registerMenuCommand
+// @grant           GM.setValue
+// @grant           GM_setValue
+// @grant           GM.xmlHttpRequest
+// @grant           GM_xmlhttpRequest
+// @require         https://greasemonkey.github.io/gm4-polyfill/gm4-polyfill.js
+// @icon            https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/ViewOnYP.ico
+// @copyright       2020-2021, TheLastZombie (https://github.com/TheLastZombie/)
+// @license         MIT; https://github.com/TheLastZombie/userscripts/blob/master/LICENSE
 // ==/UserScript==
 
 // ==OpenUserJS==
-// @author         TheLastZombie
+// @author          TheLastZombie
 // ==/OpenUserJS==
 
 (async function () {
