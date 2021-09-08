@@ -7,7 +7,7 @@
 // @name:de         VGMLoaderX
 // @name:en         VGMLoaderX
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.2
+// @version         1.0.3
 // @description     Automatically downloads albums from KHInsider without an account.
 // @description:de  Lädt Alben von KHInsider automatisch und ohne Account herunter.
 // @description:en  Automatically downloads albums from KHInsider without an account.
@@ -34,7 +34,7 @@
 // ==/OpenUserJS==
 
 (function () {
-  document.querySelectorAll('a[href^="https://downloads.khinsider.com/cp/add_album/"]').forEach(x => {
+  document.querySelectorAll('a[href^="/cp/add_album/"]').forEach(x => {
     x.addEventListener('click', e => {
       e.preventDefault()
 

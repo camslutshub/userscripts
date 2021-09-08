@@ -1,3 +1,6 @@
+### Version 1.0.3
+- Fix [#13](https://github.com/TheLastZombie/userscripts/issues/13)
+
 ### Version 1.0.2
 - Add English and German names to metadata block
 - Add English description to metadata block
