@@ -1,3 +1,6 @@
+### Version 1.3.0
+- Display Packagist-only versions in list
+
 ### Version 1.2.5
 - Add English and German names to metadata block
 - Add English description to metadata block

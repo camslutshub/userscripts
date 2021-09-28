@@ -1,12 +1,13 @@
 // @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&dn=expat.txt MIT
 /* eslint-env browser, greasemonkey */
+/* global semver */
 
 // ==UserScript==
 // @name            T3Xtend
 // @name:de         T3Xtend
 // @name:en         T3Xtend
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.2.5
+// @version         1.3.0
 // @description     Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
 // @description:de  Zeigt sowohl T3X- als auch Download-Links zu alten Versionen von TYPO3-Extensions.
 // @description:en  Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
@@ -20,6 +21,7 @@
 // @connect         ia801807.us.archive.org
 // @grant           GM.xmlHttpRequest
 // @grant           GM_xmlhttpRequest
+// @require         https://bundle.run/semver@7.3.5
 // @require         https://greasemonkey.github.io/gm4-polyfill/gm4-polyfill.js
 // @icon            https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/T3Xtend.ico
 // @copyright       2020-2021, TheLastZombie (https://github.com/TheLastZombie/)
@@ -30,7 +32,7 @@
 // @author          TheLastZombie
 // ==/OpenUserJS==
 
-(function () {
+(async function () {
   // Shorten button text
 
   document.querySelectorAll('.ter-ext-single-versionhistory .btn-primary').forEach(x => {
@@ -51,12 +53,36 @@
         "/zip'>ZIP</a>")
   })
 
+  // Add entries for Packagist-only versions
+
+  if (document.getElementById('install-composer')) {
+    const input = document.querySelector('#install-composer kbd').innerText.replace('composer req ', '')
+    const response = await fetch('https://repo.packagist.org/p2/' + input + '.json')
+    const data = await response.json()
+
+    data.packages[input].slice(1).forEach(x => {
+      if (!document.getElementById(x.version) && !document.getElementById('v' + x.version)) {
+        for (const y of document.querySelectorAll('tbody tr')) {
+          if (semver.gt(x.version.replace(/^v/, ''), y.getElementsByTagName('strong')[0].innerText)) {
+            y.insertAdjacentHTML('beforebegin', '<tr data-versions=""><td class="align-middle" colspan="3"><strong>' + x.version.replace(/^v/, '') + '</strong> / <span>composer</span><br><small>' + new Date(x.time).toLocaleString([], {
+              month: 'long',
+              day: '2-digit',
+              year: 'numeric'
+            }) + '</small></td><td class="align-middle composer"><a class="btn btn-primary" href="' + x.dist.url + '"><strong>ZIP</strong></a></td></tr>')
+            break
+          }
+        }
+      }
+    })
+  }
+
   // Add T3X download buttons
 
   document.querySelectorAll('.ter-ext-single-versionhistory .btn-primary:first-child').forEach(x => {
     const button = x.cloneNode(true)
     button.setAttribute('href', x.getAttribute('href').replace('/zip', '/t3x'))
     button.setAttribute('title', '')
+    if (x.parentNode.classList.contains('composer')) button.classList.add('disabled')
     button.textContent = 'T3X'
     x.insertAdjacentElement('afterend', button)
   })
