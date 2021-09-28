@@ -1,3 +1,8 @@
+### Version 1.3.1
+- Use native semantic versioning comparison
+- Use GM.xmlHttpRequest instead of Fetch API
+- Fix insertion if version is lower than lowest in TER
+
 ### Version 1.3.0
 - Display Packagist-only versions in list
 
