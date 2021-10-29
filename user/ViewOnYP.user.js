@@ -6,7 +6,7 @@
 // @name:de         ViewOnYP
 // @name:en         ViewOnYP
 // @namespace       https://github.com/TheLastZombie/
-// @version         2.3.3
+// @version         2.4.0
 // @description     Links various membership platforms to Kemono and OFans.party.
 // @description:de  Vernetzt verschiedene Mitgliedschaftsplattformen mit Kemono und OFans.party.
 // @description:en  Links various membership platforms to Kemono and OFans.party.
@@ -19,12 +19,10 @@
 // @match           *://www.dlsite.com/*/circle/profile/=/maker_id/*
 // @match           *://*.fanbox.cc/
 // @match           *://gumroad.com/*
-// @match           *://onlyfans.com/*
 // @match           *://www.patreon.com/*
 // @match           *://www.subscribestar.com/*
 // @match           *://subscribestar.adult/*
 // @connect         kemono.party
-// @connect         ofans.party
 // @connect         api.fanbox.cc
 // @grant           GM.deleteValue
 // @grant           GM_deleteValue
@@ -63,29 +61,7 @@
   const sites = [
     {
       name: 'Kemono',
-      url: 'https://kemono.party/$HOST/user/$USER',
-      test: {
-        match: '<h1 class="subtitle">Nobody here but us chickens!</h1>',
-        invert: true
-      }
-    },
-    {
-      name: 'OFans.party',
-      url: 'https://ofans.party/#/creator/$USER',
-      test: {
-        url: 'https://api.ofans.party/creators',
-        match: '"name":"$USER"',
-        invert: false
-      }
-    },
-    {
-      name: 'OFans.party (.onion)',
-      url: 'http://pkhksfrum4bwtvn6komioijrnblsbmalhytmmbt6teheuqsigeyeoeqd.onion/#/creator/$USER',
-      test: {
-        url: 'https://api.ofans.party/creators',
-        match: '"name":"$USER"',
-        invert: false
-      }
+      url: 'https://kemono.party/$HOST/user/$USER'
     }
   ]
 
@@ -138,7 +114,6 @@
       case 'patreon':
         resolve(document.head.innerHTML.match(/https:\/\/www\.patreon\.com\/api\/user\/\d+/)[0].slice(33))
         break
-      case 'onlyfans':
       case 'subscribestar':
         resolve(document.location.pathname.split('/')[1])
         break
@@ -149,16 +124,18 @@
     sites.forEach(x => {
       if (cache[x.name] && cache[x.name][host] && cache[x.name][host].includes(user)) return show(x, host, user)
 
+      const url = x.url.replace('$HOST', host).replace('$USER', user)
       GM.xmlHttpRequest({
-        url: (x.test.url || x.url).replace('$HOST', host).replace('$USER', user),
+        url: url,
+        method: 'HEAD',
         onload: response => {
-          if (!response.responseText.includes(x.test.match.replace('$HOST', host).replace('$USER', user)) === x.test.invert) show(x, host, user)
+          if (response.status === 200 && response.finalUrl === url) show(x, host, user)
         }
       })
     })
   })
 
-  function show (site, host, user) {
+  function show(site, host, user) {
     if (!document.getElementById('voyp')) document.getElementsByTagName('body')[0].insertAdjacentHTML('beforeend', '<div id="voyp"><div>ViewOnYP</div></div>')
 
     const name = site.name

@@ -1,3 +1,8 @@
+### Version 2.4.0
+- Fix Kemono support
+- Remove OFans.party support
+- Remove OFans.party (.onion) support
+
 ### Version 2.3.3
 - Add English and German names to metadata block
 - Add English description to metadata block
