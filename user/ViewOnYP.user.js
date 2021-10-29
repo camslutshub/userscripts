@@ -135,7 +135,7 @@
     })
   })
 
-  function show(site, host, user) {
+  function show (site, host, user) {
     if (!document.getElementById('voyp')) document.getElementsByTagName('body')[0].insertAdjacentHTML('beforeend', '<div id="voyp"><div>ViewOnYP</div></div>')
 
     const name = site.name
