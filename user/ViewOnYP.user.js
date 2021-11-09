@@ -6,7 +6,7 @@
 // @name:de         ViewOnYP
 // @name:en         ViewOnYP
 // @namespace       https://github.com/TheLastZombie/
-// @version         2.4.0
+// @version         2.5.0
 // @description     Links various membership platforms to Kemono and OFans.party.
 // @description:de  Vernetzt verschiedene Mitgliedschaftsplattformen mit Kemono und OFans.party.
 // @description:en  Links various membership platforms to Kemono and OFans.party.
@@ -18,6 +18,7 @@
 // @author          TheLastZombie
 // @match           *://www.dlsite.com/*/circle/profile/=/maker_id/*
 // @match           *://*.fanbox.cc/
+// @match           *://fantia.jp/fanclubs/*
 // @match           *://gumroad.com/*
 // @match           *://www.patreon.com/*
 // @match           *://www.subscribestar.com/*
@@ -107,6 +108,9 @@
           headers: { Origin: 'https://fanbox.cc' },
           onload: response => resolve(JSON.parse(response.responseText).body.user.userId)
         })
+        break
+      case 'fantia':
+        resolve(document.location.pathname.split('/')[2])
         break
       case 'gumroad':
         resolve(document.querySelector('.creator-profile-wrapper').getAttribute('data-username'))

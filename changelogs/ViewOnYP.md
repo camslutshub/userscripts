@@ -1,3 +1,6 @@
+### Version 2.5.0
+- Fix [#15](https://github.com/TheLastZombie/userscripts/issues/15)
+
 ### Version 2.4.0
 - Fix Kemono support
 - Remove OFans.party support
