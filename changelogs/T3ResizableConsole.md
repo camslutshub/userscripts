@@ -1,3 +1,6 @@
+### Version 1.0.5
+- Set version for interact.js to allow upload to GreasyFork
+
 ### Version 1.0.4
 - Add English and German names to metadata block
 - Add English description to metadata block
