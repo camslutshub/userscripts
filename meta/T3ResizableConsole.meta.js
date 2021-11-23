@@ -3,7 +3,7 @@
 // @name:de         T3ResizableConsole
 // @name:en         T3ResizableConsole
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.4
+// @version         1.0.5
 // @description     Makes TYPO3's debug console resizable.
 // @description:de  Erlaubt die Höhenänderung der TYPO3-Debug-Konsole.
 // @description:en  Makes TYPO3's debug console resizable.
@@ -15,7 +15,7 @@
 // @author          TheLastZombie
 // @match           *://*/typo3/index.php*
 // @grant           none
-// @require         https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js
+// @require         https://cdn.jsdelivr.net/npm/interactjs@1.10.11/dist/interact.min.js
 // @icon            https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/T3ResizableConsole.png
 // @copyright       2020-2021, TheLastZombie (https://github.com/TheLastZombie/)
 // @license         MIT; https://github.com/TheLastZombie/userscripts/blob/master/LICENSE
