@@ -1,4 +1,4 @@
-# Userscripts [<img width="32px" height="32px" src="https://raw.githubusercontent.com/TheLastZombie/userscripts/master/assets/github.svg">](https://thelastzombie.github.io/userscripts/) [<img width="32px" height="32px" src="https://raw.githubusercontent.com/TheLastZombie/userscripts/master/assets/greasyfork.png">](https://greasyfork.org/users/216460) [<img width="32px" height="32px" src="https://raw.githubusercontent.com/TheLastZombie/userscripts/master/assets/openuserjs.ico">](https://openuserjs.org/users/TheLastZombie)
+# Userscripts [<img width="32px" height="32px" src="https://raw.githubusercontent.com/TheLastZombie/userscripts/master/assets/github.svg">](https://thelastzombie.github.io/userscripts/) [<img width="32px" height="32px" src="https://raw.githubusercontent.com/TheLastZombie/userscripts/master/assets/greasyfork.png">](https://greasyfork.org/en/users/216460-thelastzombie?language=js) [<img width="32px" height="32px" src="https://raw.githubusercontent.com/TheLastZombie/userscripts/master/assets/openuserjs.ico">](https://openuserjs.org/users/TheLastZombie)
 
 Various userscripts for various sites that do various things.
 
