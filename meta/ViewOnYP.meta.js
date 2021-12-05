@@ -3,7 +3,7 @@
 // @name:de         ViewOnYP
 // @name:en         ViewOnYP
 // @namespace       https://github.com/TheLastZombie/
-// @version         2.5.0
+// @version         2.6.0
 // @description     Links various membership platforms to Kemono and OFans.party.
 // @description:de  Vernetzt verschiedene Mitgliedschaftsplattformen mit Kemono und OFans.party.
 // @description:en  Links various membership platforms to Kemono and OFans.party.
@@ -15,6 +15,7 @@
 // @author          TheLastZombie
 // @match           *://www.dlsite.com/*/circle/profile/=/maker_id/*
 // @match           *://*.fanbox.cc/
+// @match           *://www.fanbox.cc/@*
 // @match           *://fantia.jp/fanclubs/*
 // @match           *://gumroad.com/*
 // @match           *://www.patreon.com/*
