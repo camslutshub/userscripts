@@ -1,3 +1,6 @@
+### Version 2.6.0
+- Add alternative pixivFANBOX URL scheme
+
 ### Version 2.5.0
 - Fix [#15](https://github.com/TheLastZombie/userscripts/issues/15)
 

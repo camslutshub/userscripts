@@ -6,7 +6,7 @@
 // @name:de         ViewOnYP
 // @name:en         ViewOnYP
 // @namespace       https://github.com/TheLastZombie/
-// @version         2.5.0
+// @version         2.6.0
 // @description     Links various membership platforms to Kemono and OFans.party.
 // @description:de  Vernetzt verschiedene Mitgliedschaftsplattformen mit Kemono und OFans.party.
 // @description:en  Links various membership platforms to Kemono and OFans.party.
@@ -18,6 +18,7 @@
 // @author          TheLastZombie
 // @match           *://www.dlsite.com/*/circle/profile/=/maker_id/*
 // @match           *://*.fanbox.cc/
+// @match           *://www.fanbox.cc/@*
 // @match           *://fantia.jp/fanclubs/*
 // @match           *://gumroad.com/*
 // @match           *://www.patreon.com/*
@@ -102,13 +103,17 @@
       case 'dlsite':
         resolve(document.location.pathname.split('/')[6].slice(0, -5))
         break
-      case 'fanbox':
+      case 'fanbox': {
+        let creatorId = window.location.hostname.split('.').slice(-3, -2)[0]
+        if (creatorId === 'www') creatorId = window.location.pathname.split('/')[1].slice(1)
+
         GM.xmlHttpRequest({
-          url: 'https://api.fanbox.cc/creator.get?creatorId=' + window.location.hostname.split('.').slice(-3, -2)[0],
+          url: 'https://api.fanbox.cc/creator.get?creatorId=' + creatorId,
           headers: { Origin: 'https://fanbox.cc' },
           onload: response => resolve(JSON.parse(response.responseText).body.user.userId)
         })
         break
+      }
       case 'fantia':
         resolve(document.location.pathname.split('/')[2])
         break
