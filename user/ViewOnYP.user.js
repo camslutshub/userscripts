@@ -6,7 +6,7 @@
 // @name:de         ViewOnYP
 // @name:en         ViewOnYP
 // @namespace       https://github.com/TheLastZombie/
-// @version         2.6.0
+// @version         2.7.0
 // @description     Links various membership platforms to Kemono and OFans.party.
 // @description:de  Vernetzt verschiedene Mitgliedschaftsplattformen mit Kemono und OFans.party.
 // @description:en  Links various membership platforms to Kemono and OFans.party.
@@ -21,9 +21,11 @@
 // @match           *://www.fanbox.cc/@*
 // @match           *://fantia.jp/fanclubs/*
 // @match           *://gumroad.com/*
+// @match           *://onlyfans.com/*
 // @match           *://www.patreon.com/*
 // @match           *://www.subscribestar.com/*
 // @match           *://subscribestar.adult/*
+// @connect         coomer.party
 // @connect         kemono.party
 // @connect         api.fanbox.cc
 // @grant           GM.deleteValue
@@ -61,6 +63,10 @@
   }
 
   const sites = [
+    {
+      name: 'Coomer',
+      url: 'https://coomer.party/$HOST/user/$USER'
+    },
     {
       name: 'Kemono',
       url: 'https://kemono.party/$HOST/user/$USER'
@@ -123,6 +129,7 @@
       case 'patreon':
         resolve(document.head.innerHTML.match(/https:\/\/www\.patreon\.com\/api\/user\/\d+/)[0].slice(33))
         break
+      case 'onlyfans':
       case 'subscribestar':
         resolve(document.location.pathname.split('/')[1])
         break

@@ -1,3 +1,6 @@
+### Version 2.7.0
+- Add OnlyFans → Coomer support
+
 ### Version 2.6.0
 - Add alternative pixivFANBOX URL scheme
 
