@@ -3,10 +3,10 @@
 // @name:de         ViewOnYP
 // @name:en         ViewOnYP
 // @namespace       https://github.com/TheLastZombie/
-// @version         2.7.0
-// @description     Links various membership platforms to Kemono and OFans.party.
-// @description:de  Vernetzt verschiedene Mitgliedschaftsplattformen mit Kemono und OFans.party.
-// @description:en  Links various membership platforms to Kemono and OFans.party.
+// @version         2.8.0
+// @description     Links various membership platforms to Kemono and Coomer.
+// @description:de  Vernetzt verschiedene Mitgliedschaftsplattformen mit Kemono und Coomer.
+// @description:en  Links various membership platforms to Kemono and Coomer.
 // @homepageURL     https://github.com/TheLastZombie/userscripts#viewonyp-
 // @supportURL      https://github.com/TheLastZombie/userscripts/issues/new?labels=ViewOnYP
 // @contributionURL https://ko-fi.com/rcrsch
