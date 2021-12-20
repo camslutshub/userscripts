@@ -1,3 +1,8 @@
+### Version 2.8.0
+- Add menu option to populate cache
+- Use API endpoints for Kemono
+- Use API endpoints for Coomer
+
 ### Version 2.7.0
 - Add OnlyFans → Coomer support
 

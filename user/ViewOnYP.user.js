@@ -6,10 +6,10 @@
 // @name:de         ViewOnYP
 // @name:en         ViewOnYP
 // @namespace       https://github.com/TheLastZombie/
-// @version         2.7.0
-// @description     Links various membership platforms to Kemono and OFans.party.
-// @description:de  Vernetzt verschiedene Mitgliedschaftsplattformen mit Kemono und OFans.party.
-// @description:en  Links various membership platforms to Kemono and OFans.party.
+// @version         2.8.0
+// @description     Links various membership platforms to Kemono and Coomer.
+// @description:de  Vernetzt verschiedene Mitgliedschaftsplattformen mit Kemono und Coomer.
+// @description:en  Links various membership platforms to Kemono and Coomer.
 // @homepageURL     https://github.com/TheLastZombie/userscripts#viewonyp-
 // @supportURL      https://github.com/TheLastZombie/userscripts/issues/new?labels=ViewOnYP
 // @contributionURL https://ko-fi.com/rcrsch
@@ -49,11 +49,6 @@
 // ==/OpenUserJS==
 
 (async function () {
-  GM.registerMenuCommand('Clear cache', () => {
-    GM.deleteValue('cache2')
-      .then(alert('Cache cleared successfully.'))
-  })
-
   if (!await GM.getValue('cache2')) await GM.setValue('cache2', {})
   const cache = await GM.getValue('cache2')
 
@@ -65,13 +60,36 @@
   const sites = [
     {
       name: 'Coomer',
-      url: 'https://coomer.party/$HOST/user/$USER'
+      url: 'coomer.party'
     },
     {
       name: 'Kemono',
-      url: 'https://kemono.party/$HOST/user/$USER'
+      url: 'kemono.party'
     }
   ]
+
+  GM.registerMenuCommand('Populate cache', () => {
+    sites.forEach(x => {
+      GM.xmlHttpRequest({
+        url: 'https://' + x.url + '/api/creators',
+        method: 'GET',
+        onload: async response => {
+          JSON.parse(response.responseText).forEach(y => {
+            if (!cache[x.name]) cache[x.name] = {}
+            if (!cache[x.name][y.service]) cache[x.name][y.service] = []
+            cache[x.name][y.service].push(y.id)
+          })
+          await GM.setValue('cache2', cache)
+          alert('Populated cache for ' + x.name + '.')
+        }
+      })
+    })
+  })
+
+  GM.registerMenuCommand('Clear cache', () => {
+    GM.deleteValue('cache2')
+      .then(alert('Cache cleared successfully.'))
+  })
 
   document.getElementsByTagName('head')[0].insertAdjacentHTML('beforeend', `
     <style>
@@ -140,12 +158,12 @@
     sites.forEach(x => {
       if (cache[x.name] && cache[x.name][host] && cache[x.name][host].includes(user)) return show(x, host, user)
 
-      const url = x.url.replace('$HOST', host).replace('$USER', user)
+      const url = 'https://' + x.url + '/' + host + '/user/' + user
       GM.xmlHttpRequest({
-        url: url,
-        method: 'HEAD',
+        url: 'https://' + x.url + '/api/creators',
+        method: 'GET',
         onload: response => {
-          if (response.status === 200 && response.finalUrl === url) show(x, host, user)
+          if (JSON.parse(response.responseText).filter(x => x.service === host).filter(x => x.id === user).length) show(x, host, user)
         }
       })
     })
@@ -155,7 +173,7 @@
     if (!document.getElementById('voyp')) document.getElementsByTagName('body')[0].insertAdjacentHTML('beforeend', '<div id="voyp"><div>ViewOnYP</div></div>')
 
     const name = site.name
-    const url = site.url.replace('$HOST', host).replace('$USER', user)
+    const url = 'https://' + site.url + '/' + host + '/user/' + user
 
     document.getElementById('voyp').insertAdjacentHTML('beforeend', name + ': <a href="' + url + '">' + url + '</a><br>')
 
