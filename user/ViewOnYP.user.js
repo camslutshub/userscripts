@@ -158,7 +158,6 @@
     sites.forEach(x => {
       if (cache[x.name] && cache[x.name][host] && cache[x.name][host].includes(user)) return show(x, host, user)
 
-      const url = 'https://' + x.url + '/' + host + '/user/' + user
       GM.xmlHttpRequest({
         url: 'https://' + x.url + '/api/creators',
         method: 'GET',
