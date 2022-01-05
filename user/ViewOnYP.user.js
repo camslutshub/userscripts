@@ -6,7 +6,7 @@
 // @name:de         ViewOnYP
 // @name:en         ViewOnYP
 // @namespace       https://github.com/TheLastZombie/
-// @version         2.8.0
+// @version         2.8.1
 // @description     Links various membership platforms to Kemono and Coomer.
 // @description:de  Vernetzt verschiedene Mitgliedschaftsplattformen mit Kemono und Coomer.
 // @description:en  Links various membership platforms to Kemono and Coomer.
@@ -40,7 +40,7 @@
 // @grant           GM_xmlhttpRequest
 // @require         https://greasemonkey.github.io/gm4-polyfill/gm4-polyfill.js
 // @icon            https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/ViewOnYP.ico
-// @copyright       2020-2021, TheLastZombie (https://github.com/TheLastZombie/)
+// @copyright       2020-2022, TheLastZombie (https://github.com/TheLastZombie/)
 // @license         MIT; https://github.com/TheLastZombie/userscripts/blob/master/LICENSE
 // ==/UserScript==
 
@@ -60,25 +60,45 @@
   const sites = [
     {
       name: 'Coomer',
-      url: 'coomer.party'
+      check: 'https://coomer.party/api/creators',
+      cache: (response, x) => {
+        JSON.parse(response.responseText).forEach(y => {
+          if (!cache[x.name]) cache[x.name] = {}
+          if (!cache[x.name][y.service]) cache[x.name][y.service] = []
+          cache[x.name][y.service].push(y.id)
+        })
+        return cache
+      },
+      get: (response, host, user) => {
+        return Boolean(JSON.parse(response.responseText).filter(x => x.service === host).filter(x => x.id === user).length)
+      },
+      profile: 'https://coomer.party/$HOST/user/$USER'
     },
     {
       name: 'Kemono',
-      url: 'kemono.party'
+      check: 'https://kemono.party/api/creators',
+      cache: (response, x) => {
+        JSON.parse(response.responseText).forEach(y => {
+          if (!cache[x.name]) cache[x.name] = {}
+          if (!cache[x.name][y.service]) cache[x.name][y.service] = []
+          cache[x.name][y.service].push(y.id)
+        })
+        return cache
+      },
+      get: (response, host, user) => {
+        return Boolean(JSON.parse(response.responseText).filter(x => x.service === host).filter(x => x.id === user).length)
+      },
+      profile: 'https://kemono.party/$HOST/user/$USER'
     }
   ]
 
   GM.registerMenuCommand('Populate cache', () => {
     sites.forEach(x => {
       GM.xmlHttpRequest({
-        url: 'https://' + x.url + '/api/creators',
+        url: x.check,
         method: 'GET',
         onload: async response => {
-          JSON.parse(response.responseText).forEach(y => {
-            if (!cache[x.name]) cache[x.name] = {}
-            if (!cache[x.name][y.service]) cache[x.name][y.service] = []
-            cache[x.name][y.service].push(y.id)
-          })
+          const cache = x.cache(response, x)
           await GM.setValue('cache2', cache)
           alert('Populated cache for ' + x.name + '.')
         }
@@ -157,12 +177,11 @@
   p.then(user => {
     sites.forEach(x => {
       if (cache[x.name] && cache[x.name][host] && cache[x.name][host].includes(user)) return show(x, host, user)
-
       GM.xmlHttpRequest({
-        url: 'https://' + x.url + '/api/creators',
+        url: x.check,
         method: 'GET',
         onload: response => {
-          if (JSON.parse(response.responseText).filter(x => x.service === host).filter(x => x.id === user).length) show(x, host, user)
+          if (x.get(response, host, user)) show(x, host, user)
         }
       })
     })
@@ -172,7 +191,7 @@
     if (!document.getElementById('voyp')) document.getElementsByTagName('body')[0].insertAdjacentHTML('beforeend', '<div id="voyp"><div>ViewOnYP</div></div>')
 
     const name = site.name
-    const url = 'https://' + site.url + '/' + host + '/user/' + user
+    const url = site.profile.replace('$HOST', host).replace('$USER', user)
 
     document.getElementById('voyp').insertAdjacentHTML('beforeend', name + ': <a href="' + url + '">' + url + '</a><br>')
 

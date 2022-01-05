@@ -1,3 +1,6 @@
+### Version 2.8.1
+- Improve ease of multi-site support
+
 ### Version 2.8.0
 - Add menu option to populate cache
 - Use API endpoints for Kemono
