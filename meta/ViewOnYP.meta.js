@@ -3,7 +3,7 @@
 // @name:de         ViewOnYP
 // @name:en         ViewOnYP
 // @namespace       https://github.com/TheLastZombie/
-// @version         2.8.0
+// @version         2.8.1
 // @description     Links various membership platforms to Kemono and Coomer.
 // @description:de  Vernetzt verschiedene Mitgliedschaftsplattformen mit Kemono und Coomer.
 // @description:en  Links various membership platforms to Kemono and Coomer.
@@ -37,6 +37,6 @@
 // @grant           GM_xmlhttpRequest
 // @require         https://greasemonkey.github.io/gm4-polyfill/gm4-polyfill.js
 // @icon            https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/ViewOnYP.ico
-// @copyright       2020-2021, TheLastZombie (https://github.com/TheLastZombie/)
+// @copyright       2020-2022, TheLastZombie (https://github.com/TheLastZombie/)
 // @license         MIT; https://github.com/TheLastZombie/userscripts/blob/master/LICENSE
 // ==/UserScript==
