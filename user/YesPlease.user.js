@@ -34,7 +34,7 @@
 // @require         https://greasemonkey.github.io/gm4-polyfill/gm4-polyfill.js
 // @require         https://openuserjs.org/src/libs/sizzle/GM_config.js
 // @icon            https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/YesPlease.png
-// @copyright       2021, TheLastZombie (https://github.com/TheLastZombie/)
+// @copyright       2021-2022, TheLastZombie (https://github.com/TheLastZombie/)
 // @license         MIT; https://github.com/TheLastZombie/userscripts/blob/master/LICENSE
 // ==/UserScript==
 

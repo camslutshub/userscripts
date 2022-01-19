@@ -20,7 +20,7 @@
 // @match           *://*.removeddit.com/r/*/comments/*
 // @grant           none
 // @icon            https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/Collapsit.ico
-// @copyright       2020-2021, TheLastZombie (https://github.com/TheLastZombie/)
+// @copyright       2020-2022, TheLastZombie (https://github.com/TheLastZombie/)
 // @license         MIT; https://github.com/TheLastZombie/userscripts/blob/master/LICENSE
 // ==/UserScript==
 

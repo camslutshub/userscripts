@@ -3,16 +3,16 @@
 // @name:de         YesPlease
 // @name:en         YesPlease
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.0
+// @version         1.0.1
 // @description     A (not yet) drop-in replacement for the No, thanks. extension.
 // @description:de  (Noch k)ein Ersatz für die No, thanks.-Browsererweiterung.
 // @description:en  A (not yet) drop-in replacement for the No, thanks. extension.
-// @homepageURL     https://github.com/TheLastZombie/userscripts#yesplease-
+// @homepageURL     https://thelastzombie.github.io/userscripts/
 // @supportURL      https://github.com/TheLastZombie/userscripts/issues/new?labels=YesPlease
 // @contributionURL https://ko-fi.com/rcrsch
 // @downloadURL     https://raw.github.com/TheLastZombie/userscripts/master/user/YesPlease.user.js
 // @updateURL       https://raw.github.com/TheLastZombie/userscripts/master/meta/YesPlease.meta.js
-// @author          TheLastZombie
+// @author          TheLastZombie <roesch.eric@protonmail.com>
 // @match           *://*/*
 // @connect         no-thanks-extension.com
 // @connect         *

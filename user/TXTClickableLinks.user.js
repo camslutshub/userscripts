@@ -20,7 +20,7 @@
 // @match           *://*/*
 // @grant           none
 // @icon            https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/TXTClickableLinks.png
-// @copyright       2021, TheLastZombie (https://github.com/TheLastZombie/)
+// @copyright       2021-2022, TheLastZombie (https://github.com/TheLastZombie/)
 // @license         MIT; https://github.com/TheLastZombie/userscripts/blob/master/LICENSE
 // ==/UserScript==
 

@@ -3,16 +3,16 @@
 // @name:de         MSGPIntegration
 // @name:en         MSGPIntegration
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.0
+// @version         1.0.1
 // @description     Allows access to the Microsoft Store Generation Project from within Microsoft Store itself.
 // @description:de  Integriert das Microsoft Store Generation Project in den Microsoft Store selbst.
 // @description:en  Allows access to the Microsoft Store Generation Project from within Microsoft Store itself.
-// @homepageURL     https://github.com/TheLastZombie/userscripts#msgpintegration-
+// @homepageURL     https://thelastzombie.github.io/userscripts/
 // @supportURL      https://github.com/TheLastZombie/userscripts/issues/new?labels=MSGPIntegration
 // @contributionURL https://ko-fi.com/rcrsch
 // @downloadURL     https://raw.github.com/TheLastZombie/userscripts/master/user/MSGPIntegration.user.js
 // @updateURL       https://raw.github.com/TheLastZombie/userscripts/master/meta/MSGPIntegration.meta.js
-// @author          TheLastZombie
+// @author          TheLastZombie <roesch.eric@protonmail.com>
 // @match           https://www.microsoft.com/*/p/*/*
 // @connect         store.rg-adguard.net
 // @grant           GM.xmlHttpRequest

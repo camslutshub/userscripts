@@ -3,16 +3,16 @@
 // @name:de         TracklistToRYM
 // @name:en         TracklistToRYM
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.22.1
+// @version         1.22.2
 // @description     Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de  Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @description:en  Imports an album's tracklist from various sources into Rate Your Music.
-// @homepageURL     https://github.com/TheLastZombie/userscripts#tracklisttorym-
+// @homepageURL     https://thelastzombie.github.io/userscripts/
 // @supportURL      https://github.com/TheLastZombie/userscripts/issues/new?labels=TracklistToRYM
 // @contributionURL https://ko-fi.com/rcrsch
 // @downloadURL     https://raw.github.com/TheLastZombie/userscripts/master/user/TracklistToRYM.user.js
 // @updateURL       https://raw.github.com/TheLastZombie/userscripts/master/meta/TracklistToRYM.meta.js
-// @author          TheLastZombie
+// @author          TheLastZombie <roesch.eric@protonmail.com>
 // @match           https://rateyourmusic.com/releases/ac
 // @match           https://rateyourmusic.com/releases/ac?*
 // @connect         allmusic.com
