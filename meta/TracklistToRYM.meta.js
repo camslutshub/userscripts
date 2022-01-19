@@ -3,7 +3,7 @@
 // @name:de         TracklistToRYM
 // @name:en         TracklistToRYM
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.22.2
+// @version         1.22.3
 // @description     Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de  Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @description:en  Imports an album's tracklist from various sources into Rate Your Music.
