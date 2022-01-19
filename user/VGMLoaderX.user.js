@@ -1,22 +1,23 @@
 // @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&dn=expat.txt MIT
 /* eslint-env browser, greasemonkey */
-/* global zip, saveAs */
+/* jshint asi: true, esversion: 11 */
+/* globals zip, saveAs */
 
 // ==UserScript==
 // @name            VGMLoaderX
 // @name:de         VGMLoaderX
 // @name:en         VGMLoaderX
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.3
+// @version         1.0.4
 // @description     Automatically downloads albums from KHInsider without an account.
 // @description:de  Lädt Alben von KHInsider automatisch und ohne Account herunter.
 // @description:en  Automatically downloads albums from KHInsider without an account.
-// @homepageURL     https://github.com/TheLastZombie/userscripts#vgmloaderx-
+// @homepageURL     https://thelastzombie.github.io/userscripts/
 // @supportURL      https://github.com/TheLastZombie/userscripts/issues/new?labels=VGMLoaderX
 // @contributionURL https://ko-fi.com/rcrsch
 // @downloadURL     https://raw.github.com/TheLastZombie/userscripts/master/user/VGMLoaderX.user.js
 // @updateURL       https://raw.github.com/TheLastZombie/userscripts/master/meta/VGMLoaderX.meta.js
-// @author          TheLastZombie
+// @author          TheLastZombie <roesch.eric@protonmail.com>
 // @match           https://downloads.khinsider.com/game-soundtracks/album/*
 // @connect         vgmsite.com
 // @grant           GM.xmlHttpRequest
@@ -56,7 +57,7 @@
       element.style.marginBottom = '2em'
 
       // eslint-disable-next-line no-eval
-      const input = eval(document
+      const input = eval(document // jshint ignore:line
         .querySelector('#EchoTopic script')
         .textContent
         .slice(5, -3)

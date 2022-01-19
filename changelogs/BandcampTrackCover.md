@@ -1,3 +1,8 @@
+### Version 1.0.8
+- Update homepage URL
+- Add e-mail address to author
+- Fix JSHint errors and warnings
+
 ### Version 1.0.7
 - Add English and German names to metadata block
 - Add English description to metadata block

@@ -1,3 +1,8 @@
+### Version 1.0.4
+- Update homepage URL
+- Add e-mail address to author
+- Fix JSHint errors and warnings
+
 ### Version 1.0.3
 - Fix [#13](https://github.com/TheLastZombie/userscripts/issues/13)
 

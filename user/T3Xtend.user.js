@@ -1,21 +1,22 @@
 // @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&dn=expat.txt MIT
 /* eslint-env browser, greasemonkey */
+/* jshint asi: true, esversion: 11 */
 
 // ==UserScript==
 // @name            T3Xtend
 // @name:de         T3Xtend
 // @name:en         T3Xtend
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.3.1
+// @version         1.3.2
 // @description     Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
 // @description:de  Zeigt sowohl T3X- als auch Download-Links zu alten Versionen von TYPO3-Extensions.
 // @description:en  Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
-// @homepageURL     https://github.com/TheLastZombie/userscripts#t3xtend-
+// @homepageURL     https://thelastzombie.github.io/userscripts/
 // @supportURL      https://github.com/TheLastZombie/userscripts/issues/new?labels=T3Xtend
 // @contributionURL https://ko-fi.com/rcrsch
 // @downloadURL     https://raw.github.com/TheLastZombie/userscripts/master/user/T3Xtend.user.js
 // @updateURL       https://raw.github.com/TheLastZombie/userscripts/master/meta/T3Xtend.meta.js
-// @author          TheLastZombie
+// @author          TheLastZombie <roesch.eric@protonmail.com>
 // @match           https://extensions.typo3.org/extension/*
 // @connect         repo.packagist.org
 // @connect         ia801807.us.archive.org
@@ -94,7 +95,7 @@
         if (document.getElementById('install-composer')) {
           document.querySelectorAll('.ter-ext-single-versionhistory .btn-primary:first-child').forEach(x => {
             const button = x.cloneNode(true)
-            button.setAttribute('href', 'javascript:void(0)')
+            button.setAttribute('href', 'javascript:void(0)') // jshint ignore:line
             button.setAttribute('onclick', 'copyToClipboard(this)')
             button.setAttribute('title', '')
             button.setAttribute('data-message', 'Composer require command is in your clipboard now')

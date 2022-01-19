@@ -1,21 +1,22 @@
 // @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&dn=expat.txt MIT
 /* eslint-env browser, greasemonkey */
+/* jshint asi: true, esversion: 11 */
 
 // ==UserScript==
 // @name            BandcampTrackCover
 // @name:de         BandcampTrackCover
 // @name:en         BandcampTrackCover
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.7
+// @version         1.0.8
 // @description     Forces showing track instead of album covers on Bandcamp.
 // @description:de  Ersetzt gegebenenfalls Album- mit Trackcovern auf Bandcamp.
 // @description:en  Forces showing track instead of album covers on Bandcamp.
-// @homepageURL     https://github.com/TheLastZombie/userscripts#bandcamptrackcover-
+// @homepageURL     https://thelastzombie.github.io/userscripts/
 // @supportURL      https://github.com/TheLastZombie/userscripts/issues/new?labels=BandcampTrackCover
 // @contributionURL https://ko-fi.com/rcrsch
 // @downloadURL     https://raw.github.com/TheLastZombie/userscripts/master/user/BandcampTrackCover.user.js
 // @updateURL       https://raw.github.com/TheLastZombie/userscripts/master/meta/BandcampTrackCover.meta.js
-// @author          TheLastZombie
+// @author          TheLastZombie <roesch.eric@protonmail.com>
 // @match           https://*.bandcamp.com/*
 // @grant           GM.xmlHttpRequest
 // @grant           GM_xmlhttpRequest

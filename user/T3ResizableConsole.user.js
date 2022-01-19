@@ -1,22 +1,23 @@
 // @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&dn=expat.txt MIT
 /* eslint-env browser, greasemonkey */
-/* global interact */
+/* jshint asi: true, esversion: 11 */
+/* globals interact */
 
 // ==UserScript==
 // @name            T3ResizableConsole
 // @name:de         T3ResizableConsole
 // @name:en         T3ResizableConsole
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.5
+// @version         1.0.6
 // @description     Makes TYPO3's debug console resizable.
 // @description:de  Erlaubt die Höhenänderung der TYPO3-Debug-Konsole.
 // @description:en  Makes TYPO3's debug console resizable.
-// @homepageURL     https://github.com/TheLastZombie/userscripts#t3resizableconsole-
+// @homepageURL     https://thelastzombie.github.io/userscripts/
 // @supportURL      https://github.com/TheLastZombie/userscripts/issues/new?labels=T3ResizableConsole
 // @contributionURL https://ko-fi.com/rcrsch
 // @downloadURL     https://raw.github.com/TheLastZombie/userscripts/master/user/T3ResizableConsole.user.js
 // @updateURL       https://raw.github.com/TheLastZombie/userscripts/master/meta/T3ResizableConsole.meta.js
-// @author          TheLastZombie
+// @author          TheLastZombie <roesch.eric@protonmail.com>
 // @match           *://*/typo3/index.php*
 // @grant           none
 // @require         https://cdn.jsdelivr.net/npm/interactjs@1.10.11/dist/interact.min.js

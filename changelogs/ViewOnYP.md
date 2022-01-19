@@ -1,3 +1,8 @@
+### Version 2.8.3
+- Update homepage URL
+- Add e-mail address to author
+- Fix JSHint errors and warnings
+
 ### Version 2.8.2
 - Always show pop-up
 

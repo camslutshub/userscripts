@@ -1,3 +1,8 @@
+### Version 1.3.2
+- Update homepage URL
+- Add e-mail address to author
+- Fix JSHint errors and warnings
+
 ### Version 1.3.1
 - Use native semantic versioning comparison
 - Use GM.xmlHttpRequest instead of Fetch API

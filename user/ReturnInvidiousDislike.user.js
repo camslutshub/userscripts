@@ -1,21 +1,22 @@
 // @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&dn=expat.txt MIT
 /* eslint-env browser, greasemonkey */
+/* jshint asi: true, esversion: 11 */
 
 // ==UserScript==
 // @name            ReturnInvidiousDislike
 // @name:de         ReturnInvidiousDislike
 // @name:en         ReturnInvidiousDislike
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.0
+// @version         1.0.1
 // @description     Displays the dislike count of videos accessed via Invidious.
 // @description:de  Zeigt die Dislike-Anzahl von Videos auf Invidious an.
 // @description:en  Displays the dislike count of videos accessed via Invidious.
-// @homepageURL     https://github.com/TheLastZombie/userscripts#returninvidiousdislike-
+// @homepageURL     https://thelastzombie.github.io/userscripts/
 // @supportURL      https://github.com/TheLastZombie/userscripts/issues/new?labels=ReturnInvidiousDislike
 // @contributionURL https://ko-fi.com/rcrsch
 // @downloadURL     https://raw.github.com/TheLastZombie/userscripts/master/user/ReturnInvidiousDislike.user.js
 // @updateURL       https://raw.github.com/TheLastZombie/userscripts/master/meta/ReturnInvidiousDislike.meta.js
-// @author          TheLastZombie
+// @author          TheLastZombie <roesch.eric@protonmail.com>
 // @match           *://*/watch?v=*
 // @connect         return-youtube-dislike-api.azurewebsites.net
 // @grant           GM.xmlHttpRequest

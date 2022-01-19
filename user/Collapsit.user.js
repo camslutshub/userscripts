@@ -1,21 +1,22 @@
 // @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&dn=expat.txt MIT
 /* eslint-env browser, greasemonkey */
+/* jshint asi: true, esversion: 11 */
 
 // ==UserScript==
 // @name            Collapsit
 // @name:de         Collapsit
 // @name:en         Collapsit
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.4
+// @version         1.0.5
 // @description     Enables collapsing (and expanding) of comments on Removeddit.
 // @description:de  Ermöglicht das Ein- und Ausklappen von Kommentaren auf Removeddit.
 // @description:en  Enables collapsing (and expanding) of comments on Removeddit.
-// @homepageURL     https://github.com/TheLastZombie/userscripts#collapsit-
+// @homepageURL     https://thelastzombie.github.io/userscripts/
 // @supportURL      https://github.com/TheLastZombie/userscripts/issues/new?labels=Collapsit
 // @contributionURL https://ko-fi.com/rcrsch
 // @downloadURL     https://raw.github.com/TheLastZombie/userscripts/master/user/Collapsit.user.js
 // @updateURL       https://raw.github.com/TheLastZombie/userscripts/master/meta/Collapsit.meta.js
-// @author          TheLastZombie
+// @author          TheLastZombie <roesch.eric@protonmail.com>
 // @match           *://*.removeddit.com/r/*/comments/*
 // @grant           none
 // @icon            https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/Collapsit.ico

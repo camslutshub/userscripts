@@ -1,3 +1,8 @@
+### Version 1.0.6
+- Update homepage URL
+- Add e-mail address to author
+- Fix JSHint errors and warnings
+
 ### Version 1.0.5
 - Set version for interact.js to allow upload to GreasyFork
 
