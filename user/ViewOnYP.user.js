@@ -6,7 +6,7 @@
 // @name:de         ViewOnYP
 // @name:en         ViewOnYP
 // @namespace       https://github.com/TheLastZombie/
-// @version         2.8.1
+// @version         2.8.2
 // @description     Links various membership platforms to Kemono and Coomer.
 // @description:de  Vernetzt verschiedene Mitgliedschaftsplattformen mit Kemono und Coomer.
 // @description:en  Links various membership platforms to Kemono and Coomer.
@@ -132,12 +132,13 @@
       #voyp div {
         font-size: small;
         text-transform: uppercase;
-        margin-bottom: 12.5px;
         opacity: 0.5;
         text-align: center;
       }
     </style>
   `)
+
+  document.getElementsByTagName('body')[0].insertAdjacentHTML('beforeend', '<div id="voyp"><div>ViewOnYP</div></div>')
 
   const host = window.location.hostname.split('.').slice(-2, -1)[0]
   if (!host) return
@@ -188,12 +189,10 @@
   })
 
   function show (site, host, user) {
-    if (!document.getElementById('voyp')) document.getElementsByTagName('body')[0].insertAdjacentHTML('beforeend', '<div id="voyp"><div>ViewOnYP</div></div>')
-
     const name = site.name
     const url = site.profile.replace('$HOST', host).replace('$USER', user)
 
-    document.getElementById('voyp').insertAdjacentHTML('beforeend', name + ': <a href="' + url + '">' + url + '</a><br>')
+    document.getElementById('voyp').insertAdjacentHTML('beforeend', '<br>' + name + ': <a href="' + url + '">' + url + '</a>')
 
     if (!cache[site.name]) cache[site.name] = {}
     if (!cache[site.name][host]) cache[site.name][host] = []

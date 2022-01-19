@@ -1,3 +1,6 @@
+### Version 2.8.2
+- Always show pop-up
+
 ### Version 2.8.1
 - Improve ease of multi-site support
 
