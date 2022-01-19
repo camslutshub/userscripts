@@ -17,6 +17,6 @@
 // @grant           none
 // @require         https://cdn.jsdelivr.net/npm/interactjs@1.10.11/dist/interact.min.js
 // @icon            https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/T3ResizableConsole.png
-// @copyright       2020-2021, TheLastZombie (https://github.com/TheLastZombie/)
+// @copyright       2020-2022, TheLastZombie (https://github.com/TheLastZombie/)
 // @license         MIT; https://github.com/TheLastZombie/userscripts/blob/master/LICENSE
 // ==/UserScript==

@@ -19,6 +19,6 @@
 // @grant           GM_xmlhttpRequest
 // @require         https://greasemonkey.github.io/gm4-polyfill/gm4-polyfill.js
 // @icon            https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/MSGPIntegration.ico
-// @copyright       2021, TheLastZombie (https://github.com/TheLastZombie/)
+// @copyright       2021-2022, TheLastZombie (https://github.com/TheLastZombie/)
 // @license         MIT; https://github.com/TheLastZombie/userscripts/blob/master/LICENSE
 // ==/UserScript==
