@@ -1,14 +1,14 @@
 // @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&dn=expat.txt MIT
-/* eslint-env browser, jquery, greasemonkey */
+/* eslint-env browser, greasemonkey */
 /* jshint asi: true, esversion: 11 */
-/* globals $, deleteFiledUnder, goAdvanced, goSimple */
+/* globals deleteFiledUnder, goAdvanced, goSimple */
 
 // ==UserScript==
 // @name            TracklistToRYM
 // @name:de         TracklistToRYM
 // @name:en         TracklistToRYM
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.22.2
+// @version         1.22.3
 // @description     Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de  Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @description:en  Imports an album's tracklist from various sources into Rate Your Music.
@@ -69,7 +69,7 @@
 // ==/OpenUserJS==
 
 (async function () {
-  const parent = $("input[value='Copy Tracks']").parent()
+  const parent = document.querySelector("input[value='Copy Tracks']").parentNode
   let msgPosted = false
 
   const sitestmp = [
@@ -154,12 +154,12 @@
       name: 'Discogs',
       extractor: 'node',
       placeholder: 'https://discogs.com/release/*',
-      artist: '#profile_title a',
-      album: '#profile_title > span:last-child',
-      parent: '.tracklist_track:not(.track_heading)',
-      index: '.tracklist_track_pos',
-      title: '.tracklist_track_title > span',
-      length: '.tracklist_track_duration span'
+      artist: 'h1 a',
+      album: 'h1',
+      parent: 'tr[data-track-position]',
+      index: 'td[class^=trackPos]',
+      title: 'td[class^=trackTitle] span',
+      length: 'td[class^=duration] span'
     },
     {
       name: 'Free Music Archive',
@@ -389,38 +389,38 @@
   const asyncFilterHelper = await GM.getValue('sites')
   const sites = sitestmp.filter(x => asyncFilterHelper.includes(x.name))
 
-  parent.width(489)
-  parent.append("<br><hr style='margin-top:1em;margin-bottom:1em;border:none;height:1px;background:var(--mono-d);width:calc(100% + 20px);position:relative;left:-10px'>" +
+  parent.style.width = '500px'
+  parent.insertAdjacentHTML('beforeend', "<br><hr style='margin-top:1em;margin-bottom:1em;border:none;height:1px;background:var(--mono-d);width:calc(100% + 20px);position:relative;left:-10px'>" +
     "<p style='display:flex;margin-bottom:0'><a href='https://github.com/TheLastZombie/userscripts#tracklisttorym-' target='_blank' style='position:relative;top:3px;color:inherit'>TTRYM</a>" +
     "<select id='ttrym-site' style='max-width:0;margin-left:.5em;border-radius:3px 0 0 3px'>" + sites.map(x => "<option value='" + x.name + "'>" + x.name + '</option>').join('') + '</select>' +
     "<input id='ttrym-link' placeholder='Album URL' style='flex:1;border-left:none;border-radius:0 3px 3px 0;padding-left:5px'></input>" +
     "<button id='ttrym-submit' style='font-family:\"Font Awesome 5 Free\";border:none;background:none;color:inherit;font-size:1.5em;margin-left:.5em;cursor:pointer' title='Import'>&#xf00c;</button>" +
     "<button id='ttrym-settings' style='font-family:\"Font Awesome 5 Free\";border:none;background:none;color:inherit;font-size:1.5em;margin-left:.5em;cursor:pointer' title='Settings'>&#xf013;</button></p>")
 
-  $('#ttrym-site').bind('change', function () {
-    $('#ttrym-link').attr('placeholder', sites.filter(x => x.name === $(this).val())[0].placeholder)
+  document.getElementById('ttrym-site').addEventListener('change', function () {
+    document.getElementById('ttrym-link').placeholder = sites.filter(x => x.name === this.value)[0].placeholder
   })
-  $('#ttrym-site').val(await GM.getValue('default'))
-  $('#ttrym-site').trigger('change')
+  document.getElementById('ttrym-site').value = await GM.getValue('default')
+  document.getElementById('ttrym-site').dispatchEvent(new Event('change'))
 
-  $(document).on('click', '#ttrym-dismiss', function () {
-    clearMessages()
+  document.addEventListener('click', function (e) {
+    if (e.target?.id === 'ttrym-dismiss') clearMessages()
   })
 
-  $('#ttrym-submit').click(async function () {
+  document.getElementById('ttrym-submit').addEventListener('click', async function () {
     clearMessages()
-    if (!$('#ttrym-link').val()) return printMessage('error', 'No URL specified! Please enter one and try again.')
+    if (!document.getElementById('ttrym-link').value) return printMessage('error', 'No URL specified! Please enter one and try again.')
     printMessage('progress', 'Importing, please wait...')
-    $('#ttrym-submit').attr('disabled', true)
+    document.getElementById('ttrym-submit').disabled = true
 
-    $('.filed_under_delete a').each(function () {
-      deleteFiledUnder(Number($(this).attr('href').match(/\d+/)))
+    document.querySelectorAll('.filed_under_delete a').forEach(element => {
+      deleteFiledUnder(Number(element.href.match(/\d+/)))
     })
 
     try {
-      const site = $('#ttrym-site').val()
+      const site = document.getElementById('ttrym-site').value
       let input = sites.filter(x => x.name === site)[0]
-      let link = $('#ttrym-link').val()
+      let link = document.getElementById('ttrym-link').value
 
       link = input.transformer ? input.transformer(link) : link
       if (!link.match(/^https?:\/\//)) link = 'https://' + link
@@ -430,7 +430,7 @@
         if (suggestion && await GM.getValue('guess')) {
           printMessage('progress', 'Using ' + suggestion.name + ' instead of ' + input.name + '.')
           input = suggestion
-          $('#ttrym-site').val(input.name)
+          document.getElementById('ttrym-site').value = input.name
         } else {
           printMessage('warning', "Entered URL does not match the selected site's placeholder. Request may not succeed.")
         }
@@ -461,15 +461,15 @@
               break
 
             case 'node':
-              $(data).find(input.parent).each(function () {
+              new DOMParser().parseFromString(data, 'text/html').querySelectorAll(input.parent).forEach(element => {
                 amount++
-                const index = parseNode($(this).find(input.index)) || amount
-                const title = parseNode($(this).find(input.title)) || ''
-                const length = parseNode($(this).find(input.length)) || ''
+                const index = parseNode(element.querySelector(input.index)) || amount
+                const title = parseNode(element.querySelector(input.title)) || ''
+                const length = parseNode(element.querySelector(input.length)) || ''
                 result += getResult(index, title, length)
               })
-              artist = parseNode($(data).find(input.artist)) || ''
-              album = parseNode($(data).find(input.album)) || ''
+              artist = parseNode(new DOMParser().parseFromString(data, 'text/html').querySelector(input.artist)) || ''
+              album = parseNode(new DOMParser().parseFromString(data, 'text/html').querySelector(input.album)) || ''
               break
 
             case 'regex':
@@ -485,12 +485,12 @@
               break
 
             default:
-              $('#ttrym-submit').attr('disabled', false)
+              document.getElementById('ttrym-submit').disabled = false
               return printMessage('error', input.extractor + " is not a valid extractor. This is (probably) not your fault, please report this on <a href='https://github.com/TheLastZombie/userscripts/issues/new?title=" + input.extractor + "%20is%20not%20a%20valid%20extractor&labels=TracklistToRYM'>GitHub</a>.")
           }
 
           if (amount === 0) {
-            $('#ttrym-submit').attr('disabled', false)
+            document.getElementById('ttrym-submit').disabled = false
             return printMessage('warning', 'Did not find any tracks. Please check your URL and try again.')
           }
 
@@ -503,40 +503,40 @@
               url: 'https://rateyourmusic.com/go/searchcredits?target=filedunder&searchterm=' + artist,
               onload: async (response) => {
                 // eslint-disable-next-line no-eval
-                eval($($(response.responseText)[3]).attr('onClick').replace('window.parent.', '')) // jshint ignore:line
+                eval(new DOMParser().parseFromString(response.responseText, 'text/html').getElementsByClassName('result')[0].getAttribute('onClick').replace('window.parent.', '')) // jshint ignore:line
               }
             })
           }
-          if (await GM.getValue('release')) $('#title').val(album)
+          if (await GM.getValue('release')) document.getElementById('title').value = album
 
           goAdvanced()
-          $('#track_advanced').val(await GM.getValue('append') ? $('#track_advanced').val() + result : result)
+          document.getElementById('track_advanced').value = await GM.getValue('append') ? document.getElementById('track_advanced').value + result : result
           goSimple()
 
-          if (await GM.getValue('sources') && !$('#notes').val().includes($('#ttrym-link').val())) {
-            $('#notes').val($('#notes').val() + ($('#notes').val() === '' ? '' : '\n') + $('#ttrym-link').val())
+          if (await GM.getValue('sources') && !document.getElementById('notes').value.includes(document.getElementById('ttrym-link').value)) {
+            document.getElementById('notes').value = document.getElementById('notes').value + (document.getElementById('notes').value === '' ? '' : '\n') + document.getElementById('ttrym-link').value
           }
-          $('#ttrym-link').val('')
+          document.getElementById('ttrym-link').value = ''
 
-          $('#ttrym-submit').attr('disabled', false)
+          document.getElementById('ttrym-submit').disabled = false
           printMessage('success', 'Imported ' + amount + ' tracks.')
         },
 
         onerror: (response) => {
-          $('#ttrym-submit').attr('disabled', false)
+          document.getElementById('ttrym-submit').disabled = false
           printMessage('error', response.responseText)
         }
       })
     } catch (e) {
-      $('#ttrym-submit').attr('disabled', false)
+      document.getElementById('ttrym-submit').disabled = false
       printMessage('error', e.toString())
     }
   })
 
-  $('#ttrym-settings').click(async function () {
-    $('body').css('overflow', 'hidden')
+  document.getElementById('ttrym-settings').addEventListener('click', async function () {
+    document.body.style.overflow = 'hidden'
 
-    $('body').append("<div id='ttrym-settings-wrapper' style='box-sizing:border-box;width:100vw;height:100vh;position:fixed;top:45px;background:rgba(255,255,255,0.75);padding:50px;z-index:80'>" +
+    document.body.insertAdjacentHTML('beforeend', "<div id='ttrym-settings-wrapper' style='box-sizing:border-box;width:100vw;height:100vh;position:fixed;top:45px;background:rgba(255,255,255,0.75);padding:50px;z-index:80'>" +
       "<div class='submit_step_box' style='padding:25px;height:calc(100% - 50px);overflow:auto'><span class='submit_step_header' style='margin:0!important'>" +
       "TracklistToRYM: <span class='submit_step_header_title'>Settings</span></span>" +
       "<div class='submit_field_header_separator' style='margin-top:15px;margin-bottom:15px'></div>" +
@@ -577,67 +577,69 @@
       "<div style='margin-bottom:25px'><button id='ttrym-save'>Save and reload page</button><button id='ttrym-discard' style='margin-left:10px'>Close window without saving</button><button id='ttrym-reset' style='margin-left:10px'>Reset and reload page</button></div>" +
       '</div></div>')
 
-    $('#ttrym-artist').prop('checked', await GM.getValue('artist'))
-    $('#ttrym-release').prop('checked', await GM.getValue('release'))
-    $('.ttrym-checkbox').each(function () {
-      if (sites.map(x => x.name).includes($(this).attr('name'))) $(this).prop('checked', true)
+    document.getElementById('ttrym-artist').checked = await GM.getValue('artist')
+    document.getElementById('ttrym-release').checked = await GM.getValue('release')
+    Array.from(document.getElementsByClassName('ttrym-checkbox')).forEach(element => {
+      if (sites.map(x => x.name).includes(element.name)) element.checked = true
     })
-    $('#ttrym-default').val(await GM.getValue('default'))
-    $('#ttrym-change').prop('checked', await GM.getValue('guess'))
-    $('#ttrym-append').prop('checked', await GM.getValue('append'))
-    $('#ttrym-sources').prop('checked', await GM.getValue('sources'))
+    document.getElementById('ttrym-default').value = await GM.getValue('default')
+    document.getElementById('ttrym-change').checked = await GM.getValue('guess')
+    document.getElementById('ttrym-append').checked = await GM.getValue('append')
+    document.getElementById('ttrym-sources').checked = await GM.getValue('sources')
 
-    $('#ttrym-enable').click(function () {
-      $('.ttrym-checkbox').prop('checked', true)
-    })
-
-    $('#ttrym-invert').click(function () {
-      $('.ttrym-checkbox').each(function () {
-        $(this).prop('checked', !$(this).prop('checked'))
+    document.getElementById('ttrym-enable').addEventListener('click', function () {
+      Array.from(document.getElementsByClassName('ttrym-checkbox')).forEach(element => {
+        element.checked = true
       })
     })
 
-    $('#ttrym-disable').click(function () {
-      $('.ttrym-checkbox').prop('checked', false)
+    document.getElementById('ttrym-invert').addEventListener('click', function () {
+      Array.from(document.getElementsByClassName('ttrym-checkbox')).forEach(element => {
+        element.checked = !element.checked
+      })
     })
 
-    $('#ttrym-reset').click(async function () {
+    document.getElementById('ttrym-disable').addEventListener('click', function () {
+      Array.from(document.getElementsByClassName('ttrym-checkbox')).forEach(element => {
+        element.checked = false
+      })
+    })
+
+    document.getElementById('ttrym-reset').addEventListener('click', async function () {
       if (confirm('Do you really want to reset all preferences?')) {
         (await GM.listValues()).forEach(async setting => await GM.deleteValue(setting))
         location.reload()
       }
     })
 
-    $('#ttrym-save').click(async function () {
-      const sites = $('.ttrym-checkbox:checked').map(function () {
-        return $(this).attr('name')
-      }).get()
+    document.getElementById('ttrym-save').addEventListener('click', async function () {
+      const sites = Array.from(document.querySelectorAll('.ttrym-checkbox:checked')).map(x => x.name)
 
-      await GM.setValue('artist', $('#ttrym-artist').is(':checked'))
-      await GM.setValue('release', $('#ttrym-release').is(':checked'))
+      await GM.setValue('artist', document.getElementById('ttrym-artist').checked)
+      await GM.setValue('release', document.getElementById('ttrym-release').checked)
       await GM.setValue('sites', sites)
-      await GM.setValue('default', $('#ttrym-default').val())
-      await GM.setValue('guess', $('#ttrym-change').is(':checked'))
-      await GM.setValue('append', $('#ttrym-append').is(':checked'))
-      await GM.setValue('sources', $('#ttrym-sources').is(':checked'))
+      await GM.setValue('default', document.getElementById('ttrym-default').value)
+      await GM.setValue('guess', document.getElementById('ttrym-change').checked)
+      await GM.setValue('append', document.getElementById('ttrym-append').checked)
+      await GM.setValue('sources', document.getElementById('ttrym-sources').checked)
 
-      if (!sites.includes($('#ttrym-default').val())) await GM.setValue('sites', sites.concat($('#ttrym-default').val()))
+      if (!sites.includes(document.getElementById('ttrym-default').value)) await GM.setValue('sites', sites.concat(document.getElementById('ttrym-default').value))
 
       location.reload()
     })
 
-    $('#ttrym-discard').click(function () {
-      $('body').css('overflow', 'initial')
-      $('#ttrym-settings-wrapper').remove()
+    document.getElementById('ttrym-discard').addEventListener('click', function () {
+      document.body.style.overflow = 'initial'
+      document.getElementById('ttrym-settings-wrapper').parentNode.removeChild(document.getElementById('ttrym-settings-wrapper'))
     })
   })
 
   function clearMessages (levels) {
     if (!levels) levels = ['progress', 'success', 'warning', 'error']
     if (!Array.isArray(levels)) levels = [levels]
-    $(levels.map(x => '#ttrym-' + x).join(', ')).remove()
+    document.querySelectorAll(levels.map(x => '#ttrym-' + x).join(',')).forEach(x => x.parentNode.removeChild(x))
     msgPosted = false
-    $('#ttrym-dismiss').remove()
+    if (document.getElementById('ttrym-dismiss')) document.getElementById('ttrym-dismiss').parentNode.removeChild(document.getElementById('ttrym-dismiss'))
   }
 
   function getResult (index, title, length) {
@@ -676,7 +678,7 @@
   }
 
   function parseNode (node) {
-    return node.first().clone().children().remove().end().text()
+    return node ? node.firstChild.nodeValue : ''
   }
 
   function parseTitle (title) {
@@ -690,9 +692,9 @@
       warning: 'orange',
       error: 'red'
     }
-    parent.append("<p id='ttrym-" + level + "' style='color:" + colors[level] + ';' + (msgPosted ? '' : 'margin-top:.5em;') + "margin-bottom:0'>" + level.charAt(0).toUpperCase() + level.slice(1) + ': ' + message + '</p>')
+    parent.insertAdjacentHTML('beforeend', "<p id='ttrym-" + level + "' style='color:" + colors[level] + ';' + (msgPosted ? '' : 'margin-top:.5em;') + "margin-bottom:0'>" + level.charAt(0).toUpperCase() + level.slice(1) + ': ' + message + '</p>')
     msgPosted = true
-    if (!$('#ttrym-dismiss').length) $('#ttrym-settings').before("<button id='ttrym-dismiss' style='font-family:\"Font Awesome 5 Free\";border:none;background:none;color:inherit;font-size:1.5em;margin-left:.5em;cursor:pointer' title='Dismiss'>&#xf0c9;</button>")
+    if (!document.getElementById('ttrym-dismiss')) document.getElementById('ttrym-settings').insertAdjacentHTML('beforebegin', "<button id='ttrym-dismiss' style='font-family:\"Font Awesome 5 Free\";border:none;background:none;color:inherit;font-size:1.5em;margin-left:.5em;cursor:pointer' title='Dismiss'>&#xf0c9;</button>")
   }
 
   function reduceJson (object, path) {

@@ -1,3 +1,8 @@
+### Version 1.22.3
+- Fix automatic input of artist name
+- Fix Discogs support
+- Remove jQuery dependency
+
 ### Version 1.22.2
 - Update homepage URL
 - Add e-mail address to author
