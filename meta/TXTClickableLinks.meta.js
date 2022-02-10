@@ -3,7 +3,7 @@
 // @name:de         TXTClickableLinks
 // @name:en         TXTClickableLinks
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.1.2
+// @version         1.1.3
 // @description     Converts URLs in plain text files to clickable links.
 // @description:de  Konvertiert URLs in Textdateien zu anklickbaren Links.
 // @description:en  Converts URLs in plain text files to clickable links.

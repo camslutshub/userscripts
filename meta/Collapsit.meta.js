@@ -3,7 +3,7 @@
 // @name:de         Collapsit
 // @name:en         Collapsit
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.5
+// @version         1.0.6
 // @description     Enables collapsing (and expanding) of comments on Removeddit.
 // @description:de  Ermöglicht das Ein- und Ausklappen von Kommentaren auf Removeddit.
 // @description:en  Enables collapsing (and expanding) of comments on Removeddit.

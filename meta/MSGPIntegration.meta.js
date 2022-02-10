@@ -3,7 +3,7 @@
 // @name:de         MSGPIntegration
 // @name:en         MSGPIntegration
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.1
+// @version         1.0.2
 // @description     Allows access to the Microsoft Store Generation Project from within Microsoft Store itself.
 // @description:de  Integriert das Microsoft Store Generation Project in den Microsoft Store selbst.
 // @description:en  Allows access to the Microsoft Store Generation Project from within Microsoft Store itself.

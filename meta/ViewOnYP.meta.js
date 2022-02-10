@@ -3,7 +3,7 @@
 // @name:de         ViewOnYP
 // @name:en         ViewOnYP
 // @namespace       https://github.com/TheLastZombie/
-// @version         2.8.3
+// @version         2.8.4
 // @description     Links various membership platforms to Kemono and Coomer.
 // @description:de  Vernetzt verschiedene Mitgliedschaftsplattformen mit Kemono und Coomer.
 // @description:en  Links various membership platforms to Kemono and Coomer.

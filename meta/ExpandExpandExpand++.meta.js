@@ -3,7 +3,7 @@
 // @name:de         ExpandExpandExpand++
 // @name:en         ExpandExpandExpand++
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.7
+// @version         1.0.8
 // @description     Modification of "GitHub PR: expand, expand, expand!" with multiple small improvements.
 // @description:de  Modifikation von "GitHub PR: expand, expand, expand!" mit mehreren kleinen Verbesserungen.
 // @description:en  Modification of "GitHub PR: expand, expand, expand!" with multiple small improvements.

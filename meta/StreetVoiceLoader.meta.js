@@ -3,7 +3,7 @@
 // @name:de         StreetVoiceLoader
 // @name:en         StreetVoiceLoader
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.2.2
+// @version         1.2.3
 // @description     Enables downloading of tracks and albums from StreetVoice.
 // @description:de  Erlaubt das Herunterladen von Liedern und Alben von StreetVoice.
 // @description:en  Enables downloading of tracks and albums from StreetVoice.

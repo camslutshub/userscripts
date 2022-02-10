@@ -3,7 +3,7 @@
 // @name:de         BandcampTrackCover
 // @name:en         BandcampTrackCover
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.8
+// @version         1.0.9
 // @description     Forces showing track instead of album covers on Bandcamp.
 // @description:de  Ersetzt gegebenenfalls Album- mit Trackcovern auf Bandcamp.
 // @description:en  Forces showing track instead of album covers on Bandcamp.

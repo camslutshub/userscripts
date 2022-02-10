@@ -3,7 +3,7 @@
 // @name:de         T3Xtend
 // @name:en         T3Xtend
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.3.2
+// @version         1.3.3
 // @description     Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
 // @description:de  Zeigt sowohl T3X- als auch Download-Links zu alten Versionen von TYPO3-Extensions.
 // @description:en  Adds T3X buttons as well as download links to old versions of TYPO3 extensions.

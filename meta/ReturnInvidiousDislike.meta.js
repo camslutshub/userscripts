@@ -3,7 +3,7 @@
 // @name:de         ReturnInvidiousDislike
 // @name:en         ReturnInvidiousDislike
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.1
+// @version         1.0.2
 // @description     Displays the dislike count of videos accessed via Invidious.
 // @description:de  Zeigt die Dislike-Anzahl von Videos auf Invidious an.
 // @description:en  Displays the dislike count of videos accessed via Invidious.

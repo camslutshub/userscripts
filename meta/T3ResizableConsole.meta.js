@@ -3,7 +3,7 @@
 // @name:de         T3ResizableConsole
 // @name:en         T3ResizableConsole
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.6
+// @version         1.0.7
 // @description     Makes TYPO3's debug console resizable.
 // @description:de  Erlaubt die Höhenänderung der TYPO3-Debug-Konsole.
 // @description:en  Makes TYPO3's debug console resizable.

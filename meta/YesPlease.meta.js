@@ -3,7 +3,7 @@
 // @name:de         YesPlease
 // @name:en         YesPlease
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.1
+// @version         1.0.2
 // @description     A (not yet) drop-in replacement for the No, thanks. extension.
 // @description:de  (Noch k)ein Ersatz für die No, thanks.-Browsererweiterung.
 // @description:en  A (not yet) drop-in replacement for the No, thanks. extension.

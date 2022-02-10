@@ -3,7 +3,7 @@
 // @name:de         GeniusNowPlaying
 // @name:en         GeniusNowPlaying
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.1.6
+// @version         1.1.7
 // @description     Displays a link to the lyrics of your currently playing song via Last.fm.
 // @description:de  Zeigt einen Link zu dem Text des momentan spielenden Songs via Last.fm.
 // @description:en  Displays a link to the lyrics of your currently playing song via Last.fm.
