@@ -7,7 +7,7 @@
 // @name:de         T3Xtend
 // @name:en         T3Xtend
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.3.2
+// @version         1.3.3
 // @description     Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
 // @description:de  Zeigt sowohl T3X- als auch Download-Links zu alten Versionen von TYPO3-Extensions.
 // @description:en  Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
@@ -35,99 +35,170 @@
 (function () {
   // Shorten button text
 
-  document.querySelectorAll('.ter-ext-single-versionhistory .btn-primary').forEach(x => {
-    x.textContent = x.textContent.replace('Download', 'ZIP')
-  })
+  document
+    .querySelectorAll(".ter-ext-single-versionhistory .btn-primary")
+    .forEach((x) => {
+      x.textContent = x.textContent.replace("Download", "ZIP");
+    });
 
   // Add buttons to old versions
 
-  document.querySelectorAll('.ter-ext-single-versionhistory tr.table-danger td:first-child strong').forEach(x => {
-    x
-      .parentNode
-      .parentNode
-      .querySelectorAll('td:last-child')[0]
-      .insertAdjacentHTML('beforeend', "<a class='btn btn-primary' href='/extension/download/" +
-        window.location.pathname.split('/')[2] +
-        '/' +
-        x.textContent +
-        "/zip'>ZIP</a>")
-  })
+  document
+    .querySelectorAll(
+      ".ter-ext-single-versionhistory tr.table-danger td:first-child strong"
+    )
+    .forEach((x) => {
+      x.parentNode.parentNode
+        .querySelectorAll("td:last-child")[0]
+        .insertAdjacentHTML(
+          "beforeend",
+          "<a class='btn btn-primary' href='/extension/download/" +
+            window.location.pathname.split("/")[2] +
+            "/" +
+            x.textContent +
+            "/zip'>ZIP</a>"
+        );
+    });
 
   // Add entries for Packagist-only versions
 
-  if (document.getElementById('install-composer')) {
-    const input = document.querySelector('#install-composer kbd').innerText.replace('composer req ', '')
+  if (document.getElementById("install-composer")) {
+    const input = document
+      .querySelector("#install-composer kbd")
+      .innerText.replace("composer req ", "");
     GM.xmlHttpRequest({
-      method: 'GET',
-      url: 'https://repo.packagist.org/p2/' + input + '.json',
-      onload: response => {
-        JSON.parse(response.responseText).packages[input].slice(1).forEach(x => {
-          if (!document.getElementById(x.version) && !document.getElementById('v' + x.version)) {
-            let inserted = false
-            const input = x.version.replace(/^v/, '')
-            const element = '<tr data-versions=""><td class="align-middle" colspan="3"><strong>' + x.version.replace(/^v/, '') + '</strong> / <span>composer</span><br><small>' + new Date(x.time).toLocaleString([], { month: 'long', day: '2-digit', year: 'numeric' }) + '</small></td><td class="align-middle composer"><a class="btn btn-primary" href="' + x.dist.url + '"><strong>ZIP</strong></a></td></tr>'
+      method: "GET",
+      url: "https://repo.packagist.org/p2/" + input + ".json",
+      onload: (response) => {
+        JSON.parse(response.responseText)
+          .packages[input].slice(1)
+          .forEach((x) => {
+            if (
+              !document.getElementById(x.version) &&
+              !document.getElementById("v" + x.version)
+            ) {
+              let inserted = false;
+              const input = x.version.replace(/^v/, "");
+              const element =
+                '<tr data-versions=""><td class="align-middle" colspan="3"><strong>' +
+                x.version.replace(/^v/, "") +
+                "</strong> / <span>composer</span><br><small>" +
+                new Date(x.time).toLocaleString([], {
+                  month: "long",
+                  day: "2-digit",
+                  year: "numeric",
+                }) +
+                '</small></td><td class="align-middle composer"><a class="btn btn-primary" href="' +
+                x.dist.url +
+                '"><strong>ZIP</strong></a></td></tr>';
 
-            for (const y of document.querySelectorAll('tbody tr')) {
-              if (input.localeCompare(y.getElementsByTagName('strong')[0].innerText, undefined, { numeric: true }) === 1) {
-                y.insertAdjacentHTML('beforebegin', element)
-                inserted = true
-                break
+              for (const y of document.querySelectorAll("tbody tr")) {
+                if (
+                  input.localeCompare(
+                    y.getElementsByTagName("strong")[0].innerText,
+                    undefined,
+                    { numeric: true }
+                  ) === 1
+                ) {
+                  y.insertAdjacentHTML("beforebegin", element);
+                  inserted = true;
+                  break;
+                }
               }
-            }
 
-            if (!inserted) document.getElementsByTagName('tbody')[0].insertAdjacentHTML('beforeend', element)
-          }
-        })
+              if (!inserted)
+                document
+                  .getElementsByTagName("tbody")[0]
+                  .insertAdjacentHTML("beforeend", element);
+            }
+          });
 
         // Add T3X download buttons
 
-        document.querySelectorAll('.ter-ext-single-versionhistory .btn-primary:first-child').forEach(x => {
-          const button = x.cloneNode(true)
-          button.setAttribute('href', x.getAttribute('href').replace('/zip', '/t3x'))
-          button.setAttribute('title', '')
-          if (x.parentNode.classList.contains('composer')) button.classList.add('disabled')
-          button.textContent = 'T3X'
-          x.insertAdjacentElement('afterend', button)
-        })
+        document
+          .querySelectorAll(
+            ".ter-ext-single-versionhistory .btn-primary:first-child"
+          )
+          .forEach((x) => {
+            const button = x.cloneNode(true);
+            button.setAttribute(
+              "href",
+              x.getAttribute("href").replace("/zip", "/t3x")
+            );
+            button.setAttribute("title", "");
+            if (x.parentNode.classList.contains("composer"))
+              button.classList.add("disabled");
+            button.textContent = "T3X";
+            x.insertAdjacentElement("afterend", button);
+          });
 
         // Add Composer command buttons
 
-        if (document.getElementById('install-composer')) {
-          document.querySelectorAll('.ter-ext-single-versionhistory .btn-primary:first-child').forEach(x => {
-            const button = x.cloneNode(true)
-            button.setAttribute('href', 'javascript:void(0)') // jshint ignore:line
-            button.setAttribute('onclick', 'copyToClipboard(this)')
-            button.setAttribute('title', '')
-            button.setAttribute('data-message', 'Composer require command is in your clipboard now')
-            button.innerHTML = '<svg style="width:18px;height:18px;position:relative;top:-1px" viewBox="0 0 24 24"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" /></svg><span style="display:none">' + document.querySelectorAll('#install-composer kbd')[0].textContent + ':' + x.parentNode.parentNode.firstElementChild.firstElementChild.textContent + '</span>'
-            x.insertAdjacentElement('afterend', button)
-          })
+        if (document.getElementById("install-composer")) {
+          document
+            .querySelectorAll(
+              ".ter-ext-single-versionhistory .btn-primary:first-child"
+            )
+            .forEach((x) => {
+              const button = x.cloneNode(true);
+              button.setAttribute("href", "javascript:void(0)"); // jshint ignore:line
+              button.setAttribute("onclick", "copyToClipboard(this)");
+              button.setAttribute("title", "");
+              button.setAttribute(
+                "data-message",
+                "Composer require command is in your clipboard now"
+              );
+              button.innerHTML =
+                '<svg style="width:18px;height:18px;position:relative;top:-1px" viewBox="0 0 24 24"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" /></svg><span style="display:none">' +
+                document.querySelectorAll("#install-composer kbd")[0]
+                  .textContent +
+                ":" +
+                x.parentNode.parentNode.firstElementChild.firstElementChild
+                  .textContent +
+                "</span>";
+              x.insertAdjacentElement("afterend", button);
+            });
         }
 
         // Improve button styles
 
-        document.querySelectorAll('.ter-ext-single-versionhistory .btn-primary').forEach(x => {
-          x.style.paddingLeft = '1rem'
-          x.style.paddingRight = '1rem'
-          x.parentNode.style.display = 'flex'
-          x.parentNode.style.justifyContent = 'space-around'
-          x.parentNode.style.position = 'relative'
-          x.parentNode.style.top = '-1px'
-        })
+        document
+          .querySelectorAll(".ter-ext-single-versionhistory .btn-primary")
+          .forEach((x) => {
+            x.style.paddingLeft = "1rem";
+            x.style.paddingRight = "1rem";
+            x.parentNode.style.display = "flex";
+            x.parentNode.style.justifyContent = "space-around";
+            x.parentNode.style.position = "relative";
+            x.parentNode.style.top = "-1px";
+          });
 
         // Replace to-be-deleted documentation links
 
-        const x = document.getElementsByClassName('btn-info')[0].getAttribute('href').split('/')
-        const y = 'https://ia801807.us.archive.org/view_archive.php?archive=/12/items/ter-archive/docs.zip&file=' + x[5] + '%20' + x[6] + '.html'
-        if (x.length !== 7) return
+        const x = document
+          .getElementsByClassName("btn-info")[0]
+          .getAttribute("href")
+          .split("/");
+        const y =
+          "https://ia801807.us.archive.org/view_archive.php?archive=/12/items/ter-archive/docs.zip&file=" +
+          x[5] +
+          "%20" +
+          x[6] +
+          ".html";
+        if (x.length !== 7) return;
         GM.xmlHttpRequest({
-          method: 'GET',
+          method: "GET",
           url: y,
-          onload: response => response.responseText ? document.getElementsByClassName('btn-info')[0].setAttribute('href', y) : ''
-        })
-      }
-    })
+          onload: (response) =>
+            response.responseText
+              ? document
+                  .getElementsByClassName("btn-info")[0]
+                  .setAttribute("href", y)
+              : "",
+        });
+      },
+    });
   }
-})()
+})();
 
 // @license-end

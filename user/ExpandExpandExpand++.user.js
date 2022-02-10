@@ -7,7 +7,7 @@
 // @name:de         ExpandExpandExpand++
 // @name:en         ExpandExpandExpand++
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.7
+// @version         1.0.8
 // @description     Modification of "GitHub PR: expand, expand, expand!" with multiple small improvements.
 // @description:de  Modifikation von "GitHub PR: expand, expand, expand!" mit mehreren kleinen Verbesserungen.
 // @description:en  Modification of "GitHub PR: expand, expand, expand!" with multiple small improvements.
@@ -30,26 +30,39 @@
 // ==/OpenUserJS==
 
 (function () {
-  if (document.getElementsByClassName('ajax-pagination-btn').length) document.getElementsByClassName('pagehead-actions')[0].insertAdjacentHTML('afterbegin', "<li><a id='_f_expand_expand' class='btn btn-sm'>Expand all</a></li>")
-  document.getElementById('_f_expand_expand').onclick = expand
+  if (document.getElementsByClassName("ajax-pagination-btn").length)
+    document
+      .getElementsByClassName("pagehead-actions")[0]
+      .insertAdjacentHTML(
+        "afterbegin",
+        "<li><a id='_f_expand_expand' class='btn btn-sm'>Expand all</a></li>"
+      );
+  document.getElementById("_f_expand_expand").onclick = expand;
 
-  function expand () {
-    const btnMeta = document.getElementById('_f_expand_expand')
-    const btnLoad = Array.from(document.querySelectorAll('.ajax-pagination-btn')).filter(x => x.textContent.includes('Load more'))[0]
-    const btnWait = Array.from(document.querySelectorAll('.ajax-pagination-btn')).filter(x => x.textContent.includes('Loading'))[0]
+  function expand() {
+    const btnMeta = document.getElementById("_f_expand_expand");
+    const btnLoad = Array.from(
+      document.querySelectorAll(".ajax-pagination-btn")
+    ).filter((x) => x.textContent.includes("Load more"))[0];
+    const btnWait = Array.from(
+      document.querySelectorAll(".ajax-pagination-btn")
+    ).filter((x) => x.textContent.includes("Loading"))[0];
 
-    btnMeta.setAttribute('aria-disabled', 'true')
+    btnMeta.setAttribute("aria-disabled", "true");
 
     if (btnLoad) {
-      btnMeta.innerHTML = 'Expanding ' + btnLoad.previousElementSibling.textContent.match(/\d+/).toString() + ' items...'
-      btnLoad.click()
-      setTimeout(expand, 25)
+      btnMeta.innerHTML =
+        "Expanding " +
+        btnLoad.previousElementSibling.textContent.match(/\d+/).toString() +
+        " items...";
+      btnLoad.click();
+      setTimeout(expand, 25);
     } else if (btnWait) {
-      setTimeout(expand, 25)
+      setTimeout(expand, 25);
     } else {
-      btnMeta.parentNode.remove()
+      btnMeta.parentNode.remove();
     }
   }
-})()
+})();
 
 // @license-end

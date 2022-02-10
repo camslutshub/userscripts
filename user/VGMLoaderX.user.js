@@ -8,7 +8,7 @@
 // @name:de         VGMLoaderX
 // @name:en         VGMLoaderX
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.4
+// @version         1.0.5
 // @description     Automatically downloads albums from KHInsider without an account.
 // @description:de  Lädt Alben von KHInsider automatisch und ohne Account herunter.
 // @description:en  Automatically downloads albums from KHInsider without an account.
@@ -35,66 +35,98 @@
 // ==/OpenUserJS==
 
 (function () {
-  document.querySelectorAll('a[href^="/cp/add_album/"]').forEach(x => {
-    x.addEventListener('click', e => {
-      e.preventDefault()
+  document.querySelectorAll('a[href^="/cp/add_album/"]').forEach((x) => {
+    x.addEventListener("click", (e) => {
+      e.preventDefault();
 
-      let format = Array(...document.querySelectorAll('#songlist_header th[align=right]')).map(x => x.textContent)
+      let format = Array(
+        ...document.querySelectorAll("#songlist_header th[align=right]")
+      ).map((x) => x.textContent);
       if (format.length === 1) {
-        format = format[0]
+        format = format[0];
       } else {
-        const input = prompt('Please enter your desired format (one of ' + format.join(', ') + '):', format[0])
+        const input = prompt(
+          "Please enter your desired format (one of " +
+            format.join(", ") +
+            "):",
+          format[0]
+        );
         if (!format.includes(input.toUpperCase())) {
-          format = format[0]
-          alert('Invalid format supplied. Using ' + format + ' instead.')
+          format = format[0];
+          alert("Invalid format supplied. Using " + format + " instead.");
         } else {
-          format = input
+          format = input;
         }
       }
 
-      const element = document.getElementsByClassName('albumMassDownload')[0]
-      element.style.height = 'auto'
-      element.style.marginBottom = '2em'
+      const element = document.getElementsByClassName("albumMassDownload")[0];
+      element.style.height = "auto";
+      element.style.marginBottom = "2em";
 
+      /* jshint ignore:start */
       // eslint-disable-next-line no-eval
-      const input = eval(document // jshint ignore:line
-        .querySelector('#EchoTopic script')
-        .textContent
-        .slice(5, -3)
-        .replace('function', 'function x')
-        .replace('return p}', 'return p}x')
-      )
-      const mediaPath = input.match(/mediaPath='(.+?)'/)[1]
-      const tracks = JSON.parse(input.match(/tracks=(\[.+?\])/)[1].replace(',]', ']'))
-      const output = tracks.map(x => mediaPath + x.file.split('.').slice(0, -1).join('.') + '.' + format.toLowerCase())
-      const names = tracks.map(x => x.name)
+      const input = eval(
+        document
+          .querySelector("#EchoTopic script")
+          .textContent.slice(5, -3)
+          .replace("function", "function x")
+          .replace("return p}", "return p}x")
+      );
+      /* jshint ignore:end */
 
-      const blobWriter = new zip.BlobWriter('application/zip')
-      const writer = new zip.ZipWriter(blobWriter)
+      const mediaPath = input.match(/mediaPath='(.+?)'/)[1];
+      const tracks = JSON.parse(
+        input.match(/tracks=(\[.+?\])/)[1].replace(",]", "]")
+      );
+      const output = tracks.map(
+        (x) =>
+          mediaPath +
+          x.file.split(".").slice(0, -1).join(".") +
+          "." +
+          format.toLowerCase()
+      );
+      const names = tracks.map((x) => x.name);
 
-      function forSync (i) {
-        element.innerHTML = 'Downloading track ' + (i + 1) + ' of ' + output.length + ' (' + names[i] + ')…'
+      const blobWriter = new zip.BlobWriter("application/zip");
+      const writer = new zip.ZipWriter(blobWriter);
+
+      function forSync(i) {
+        element.innerHTML =
+          "Downloading track " +
+          (i + 1) +
+          " of " +
+          output.length +
+          " (" +
+          names[i] +
+          ")…";
         GM.xmlHttpRequest({
-          method: 'GET',
+          method: "GET",
           url: output[i],
-          responseType: 'blob',
-          onload: async response => {
-            await writer.add(decodeURIComponent(output[i].split('/').pop()), new zip.BlobReader(response.response))
+          responseType: "blob",
+          onload: async (response) => {
+            await writer.add(
+              decodeURIComponent(output[i].split("/").pop()),
+              new zip.BlobReader(response.response)
+            );
 
             if (output[i + 1]) {
-              forSync(i + 1)
+              forSync(i + 1);
             } else {
-              await writer.close()
-              const blob = await blobWriter.getData()
-              saveAs(blob, document.getElementsByTagName('h2')[0].textContent + '.zip')
-              element.innerHTML = 'Album successfully downloaded. ZIP file has been passed to the browser.'
+              await writer.close();
+              const blob = await blobWriter.getData();
+              saveAs(
+                blob,
+                document.getElementsByTagName("h2")[0].textContent + ".zip"
+              );
+              element.innerHTML =
+                "Album successfully downloaded. ZIP file has been passed to the browser.";
             }
-          }
-        })
+          },
+        });
       }
-      forSync(0)
-    })
-  })
-})()
+      forSync(0);
+    });
+  });
+})();
 
 // @license-end

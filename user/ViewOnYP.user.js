@@ -7,7 +7,7 @@
 // @name:de         ViewOnYP
 // @name:en         ViewOnYP
 // @namespace       https://github.com/TheLastZombie/
-// @version         2.8.3
+// @version         2.8.4
 // @description     Links various membership platforms to Kemono and Coomer.
 // @description:de  Vernetzt verschiedene Mitgliedschaftsplattformen mit Kemono und Coomer.
 // @description:en  Links various membership platforms to Kemono and Coomer.
@@ -50,69 +50,78 @@
 // ==/OpenUserJS==
 
 (async function () {
-  if (!await GM.getValue('cache2')) await GM.setValue('cache2', {})
-  const cache = await GM.getValue('cache2')
+  if (!(await GM.getValue("cache2"))) await GM.setValue("cache2", {});
+  const cache = await GM.getValue("cache2");
 
-  if (await GM.getValue('cache')) {
-    cache.Kemono = await GM.getValue('cache')
-    await GM.deleteValue('cache')
+  if (await GM.getValue("cache")) {
+    cache.Kemono = await GM.getValue("cache");
+    await GM.deleteValue("cache");
   }
 
   const sites = [
     {
-      name: 'Coomer',
-      check: 'https://coomer.party/api/creators',
+      name: "Coomer",
+      check: "https://coomer.party/api/creators",
       cache: (response, x) => {
-        JSON.parse(response.responseText).forEach(y => {
-          if (!cache[x.name]) cache[x.name] = {}
-          if (!cache[x.name][y.service]) cache[x.name][y.service] = []
-          cache[x.name][y.service].push(y.id)
-        })
-        return cache
+        JSON.parse(response.responseText).forEach((y) => {
+          if (!cache[x.name]) cache[x.name] = {};
+          if (!cache[x.name][y.service]) cache[x.name][y.service] = [];
+          cache[x.name][y.service].push(y.id);
+        });
+        return cache;
       },
       get: (response, host, user) => {
-        return Boolean(JSON.parse(response.responseText).filter(x => x.service === host).filter(x => x.id === user).length)
+        return Boolean(
+          JSON.parse(response.responseText)
+            .filter((x) => x.service === host)
+            .filter((x) => x.id === user).length
+        );
       },
-      profile: 'https://coomer.party/$HOST/user/$USER'
+      profile: "https://coomer.party/$HOST/user/$USER",
     },
     {
-      name: 'Kemono',
-      check: 'https://kemono.party/api/creators',
+      name: "Kemono",
+      check: "https://kemono.party/api/creators",
       cache: (response, x) => {
-        JSON.parse(response.responseText).forEach(y => {
-          if (!cache[x.name]) cache[x.name] = {}
-          if (!cache[x.name][y.service]) cache[x.name][y.service] = []
-          cache[x.name][y.service].push(y.id)
-        })
-        return cache
+        JSON.parse(response.responseText).forEach((y) => {
+          if (!cache[x.name]) cache[x.name] = {};
+          if (!cache[x.name][y.service]) cache[x.name][y.service] = [];
+          cache[x.name][y.service].push(y.id);
+        });
+        return cache;
       },
       get: (response, host, user) => {
-        return Boolean(JSON.parse(response.responseText).filter(x => x.service === host).filter(x => x.id === user).length)
+        return Boolean(
+          JSON.parse(response.responseText)
+            .filter((x) => x.service === host)
+            .filter((x) => x.id === user).length
+        );
       },
-      profile: 'https://kemono.party/$HOST/user/$USER'
-    }
-  ]
+      profile: "https://kemono.party/$HOST/user/$USER",
+    },
+  ];
 
-  GM.registerMenuCommand('Populate cache', () => {
-    sites.forEach(x => {
+  GM.registerMenuCommand("Populate cache", () => {
+    sites.forEach((x) => {
       GM.xmlHttpRequest({
         url: x.check,
-        method: 'GET',
-        onload: async response => {
-          const cache = x.cache(response, x)
-          await GM.setValue('cache2', cache)
-          alert('Populated cache for ' + x.name + '.')
-        }
-      })
-    })
-  })
+        method: "GET",
+        onload: async (response) => {
+          const cache = x.cache(response, x);
+          await GM.setValue("cache2", cache);
+          alert("Populated cache for " + x.name + ".");
+        },
+      });
+    });
+  });
 
-  GM.registerMenuCommand('Clear cache', () => {
-    GM.deleteValue('cache2')
-      .then(alert('Cache cleared successfully.'))
-  })
+  GM.registerMenuCommand("Clear cache", () => {
+    GM.deleteValue("cache2").then(alert("Cache cleared successfully."));
+  });
 
-  document.getElementsByTagName('head')[0].insertAdjacentHTML('beforeend', `
+  document.getElementsByTagName("head")[0].insertAdjacentHTML(
+    "beforeend",
+    `
     <style>
       #voyp {
         background: white;
@@ -137,69 +146,96 @@
         text-align: center;
       }
     </style>
-  `)
+  `
+  );
 
-  document.getElementsByTagName('body')[0].insertAdjacentHTML('beforeend', '<div id="voyp"><div>ViewOnYP</div></div>')
+  document
+    .getElementsByTagName("body")[0]
+    .insertAdjacentHTML(
+      "beforeend",
+      '<div id="voyp"><div>ViewOnYP</div></div>'
+    );
 
-  const host = window.location.hostname.split('.').slice(-2, -1)[0]
-  if (!host) return
+  const host = window.location.hostname.split(".").slice(-2, -1)[0];
+  if (!host) return;
 
   const p = new Promise((resolve, reject) => {
     switch (host) {
-      case 'dlsite':
-        resolve(document.location.pathname.split('/')[6].slice(0, -5))
-        break
-      case 'fanbox': {
-        let creatorId = window.location.hostname.split('.').slice(-3, -2)[0]
-        if (creatorId === 'www') creatorId = window.location.pathname.split('/')[1].slice(1)
+      case "dlsite":
+        resolve(document.location.pathname.split("/")[6].slice(0, -5));
+        break;
+      case "fanbox": {
+        let creatorId = window.location.hostname.split(".").slice(-3, -2)[0];
+        if (creatorId === "www")
+          creatorId = window.location.pathname.split("/")[1].slice(1);
 
         GM.xmlHttpRequest({
-          url: 'https://api.fanbox.cc/creator.get?creatorId=' + creatorId,
-          headers: { Origin: 'https://fanbox.cc' },
-          onload: response => resolve(JSON.parse(response.responseText).body.user.userId)
-        })
-        break
+          url: "https://api.fanbox.cc/creator.get?creatorId=" + creatorId,
+          headers: { Origin: "https://fanbox.cc" },
+          onload: (response) =>
+            resolve(JSON.parse(response.responseText).body.user.userId),
+        });
+        break;
       }
-      case 'fantia':
-        resolve(document.location.pathname.split('/')[2])
-        break
-      case 'gumroad':
-        resolve(document.querySelector('.creator-profile-wrapper').getAttribute('data-username'))
-        break
-      case 'patreon':
-        resolve(document.head.innerHTML.match(/https:\/\/www\.patreon\.com\/api\/user\/\d+/)[0].slice(33))
-        break
-      case 'onlyfans':
-      case 'subscribestar':
-        resolve(document.location.pathname.split('/')[1])
-        break
+      case "fantia":
+        resolve(document.location.pathname.split("/")[2]);
+        break;
+      case "gumroad":
+        resolve(
+          document
+            .querySelector(".creator-profile-wrapper")
+            .getAttribute("data-username")
+        );
+        break;
+      case "patreon":
+        resolve(
+          document.head.innerHTML
+            .match(/https:\/\/www\.patreon\.com\/api\/user\/\d+/)[0]
+            .slice(33)
+        );
+        break;
+      case "onlyfans":
+      case "subscribestar":
+        resolve(document.location.pathname.split("/")[1]);
+        break;
     }
-  })
+  });
 
-  p.then(user => {
-    sites.forEach(x => {
-      if (cache[x.name] && cache[x.name][host] && cache[x.name][host].includes(user)) return show(x, host, user)
+  p.then((user) => {
+    sites.forEach((x) => {
+      if (
+        cache[x.name] &&
+        cache[x.name][host] &&
+        cache[x.name][host].includes(user)
+      )
+        return show(x, host, user);
       GM.xmlHttpRequest({
         url: x.check,
-        method: 'GET',
-        onload: response => {
-          if (x.get(response, host, user)) show(x, host, user)
-        }
-      })
-    })
-  })
+        method: "GET",
+        onload: (response) => {
+          if (x.get(response, host, user)) show(x, host, user);
+        },
+      });
+    });
+  });
 
-  function show (site, host, user) {
-    const name = site.name
-    const url = site.profile.replace('$HOST', host).replace('$USER', user)
+  function show(site, host, user) {
+    const name = site.name;
+    const url = site.profile.replace("$HOST", host).replace("$USER", user);
 
-    document.getElementById('voyp').insertAdjacentHTML('beforeend', '<br>' + name + ': <a href="' + url + '">' + url + '</a>')
+    document
+      .getElementById("voyp")
+      .insertAdjacentHTML(
+        "beforeend",
+        "<br>" + name + ': <a href="' + url + '">' + url + "</a>"
+      );
 
-    if (!cache[site.name]) cache[site.name] = {}
-    if (!cache[site.name][host]) cache[site.name][host] = []
-    if (!cache[site.name][host].includes(user)) cache[site.name][host].push(user)
-    GM.setValue('cache2', cache)
+    if (!cache[site.name]) cache[site.name] = {};
+    if (!cache[site.name][host]) cache[site.name][host] = [];
+    if (!cache[site.name][host].includes(user))
+      cache[site.name][host].push(user);
+    GM.setValue("cache2", cache);
   }
-})()
+})();
 
 // @license-end

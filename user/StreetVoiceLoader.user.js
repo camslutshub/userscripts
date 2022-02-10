@@ -8,7 +8,7 @@
 // @name:de         StreetVoiceLoader
 // @name:en         StreetVoiceLoader
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.2.2
+// @version         1.2.3
 // @description     Enables downloading of tracks and albums from StreetVoice.
 // @description:de  Erlaubt das Herunterladen von Liedern und Alben von StreetVoice.
 // @description:en  Enables downloading of tracks and albums from StreetVoice.
@@ -35,74 +35,99 @@
 // ==/OpenUserJS==
 
 (function () {
-  const awrapper = document.getElementsByClassName('list-item-buttons')[0]
-  const song = window.location.toString().split('/')[5]
+  const awrapper = document.getElementsByClassName("list-item-buttons")[0];
+  const song = window.location.toString().split("/")[5];
 
   GM.xmlHttpRequest({
-    method: 'POST',
-    url: 'https://streetvoice.com/api/v3/songs/' + song + '/file/',
-    onload: response => {
-      const file = JSON.parse(response.response).file
+    method: "POST",
+    url: "https://streetvoice.com/api/v3/songs/" + song + "/file/",
+    onload: (response) => {
+      const file = JSON.parse(response.response).file;
 
-      awrapper.insertAdjacentHTML('afterbegin', '<li class="list-inline-item"><a href="' + file + '" download class="btn btn-circle btn-outline-white btn-lg"><span>⬇</span></a></li>')
-    }
-  })
+      awrapper.insertAdjacentHTML(
+        "afterbegin",
+        '<li class="list-inline-item"><a href="' +
+          file +
+          '" download class="btn btn-circle btn-outline-white btn-lg"><span>⬇</span></a></li>'
+      );
+    },
+  });
 
-  const links = document.querySelectorAll('#item_box_list > li')
-  const album = []
+  const links = document.querySelectorAll("#item_box_list > li");
+  const album = [];
 
-  links.forEach(x => {
-    const swrapper = x.getElementsByClassName('list-item-buttons')[0]
-    const song = x.getElementsByTagName('a')[0].getAttribute('href').split('/')[3]
+  links.forEach((x) => {
+    const swrapper = x.getElementsByClassName("list-item-buttons")[0];
+    const song = x
+      .getElementsByTagName("a")[0]
+      .getAttribute("href")
+      .split("/")[3];
 
     GM.xmlHttpRequest({
-      method: 'POST',
-      url: 'https://streetvoice.com/api/v3/songs/' + song + '/file/',
-      onload: response => {
-        const file = JSON.parse(response.response).file
-        album.push(file)
+      method: "POST",
+      url: "https://streetvoice.com/api/v3/songs/" + song + "/file/",
+      onload: (response) => {
+        const file = JSON.parse(response.response).file;
+        album.push(file);
 
-        swrapper.style.width = 'max-content'
-        swrapper.insertAdjacentHTML('beforeend', '<li class="list-inline-item"><a href="' + file + '" download class="btn btn-circle btn-white"><span>⬇</span></a></li>')
+        swrapper.style.width = "max-content";
+        swrapper.insertAdjacentHTML(
+          "beforeend",
+          '<li class="list-inline-item"><a href="' +
+            file +
+            '" download class="btn btn-circle btn-white"><span>⬇</span></a></li>'
+        );
 
         if (album.length === links.length) {
-          awrapper.insertAdjacentHTML('afterbegin', '<li class="list-inline-item"><a href="#" id="svl-download" class="btn btn-circle btn-outline-white btn-lg"><span>⬇</span></a></li>')
-          const adownload = document.getElementById('svl-download')
+          awrapper.insertAdjacentHTML(
+            "afterbegin",
+            '<li class="list-inline-item"><a href="#" id="svl-download" class="btn btn-circle btn-outline-white btn-lg"><span>⬇</span></a></li>'
+          );
+          const adownload = document.getElementById("svl-download");
 
           adownload.onclick = (e) => {
-            e.preventDefault()
+            e.preventDefault();
 
-            const blobWriter = new zip.BlobWriter('application/zip')
-            const writer = new zip.ZipWriter(blobWriter)
+            const blobWriter = new zip.BlobWriter("application/zip");
+            const writer = new zip.ZipWriter(blobWriter);
 
-            function forSync (i) {
-              adownload.innerHTML = '<small>' + (i + 1) + '/' + album.length + '</small>'
+            function forSync(i) {
+              adownload.innerHTML =
+                "<small>" + (i + 1) + "/" + album.length + "</small>";
 
               GM.xmlHttpRequest({
-                method: 'GET',
+                method: "GET",
                 url: album[i],
-                responseType: 'blob',
-                onload: async response => {
-                  await writer.add(decodeURIComponent(album[i].split('/').pop().split('?')[0]), new zip.BlobReader(response.response))
+                responseType: "blob",
+                onload: async (response) => {
+                  await writer.add(
+                    decodeURIComponent(album[i].split("/").pop().split("?")[0]),
+                    new zip.BlobReader(response.response)
+                  );
 
                   if (album[i + 1]) {
-                    forSync(i + 1)
+                    forSync(i + 1);
                   } else {
-                    adownload.innerHTML = '⬇'
+                    adownload.innerHTML = "⬇";
 
-                    await writer.close()
-                    const blob = await blobWriter.getData()
-                    saveAs(blob, document.getElementsByTagName('h1')[0].textContent.trim() + '.zip')
+                    await writer.close();
+                    const blob = await blobWriter.getData();
+                    saveAs(
+                      blob,
+                      document
+                        .getElementsByTagName("h1")[0]
+                        .textContent.trim() + ".zip"
+                    );
                   }
-                }
-              })
+                },
+              });
             }
-            forSync(0)
-          }
+            forSync(0);
+          };
         }
-      }
-    })
-  })
-})()
+      },
+    });
+  });
+})();
 
 // @license-end

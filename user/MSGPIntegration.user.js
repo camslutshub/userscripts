@@ -7,7 +7,7 @@
 // @name:de         MSGPIntegration
 // @name:en         MSGPIntegration
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.1
+// @version         1.0.2
 // @description     Allows access to the Microsoft Store Generation Project from within Microsoft Store itself.
 // @description:de  Integriert das Microsoft Store Generation Project in den Microsoft Store selbst.
 // @description:en  Allows access to the Microsoft Store Generation Project from within Microsoft Store itself.
@@ -32,33 +32,57 @@
 // ==/OpenUserJS==
 
 (function () {
-  document.getElementById('buttonPanel').insertAdjacentHTML('afterend', "<div id='msgpintegration-wrapper' class='pi-button-panel'><div class='pi-overflow-ctrl'><button id='msgpintegration-button' class='c-button' disabled><span id='msgpintegration-text'>Loading...</span></button></div></div>")
+  document
+    .getElementById("buttonPanel")
+    .insertAdjacentHTML(
+      "afterend",
+      "<div id='msgpintegration-wrapper' class='pi-button-panel'><div class='pi-overflow-ctrl'><button id='msgpintegration-button' class='c-button' disabled><span id='msgpintegration-text'>Loading...</span></button></div></div>"
+    );
 
-  const lang = location.pathname.split('/')[1]
-  const url = location.pathname.split('/')[4]
+  const lang = location.pathname.split("/")[1];
+  const url = location.pathname.split("/")[4];
 
   GM.xmlHttpRequest({
-    method: 'POST',
-    url: 'https://store.rg-adguard.net/api/GetFiles',
-    data: 'type=ProductId&url=' + url + '&lang=' + lang,
+    method: "POST",
+    url: "https://store.rg-adguard.net/api/GetFiles",
+    data: "type=ProductId&url=" + url + "&lang=" + lang,
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
+      "Content-Type": "application/x-www-form-urlencoded",
     },
     onload: function (response) {
-      const element = document.createElement('html')
-      element.innerHTML = response.responseText
+      const element = document.createElement("html");
+      element.innerHTML = response.responseText;
 
-      if (element.getElementsByTagName('p')[0].innerText !== 'The links were successfully received from the Microsoft Store server.') {
-        document.getElementById('msgpintegration-text').innerText = 'No links found.'
-        return
+      if (
+        element.getElementsByTagName("p")[0].innerText !==
+        "The links were successfully received from the Microsoft Store server."
+      ) {
+        document.getElementById("msgpintegration-text").innerText =
+          "No links found.";
+        return;
       }
 
-      document.getElementById('msgpintegration-button').removeAttribute('disabled')
-      document.getElementById('msgpintegration-text').innerText = element.getElementsByClassName('tftable')[0].rows.length - 1 + ' links found.'
+      document
+        .getElementById("msgpintegration-button")
+        .removeAttribute("disabled");
+      document.getElementById("msgpintegration-text").innerText =
+        element.getElementsByClassName("tftable")[0].rows.length -
+        1 +
+        " links found.";
 
-      document.body.insertAdjacentHTML('beforeend', "<div id='msgpintegration-background'></div>")
-      document.getElementById('msgpintegration-background').insertAdjacentElement('beforeend', element.getElementsByClassName('tftable')[0])
-      document.getElementsByTagName('head')[0].insertAdjacentHTML('beforeend', `
+      document.body.insertAdjacentHTML(
+        "beforeend",
+        "<div id='msgpintegration-background'></div>"
+      );
+      document
+        .getElementById("msgpintegration-background")
+        .insertAdjacentElement(
+          "beforeend",
+          element.getElementsByClassName("tftable")[0]
+        );
+      document.getElementsByTagName("head")[0].insertAdjacentHTML(
+        "beforeend",
+        `
         <style>
           #msgpintegration-background {
             position: fixed;
@@ -76,17 +100,28 @@
             background-color: white;
           }
         </style>
-      `)
+      `
+      );
 
-      document.getElementById('msgpintegration-button').addEventListener('click', function () {
-        document.getElementById('msgpintegration-background').style.display = 'initial'
-      })
+      document
+        .getElementById("msgpintegration-button")
+        .addEventListener("click", function () {
+          document.getElementById("msgpintegration-background").style.display =
+            "initial";
+        });
 
-      document.getElementById('msgpintegration-background').addEventListener('click', function (e) {
-        if (e.target === document.getElementById('msgpintegration-background')) document.getElementById('msgpintegration-background').style.display = 'none'
-      })
-    }
-  })
-})()
+      document
+        .getElementById("msgpintegration-background")
+        .addEventListener("click", function (e) {
+          if (
+            e.target === document.getElementById("msgpintegration-background")
+          )
+            document.getElementById(
+              "msgpintegration-background"
+            ).style.display = "none";
+        });
+    },
+  });
+})();
 
 // @license-end

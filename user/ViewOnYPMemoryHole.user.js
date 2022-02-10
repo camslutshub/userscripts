@@ -7,7 +7,7 @@
 // @name:de         ViewOnYPMemoryHole
 // @name:en         ViewOnYPMemoryHole
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.1
+// @version         1.0.2
 // @description     An add-on for ViewOnYP that adds support for Memory Hole.
 // @description:de  Ein Add-on für ViewOnYP, das Unterstützung für Memory Hole hinzufügt.
 // @description:en  An add-on for ViewOnYP that adds support for Memory Hole.
@@ -40,54 +40,68 @@
 // ==/OpenUserJS==
 
 (async function () {
-  if (!await GM.getValue('cache2')) await GM.setValue('cache2', {})
-  const cache = await GM.getValue('cache2')
+  if (!(await GM.getValue("cache2"))) await GM.setValue("cache2", {});
+  const cache = await GM.getValue("cache2");
 
-  GM.registerMenuCommand('Clear cache', () => {
-    GM.deleteValue('cache2')
-      .then(alert('Cache cleared successfully.'))
-  })
+  GM.registerMenuCommand("Clear cache", () => {
+    GM.deleteValue("cache2").then(alert("Cache cleared successfully."));
+  });
 
-  const campaign = document.head.innerHTML.match(/"id": "\d+?"/)[0].slice(7, -1)
+  const campaign = document.head.innerHTML
+    .match(/"id": "\d+?"/)[0]
+    .slice(7, -1);
 
-  if (cache[campaign]) return show(cache[campaign])
+  if (cache[campaign]) return show(cache[campaign]);
 
   GM.xmlHttpRequest({
-    url: 'https://api.memoryhole.cc/graphql',
-    method: 'POST',
+    url: "https://api.memoryhole.cc/graphql",
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
     data: JSON.stringify({
-      query: 'query { getPatreonByCampaignId (campaignId: ' + campaign + ') { creator { id } } }'
+      query:
+        "query { getPatreonByCampaignId (campaignId: " +
+        campaign +
+        ") { creator { id } } }",
     }),
-    onload: response => {
-      const id = JSON.parse(response.responseText).data?.getPatreonByCampaignId?.creator?.id
+    onload: (response) => {
+      const id = JSON.parse(response.responseText).data?.getPatreonByCampaignId
+        ?.creator?.id;
 
-      if (id) show(id)
-    }
-  })
+      if (id) show(id);
+    },
+  });
 
-  function show (id) {
-    if (document.getElementById('voyp')) {
-      insert(id)
+  function show(id) {
+    if (document.getElementById("voyp")) {
+      insert(id);
     } else {
       const observer = new MutationObserver(() => {
-        if (document.getElementById('voyp')) insert(id)
-      })
-      observer.observe(document.body, { childList: true })
+        if (document.getElementById("voyp")) insert(id);
+      });
+      observer.observe(document.body, { childList: true });
     }
 
-    if (!cache[campaign]) cache[campaign] = id
-    GM.setValue('cache2', cache)
+    if (!cache[campaign]) cache[campaign] = id;
+    GM.setValue("cache2", cache);
   }
 
-  function insert (id) {
-    document.getElementById('voyp').insertAdjacentHTML('beforeend', '<br>Memory Hole: <a href="https://memoryhole.cc/creator/' + id + '">https://memoryhole.cc/creator/' + id + '</a>')
+  function insert(id) {
+    document
+      .getElementById("voyp")
+      .insertAdjacentHTML(
+        "beforeend",
+        '<br>Memory Hole: <a href="https://memoryhole.cc/creator/' +
+          id +
+          '">https://memoryhole.cc/creator/' +
+          id +
+          "</a>"
+      );
 
     // eslint-disable-next-line no-func-assign
-    insert = () => {} // jshint ignore:line
+    insert = () => {}; // jshint ignore:line
   }
-})()
+})();
 
 // @license-end

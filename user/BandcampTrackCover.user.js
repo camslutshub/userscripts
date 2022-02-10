@@ -7,7 +7,7 @@
 // @name:de         BandcampTrackCover
 // @name:en         BandcampTrackCover
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.8
+// @version         1.0.9
 // @description     Forces showing track instead of album covers on Bandcamp.
 // @description:de  Ersetzt gegebenenfalls Album- mit Trackcovern auf Bandcamp.
 // @description:en  Forces showing track instead of album covers on Bandcamp.
@@ -33,22 +33,34 @@
 (function () {
   const observer = new MutationObserver(() => {
     GM.xmlHttpRequest({
-      url: document.querySelector('.title_link.primaryText').getAttribute('href'),
-      onload: response => {
-        const result = document.createElement('html')
-        result.innerHTML = response.responseText
+      url: document
+        .querySelector(".title_link.primaryText")
+        .getAttribute("href"),
+      onload: (response) => {
+        const result = document.createElement("html");
+        result.innerHTML = response.responseText;
 
-        document.querySelector('#tralbumArt a').setAttribute('href', result.querySelector('#tralbumArt a').getAttribute('href'))
-        document.querySelector('#tralbumArt a img').setAttribute('src', result.querySelector('#tralbumArt a img').getAttribute('src'))
-      }
-    })
-  })
+        document
+          .querySelector("#tralbumArt a")
+          .setAttribute(
+            "href",
+            result.querySelector("#tralbumArt a").getAttribute("href")
+          );
+        document
+          .querySelector("#tralbumArt a img")
+          .setAttribute(
+            "src",
+            result.querySelector("#tralbumArt a img").getAttribute("src")
+          );
+      },
+    });
+  });
 
-  observer.observe(document.getElementsByClassName('play_cell')[0], {
+  observer.observe(document.getElementsByClassName("play_cell")[0], {
     attributes: true,
     childList: true,
-    subtree: true
-  })
-})()
+    subtree: true,
+  });
+})();
 
 // @license-end

@@ -7,7 +7,7 @@
 // @name:de         TXTClickableLinks
 // @name:en         TXTClickableLinks
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.1.2
+// @version         1.1.3
 // @description     Converts URLs in plain text files to clickable links.
 // @description:de  Konvertiert URLs in Textdateien zu anklickbaren Links.
 // @description:en  Converts URLs in plain text files to clickable links.
@@ -44,15 +44,19 @@
   //
   // The above copyright notice and this permission notice shall be
   // included in all copies or substantial portions of the Software.
-  const reWeburl = /((?:(?:(?:https?|ftp|file):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z0-9\u00a1-\uffff][a-z0-9\u00a1-\uffff_-]{0,62})?[a-z0-9\u00a1-\uffff]\.)+(?:[a-z\u00a1-\uffff]{2,}\.?))(?::\d{2,5})?(?:[/?#]\S*)?)/gi
+  const reWeburl =
+    /((?:(?:(?:https?|ftp|file):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z0-9\u00a1-\uffff][a-z0-9\u00a1-\uffff_-]{0,62})?[a-z0-9\u00a1-\uffff]\.)+(?:[a-z\u00a1-\uffff]{2,}\.?))(?::\d{2,5})?(?:[/?#]\S*)?)/gi;
 
   if (
-    (document.body.childElementCount === 1 && document.body.getElementsByTagName('pre')[0].getAttribute('style') === 'word-wrap: break-word; white-space: pre-wrap;') || // Chrome
-    document.getElementsByTagName('link')[0].getAttribute('href') === 'resource://content-accessible/plaintext.css' // Firefox
+    (document.body.childElementCount === 1 &&
+      document.body.getElementsByTagName("pre")[0].getAttribute("style") ===
+        "word-wrap: break-word; white-space: pre-wrap;") || // Chrome
+    document.getElementsByTagName("link")[0].getAttribute("href") ===
+      "resource://content-accessible/plaintext.css" // Firefox
   ) {
-    const pre = document.getElementsByTagName('pre')[0]
-    pre.innerHTML = pre.innerHTML.replace(reWeburl, '<a href="$1">$1</a>')
+    const pre = document.getElementsByTagName("pre")[0];
+    pre.innerHTML = pre.innerHTML.replace(reWeburl, '<a href="$1">$1</a>');
   }
-})()
+})();
 
 // @license-end

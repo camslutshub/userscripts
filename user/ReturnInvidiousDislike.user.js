@@ -7,7 +7,7 @@
 // @name:de         ReturnInvidiousDislike
 // @name:en         ReturnInvidiousDislike
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.1
+// @version         1.0.2
 // @description     Displays the dislike count of videos accessed via Invidious.
 // @description:de  Zeigt die Dislike-Anzahl von Videos auf Invidious an.
 // @description:en  Displays the dislike count of videos accessed via Invidious.
@@ -32,23 +32,25 @@
 // ==/OpenUserJS==
 
 (function () {
-  const video = new URLSearchParams(window.location.search).get('v')
-  const views = document.getElementById('views')?.childNodes[1]
-  const likes = document.getElementById('likes')?.childNodes[1]
-  const dislikes = document.getElementById('dislikes')?.childNodes[1]
-  const rating = document.getElementById('rating')
+  const video = new URLSearchParams(window.location.search).get("v");
+  const views = document.getElementById("views")?.childNodes[1];
+  const likes = document.getElementById("likes")?.childNodes[1];
+  const dislikes = document.getElementById("dislikes")?.childNodes[1];
+  const rating = document.getElementById("rating");
 
   if (video && views && likes && dislikes && rating) {
     GM.xmlHttpRequest({
-      url: 'https://return-youtube-dislike-api.azurewebsites.net/votes?videoId=' + video,
-      onload: response => {
-        const data = JSON.parse(response.responseText)
+      url:
+        "https://return-youtube-dislike-api.azurewebsites.net/votes?videoId=" +
+        video,
+      onload: (response) => {
+        const data = JSON.parse(response.responseText);
 
-        views.textContent = ' ' + data.viewCount.toLocaleString()
-        likes.textContent = ' ' + data.likes.toLocaleString()
-        dislikes.textContent = ' ' + data.dislikes.toLocaleString()
-        rating.textContent = 'Rating: ' + data.rating.toFixed(4) + ' / 5'
-      }
-    })
+        views.textContent = " " + data.viewCount.toLocaleString();
+        likes.textContent = " " + data.likes.toLocaleString();
+        dislikes.textContent = " " + data.dislikes.toLocaleString();
+        rating.textContent = "Rating: " + data.rating.toFixed(4) + " / 5";
+      },
+    });
   }
-})()
+})();

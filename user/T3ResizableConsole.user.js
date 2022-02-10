@@ -8,7 +8,7 @@
 // @name:de         T3ResizableConsole
 // @name:en         T3ResizableConsole
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.6
+// @version         1.0.7
 // @description     Makes TYPO3's debug console resizable.
 // @description:de  Erlaubt die Höhenänderung der TYPO3-Debug-Konsole.
 // @description:en  Makes TYPO3's debug console resizable.
@@ -31,21 +31,27 @@
 // ==/OpenUserJS==
 
 (function () {
-  interact('#typo3-debug-console').resizable({
-    edges: {
-      top: true
-    }
-  })
-    .on('resizemove', event => {
-      document.querySelectorAll('.t3js-messages.messages')[0].style.height = (event.rect.height - 77) + 'px'
-    }).on('resizestart', () => {
-      document.querySelectorAll('#typo3-contentIframe')[0].style.pointerEvents = 'none'
-    }).on('resizeend', () => {
-      document.querySelectorAll('#typo3-contentIframe')[0].style.pointerEvents = 'initial'
+  interact("#typo3-debug-console")
+    .resizable({
+      edges: {
+        top: true,
+      },
     })
+    .on("resizemove", (event) => {
+      document.querySelectorAll(".t3js-messages.messages")[0].style.height =
+        event.rect.height - 77 + "px";
+    })
+    .on("resizestart", () => {
+      document.querySelectorAll("#typo3-contentIframe")[0].style.pointerEvents =
+        "none";
+    })
+    .on("resizeend", () => {
+      document.querySelectorAll("#typo3-contentIframe")[0].style.pointerEvents =
+        "initial";
+    });
 
   // resizestart and resizeend events are required due to the iframe displayed above the console.
   // See https://github.com/taye/interact.js/issues/200 for details.
-})()
+})();
 
 // @license-end

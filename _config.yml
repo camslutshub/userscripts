@@ -2,4 +2,4 @@ name: Userscripts
 title: null
 markdown: CommonMarkGhPages
 commonmark:
-  extensions: ['autolink', 'table']
+  extensions: ["autolink", "table"]
