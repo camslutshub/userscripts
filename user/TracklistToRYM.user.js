@@ -8,7 +8,7 @@
 // @name:de         TracklistToRYM
 // @name:en         TracklistToRYM
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.22.4
+// @version         1.23.0
 // @description     Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de  Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @description:en  Imports an album's tracklist from various sources into Rate Your Music.
@@ -346,6 +346,17 @@
       artist: "td .artistname[style='display:inline']:not([title='Composer'])",
       album: "h1 .albumtitle[lang='en']",
       parent: ".tl:first-child .rolebit",
+      index: ".label",
+      title: "[colspan='2']",
+      length: ".time",
+    },
+    {
+      name: "VGMdb (secondary language)",
+      extractor: "node",
+      placeholder: "https://vgmdb.net/album/*",
+      artist: "td .artistname[style='display:inline']:not([title='Composer'])",
+      album: "h1 .albumtitle[lang='en']",
+      parent: ".tl:nth-child(2) .rolebit",
       index: ".label",
       title: "[colspan='2']",
       length: ".time",

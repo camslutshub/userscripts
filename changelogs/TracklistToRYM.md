@@ -1,3 +1,7 @@
+### Version 1.23.0
+
+- Add secondary language support for VGMdb
+
 ### Version 1.22.4
 
 - Use Prettier code style
