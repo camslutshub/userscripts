@@ -7,15 +7,15 @@
 // @name:de         ViewOnYP
 // @name:en         ViewOnYP
 // @namespace       https://github.com/TheLastZombie/
-// @version         2.8.4
+// @version         2.8.5
 // @description     Links various membership platforms to Kemono and Coomer.
 // @description:de  Vernetzt verschiedene Mitgliedschaftsplattformen mit Kemono und Coomer.
 // @description:en  Links various membership platforms to Kemono and Coomer.
 // @homepageURL     https://thelastzombie.github.io/userscripts/
 // @supportURL      https://github.com/TheLastZombie/userscripts/issues/new?labels=ViewOnYP
 // @contributionURL https://ko-fi.com/rcrsch
-// @downloadURL     https://raw.github.com/TheLastZombie/userscripts/master/user/ViewOnYP.user.js
-// @updateURL       https://raw.github.com/TheLastZombie/userscripts/master/meta/ViewOnYP.meta.js
+// @downloadURL     https://raw.github.com/TheLastZombie/userscripts/main/user/ViewOnYP.user.js
+// @updateURL       https://raw.github.com/TheLastZombie/userscripts/main/meta/ViewOnYP.meta.js
 // @author          TheLastZombie <roesch.eric@protonmail.com>
 // @match           *://www.dlsite.com/*/circle/profile/=/maker_id/*
 // @match           *://*.fanbox.cc/
@@ -40,9 +40,9 @@
 // @grant           GM.xmlHttpRequest
 // @grant           GM_xmlhttpRequest
 // @require         https://greasemonkey.github.io/gm4-polyfill/gm4-polyfill.js
-// @icon            https://raw.githubusercontent.com/TheLastZombie/userscripts/master/icons/ViewOnYP.ico
+// @icon            https://raw.githubusercontent.com/TheLastZombie/userscripts/main/icons/ViewOnYP.ico
 // @copyright       2020-2022, TheLastZombie (https://github.com/TheLastZombie/)
-// @license         MIT; https://github.com/TheLastZombie/userscripts/blob/master/LICENSE
+// @license         MIT; https://github.com/TheLastZombie/userscripts/blob/main/LICENSE
 // ==/UserScript==
 
 // ==OpenUserJS==

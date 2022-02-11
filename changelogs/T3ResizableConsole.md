@@ -1,3 +1,7 @@
+### Version 1.0.8
+
+- Rename master branch to main
+
 ### Version 1.0.7
 
 - Use Prettier code style

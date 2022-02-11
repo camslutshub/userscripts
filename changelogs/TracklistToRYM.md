@@ -1,3 +1,7 @@
+### Version 1.23.1
+
+- Rename master branch to main
+
 ### Version 1.23.0
 
 - Add secondary language support for VGMdb
