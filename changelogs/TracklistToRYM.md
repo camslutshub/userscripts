@@ -1,3 +1,7 @@
+### Version 1.24.0
+
+- Add SoundCloud support
+
 ### Version 1.23.1
 
 - Rename master branch to main

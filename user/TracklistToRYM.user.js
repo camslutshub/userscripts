@@ -8,7 +8,7 @@
 // @name:de         TracklistToRYM
 // @name:en         TracklistToRYM
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.23.1
+// @version         1.24.0
 // @description     Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de  Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @description:en  Imports an album's tracklist from various sources into Rate Your Music.
@@ -42,6 +42,7 @@
 // @connect         naxos.com
 // @connect         rateyourmusic.com
 // @connect         sonemic.com
+// @connect         soundcloud.com
 // @connect         streetvoice.com
 // @connect         qobuz.com
 // @connect         vgmdb.net
@@ -329,6 +330,17 @@
       length: ".page_fragment_track_duration",
     },
     {
+      name: "SoundCloud",
+      extractor: "regex",
+      placeholder: "https://soundcloud.com/*/sets/*",
+      artist: /(?<=by <a href=".*?">).*?(?=<\/a>)/g,
+      album: /(?<=<a itemprop="url" href=".*?">).*?(?=<\/a>)/g,
+      parent: /<article itemprop="track".*?<\/article>/g,
+      index: false,
+      title: /(?<=<a itemprop="url" href=".*?">).*?(?=<\/a>)/,
+      length: /(?<=<meta itemprop="duration" content=").*?(?=" \/>)/,
+    },
+    {
       name: "StreetVoice",
       extractor: "node",
       placeholder: "https://streetvoice.com/*/songs/album/*",
@@ -551,15 +563,19 @@
                 break;
 
               case "regex":
-                data.match(input.parent).forEach(function (i) {
-                  amount++;
-                  const index = input.index
-                    ? i.match(input.index)[0].toString()
-                    : amount;
-                  const title = input.title ? i.match(input.title)[0] : "";
-                  const length = input.length ? i.match(input.length)[0] : "";
-                  result += getResult(index, title, length);
-                });
+                data
+                  .replace(/\n/g, "")
+                  .match(input.parent)
+                  .forEach(function (i) {
+                    amount++;
+                    i = i.replace(/\n/g, "");
+                    const index = input.index
+                      ? i.match(input.index)[0].toString()
+                      : amount;
+                    const title = input.title ? i.match(input.title)[0] : "";
+                    const length = input.length ? i.match(input.length)[0] : "";
+                    result += getResult(index, title, length);
+                  });
                 artist = input.artist ? data.match(input.artist)[0] : "";
                 album = input.album ? data.match(input.album)[0] : "";
                 break;
@@ -878,6 +894,8 @@
 
   function parseLength(length) {
     if (length === "?:??") return "";
+    if (length.match(/PT\d{2}H\d{2}M\d{2}S/))
+      length = length.replace(/[PTS]/g, "").replace(/[HM]/g, ":");
     let matches = length.match(/(\d+:)+\d+/);
     if (matches) {
       matches = matches[0].replace(/^(0+:?)+/, "");
