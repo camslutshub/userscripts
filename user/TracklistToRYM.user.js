@@ -8,7 +8,7 @@
 // @name:de         TracklistToRYM
 // @name:en         TracklistToRYM
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.24.0
+// @version         1.25.0
 // @description     Imports an album's tracklist from various sources into Rate Your Music.
 // @description:de  Importiert die Tracklist eines Albums von verschiedenen Quellen in Rate Your Music.
 // @description:en  Imports an album's tracklist from various sources into Rate Your Music.
@@ -341,6 +341,17 @@
       length: /(?<=<meta itemprop="duration" content=").*?(?=" \/>)/,
     },
     {
+      name: "SoundCloud (track)",
+      extractor: "regex",
+      placeholder: "https://soundcloud.com/*/*",
+      artist: /(?<=by <a href=".*?">).*?(?=<\/a>)/g,
+      album: /(?<=<a itemprop="url" href=".*?">).*?(?=<\/a>)/g,
+      parent: /<header>.*?<\/header>/g,
+      index: false,
+      title: /(?<=<a itemprop="url" href=".*?">).*?(?=<\/a>)/,
+      length: /(?<=<meta itemprop="duration" content=").*?(?=" \/>)/,
+    },
+    {
       name: "StreetVoice",
       extractor: "node",
       placeholder: "https://streetvoice.com/*/songs/album/*",
@@ -572,12 +583,18 @@
                     const index = input.index
                       ? i.match(input.index)[0].toString()
                       : amount;
-                    const title = input.title ? i.match(input.title)[0] : "";
+                    const title = input.title
+                      ? decodeHTML(i.match(input.title)[0])
+                      : "";
                     const length = input.length ? i.match(input.length)[0] : "";
                     result += getResult(index, title, length);
                   });
-                artist = input.artist ? data.match(input.artist)[0] : "";
-                album = input.album ? data.match(input.album)[0] : "";
+                artist = input.artist
+                  ? decodeHTML(data.match(input.artist)[0])
+                  : "";
+                album = input.album
+                  ? decodeHTML(data.match(input.album)[0])
+                  : "";
                 break;
 
               default:
@@ -861,6 +878,12 @@
       document
         .getElementById("ttrym-dismiss")
         .parentNode.removeChild(document.getElementById("ttrym-dismiss"));
+  }
+
+  function decodeHTML(input) {
+    if (!input) return;
+    const dom = new DOMParser().parseFromString(input, "text/html");
+    return dom.documentElement.textContent;
   }
 
   function getResult(index, title, length) {

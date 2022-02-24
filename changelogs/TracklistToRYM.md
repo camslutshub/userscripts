@@ -1,3 +1,8 @@
+### Version 1.25.0
+
+- Add track support for SoundCloud
+- Decode HTML entities when using `regex` extractor
+
 ### Version 1.24.0
 
 - Add SoundCloud support
