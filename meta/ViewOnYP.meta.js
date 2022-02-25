@@ -3,7 +3,7 @@
 // @name:de         ViewOnYP
 // @name:en         ViewOnYP
 // @namespace       https://github.com/TheLastZombie/
-// @version         2.8.5
+// @version         2.8.6
 // @description     Links various membership platforms to Kemono and Coomer.
 // @description:de  Vernetzt verschiedene Mitgliedschaftsplattformen mit Kemono und Coomer.
 // @description:en  Links various membership platforms to Kemono and Coomer.
@@ -12,7 +12,7 @@
 // @contributionURL https://ko-fi.com/rcrsch
 // @downloadURL     https://raw.github.com/TheLastZombie/userscripts/main/user/ViewOnYP.user.js
 // @updateURL       https://raw.github.com/TheLastZombie/userscripts/main/meta/ViewOnYP.meta.js
-// @author          TheLastZombie <roesch.eric@protonmail.com>
+// @author          TheLastZombie <roesch.eric+userscripts@protonmail.com>
 // @match           *://www.dlsite.com/*/circle/profile/=/maker_id/*
 // @match           *://*.fanbox.cc/
 // @match           *://www.fanbox.cc/@*

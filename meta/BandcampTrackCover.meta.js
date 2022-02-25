@@ -3,7 +3,7 @@
 // @name:de         BandcampTrackCover
 // @name:en         BandcampTrackCover
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.10
+// @version         1.0.11
 // @description     Forces showing track instead of album covers on Bandcamp.
 // @description:de  Ersetzt gegebenenfalls Album- mit Trackcovern auf Bandcamp.
 // @description:en  Forces showing track instead of album covers on Bandcamp.
@@ -12,7 +12,7 @@
 // @contributionURL https://ko-fi.com/rcrsch
 // @downloadURL     https://raw.github.com/TheLastZombie/userscripts/main/user/BandcampTrackCover.user.js
 // @updateURL       https://raw.github.com/TheLastZombie/userscripts/main/meta/BandcampTrackCover.meta.js
-// @author          TheLastZombie <roesch.eric@protonmail.com>
+// @author          TheLastZombie <roesch.eric+userscripts@protonmail.com>
 // @match           https://*.bandcamp.com/*
 // @grant           GM.xmlHttpRequest
 // @grant           GM_xmlhttpRequest

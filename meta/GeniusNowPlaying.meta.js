@@ -3,7 +3,7 @@
 // @name:de         GeniusNowPlaying
 // @name:en         GeniusNowPlaying
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.1.8
+// @version         1.1.9
 // @description     Displays a link to the lyrics of your currently playing song via Last.fm.
 // @description:de  Zeigt einen Link zu dem Text des momentan spielenden Songs via Last.fm.
 // @description:en  Displays a link to the lyrics of your currently playing song via Last.fm.
@@ -12,7 +12,7 @@
 // @contributionURL https://ko-fi.com/rcrsch
 // @downloadURL     https://raw.github.com/TheLastZombie/userscripts/main/user/GeniusNowPlaying.user.js
 // @updateURL       https://raw.github.com/TheLastZombie/userscripts/main/meta/GeniusNowPlaying.meta.js
-// @author          TheLastZombie <roesch.eric@protonmail.com>
+// @author          TheLastZombie <roesch.eric+userscripts@protonmail.com>
 // @match           https://genius.com/
 // @connect         ws.audioscrobbler.com
 // @connect         api.genius.com

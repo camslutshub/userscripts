@@ -3,7 +3,7 @@
 // @name:de         ViewOnYPMemoryHole
 // @name:en         ViewOnYPMemoryHole
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.3
+// @version         1.0.4
 // @description     An add-on for ViewOnYP that adds support for Memory Hole.
 // @description:de  Ein Add-on für ViewOnYP, das Unterstützung für Memory Hole hinzufügt.
 // @description:en  An add-on for ViewOnYP that adds support for Memory Hole.
@@ -12,7 +12,7 @@
 // @contributionURL https://ko-fi.com/rcrsch
 // @downloadURL     https://raw.github.com/TheLastZombie/userscripts/main/user/ViewOnYPMemoryHole.user.js
 // @updateURL       https://raw.github.com/TheLastZombie/userscripts/main/meta/ViewOnYPMemoryHole.meta.js
-// @author          TheLastZombie <roesch.eric@protonmail.com>
+// @author          TheLastZombie <roesch.eric+userscripts@protonmail.com>
 // @match           *://www.patreon.com/*
 // @connect         api.memoryhole.cc
 // @grant           GM.deleteValue
