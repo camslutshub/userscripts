@@ -7,7 +7,7 @@
 // @name:de         ReturnInvidiousDislike
 // @name:en         ReturnInvidiousDislike
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.3
+// @version         1.0.4
 // @description     Displays the dislike count of videos accessed via Invidious.
 // @description:de  Zeigt die Dislike-Anzahl von Videos auf Invidious an.
 // @description:en  Displays the dislike count of videos accessed via Invidious.
@@ -16,7 +16,7 @@
 // @contributionURL https://ko-fi.com/rcrsch
 // @downloadURL     https://raw.github.com/TheLastZombie/userscripts/main/user/ReturnInvidiousDislike.user.js
 // @updateURL       https://raw.github.com/TheLastZombie/userscripts/main/meta/ReturnInvidiousDislike.meta.js
-// @author          TheLastZombie <roesch.eric@protonmail.com>
+// @author          TheLastZombie <roesch.eric+userscripts@protonmail.com>
 // @match           *://*/watch?v=*
 // @connect         return-youtube-dislike-api.azurewebsites.net
 // @grant           GM.xmlHttpRequest
@@ -32,6 +32,8 @@
 // ==/OpenUserJS==
 
 (function () {
+  "use strict";
+
   const video = new URLSearchParams(window.location.search).get("v");
   const views = document.getElementById("views")?.childNodes[1];
   const likes = document.getElementById("likes")?.childNodes[1];

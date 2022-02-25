@@ -7,7 +7,7 @@
 // @name:de         TXTClickableLinks
 // @name:en         TXTClickableLinks
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.1.4
+// @version         1.1.5
 // @description     Converts URLs in plain text files to clickable links.
 // @description:de  Konvertiert URLs in Textdateien zu anklickbaren Links.
 // @description:en  Converts URLs in plain text files to clickable links.
@@ -16,7 +16,7 @@
 // @contributionURL https://ko-fi.com/rcrsch
 // @downloadURL     https://raw.github.com/TheLastZombie/userscripts/main/user/TXTClickableLinks.user.js
 // @updateURL       https://raw.github.com/TheLastZombie/userscripts/main/meta/TXTClickableLinks.meta.js
-// @author          TheLastZombie <roesch.eric@protonmail.com>
+// @author          TheLastZombie <roesch.eric+userscripts@protonmail.com>
 // @match           *://*/*
 // @grant           none
 // @icon            https://raw.githubusercontent.com/TheLastZombie/userscripts/main/icons/TXTClickableLinks.png
@@ -29,6 +29,8 @@
 // ==/OpenUserJS==
 
 (function () {
+  "use strict";
+
   // Regular Expression for URL validation
   //
   // Copyright (c) 2010-2018 Diego Perini (http://www.iport.it)

@@ -1,3 +1,8 @@
+### Version 2.8.6
+
+- Use strict mode
+- Update author e-mail address
+
 ### Version 2.8.5
 
 - Rename master branch to main

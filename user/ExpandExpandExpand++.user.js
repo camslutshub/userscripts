@@ -7,7 +7,7 @@
 // @name:de         ExpandExpandExpand++
 // @name:en         ExpandExpandExpand++
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.9
+// @version         1.0.10
 // @description     Modification of "GitHub PR: expand, expand, expand!" with multiple small improvements.
 // @description:de  Modifikation von "GitHub PR: expand, expand, expand!" mit mehreren kleinen Verbesserungen.
 // @description:en  Modification of "GitHub PR: expand, expand, expand!" with multiple small improvements.
@@ -16,7 +16,7 @@
 // @contributionURL https://ko-fi.com/rcrsch
 // @downloadURL     https://raw.github.com/TheLastZombie/userscripts/main/user/ExpandExpandExpand++.user.js
 // @updateURL       https://raw.github.com/TheLastZombie/userscripts/main/meta/ExpandExpandExpand++.meta.js
-// @author          findepi, TheLastZombie <roesch.eric@protonmail.com>
+// @author          findepi, TheLastZombie <roesch.eric+userscripts@protonmail.com>
 // @match           https://github.com/*/*/issues/*
 // @match           https://github.com/*/*/pull/*
 // @grant           none
@@ -30,6 +30,8 @@
 // ==/OpenUserJS==
 
 (function () {
+  "use strict";
+
   if (document.getElementsByClassName("ajax-pagination-btn").length)
     document
       .getElementsByClassName("pagehead-actions")[0]

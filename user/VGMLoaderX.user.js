@@ -8,7 +8,7 @@
 // @name:de         VGMLoaderX
 // @name:en         VGMLoaderX
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.6
+// @version         1.0.7
 // @description     Automatically downloads albums from KHInsider without an account.
 // @description:de  Lädt Alben von KHInsider automatisch und ohne Account herunter.
 // @description:en  Automatically downloads albums from KHInsider without an account.
@@ -17,7 +17,7 @@
 // @contributionURL https://ko-fi.com/rcrsch
 // @downloadURL     https://raw.github.com/TheLastZombie/userscripts/main/user/VGMLoaderX.user.js
 // @updateURL       https://raw.github.com/TheLastZombie/userscripts/main/meta/VGMLoaderX.meta.js
-// @author          TheLastZombie <roesch.eric@protonmail.com>
+// @author          TheLastZombie <roesch.eric+userscripts@protonmail.com>
 // @match           https://downloads.khinsider.com/game-soundtracks/album/*
 // @connect         vgmsite.com
 // @grant           GM.xmlHttpRequest
@@ -35,6 +35,8 @@
 // ==/OpenUserJS==
 
 (function () {
+  "use strict";
+
   document.querySelectorAll('a[href^="/cp/add_album/"]').forEach((x) => {
     x.addEventListener("click", (e) => {
       e.preventDefault();

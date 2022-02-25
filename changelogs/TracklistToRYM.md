@@ -1,3 +1,8 @@
+### Version 1.25.1
+
+- Use strict mode
+- Update author e-mail address
+
 ### Version 1.25.0
 
 - Add track support for SoundCloud

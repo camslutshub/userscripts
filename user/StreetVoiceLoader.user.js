@@ -8,7 +8,7 @@
 // @name:de         StreetVoiceLoader
 // @name:en         StreetVoiceLoader
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.2.4
+// @version         1.2.5
 // @description     Enables downloading of tracks and albums from StreetVoice.
 // @description:de  Erlaubt das Herunterladen von Liedern und Alben von StreetVoice.
 // @description:en  Enables downloading of tracks and albums from StreetVoice.
@@ -17,7 +17,7 @@
 // @contributionURL https://ko-fi.com/rcrsch
 // @downloadURL     https://raw.github.com/TheLastZombie/userscripts/main/user/StreetVoiceLoader.user.js
 // @updateURL       https://raw.github.com/TheLastZombie/userscripts/main/meta/StreetVoiceLoader.meta.js
-// @author          TheLastZombie <roesch.eric@protonmail.com>
+// @author          TheLastZombie <roesch.eric+userscripts@protonmail.com>
 // @match           https://streetvoice.com/*/songs/*
 // @connect         streetvoice.com
 // @grant           GM.xmlHttpRequest
@@ -35,6 +35,8 @@
 // ==/OpenUserJS==
 
 (function () {
+  "use strict";
+
   const awrapper = document.getElementsByClassName("list-item-buttons")[0];
   const song = window.location.toString().split("/")[5];
 

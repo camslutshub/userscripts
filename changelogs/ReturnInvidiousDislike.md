@@ -1,3 +1,8 @@
+### Version 1.0.4
+
+- Use strict mode
+- Update author e-mail address
+
 ### Version 1.0.3
 
 - Rename master branch to main

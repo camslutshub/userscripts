@@ -8,7 +8,7 @@
 // @name:de         YesPlease
 // @name:en         YesPlease
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.0.3
+// @version         1.0.4
 // @description     A (not yet) drop-in replacement for the No, thanks. extension.
 // @description:de  (Noch k)ein Ersatz für die No, thanks.-Browsererweiterung.
 // @description:en  A (not yet) drop-in replacement for the No, thanks. extension.
@@ -17,7 +17,7 @@
 // @contributionURL https://ko-fi.com/rcrsch
 // @downloadURL     https://raw.github.com/TheLastZombie/userscripts/main/user/YesPlease.user.js
 // @updateURL       https://raw.github.com/TheLastZombie/userscripts/main/meta/YesPlease.meta.js
-// @author          TheLastZombie <roesch.eric@protonmail.com>
+// @author          TheLastZombie <roesch.eric+userscripts@protonmail.com>
 // @match           *://*/*
 // @connect         no-thanks-extension.com
 // @connect         *
@@ -43,6 +43,8 @@
 // ==/OpenUserJS==
 
 (function () {
+  "use strict";
+
   GM_config.init({
     id: "options",
     title: "YesPlease",

@@ -7,7 +7,7 @@
 // @name:de         T3Xtend
 // @name:en         T3Xtend
 // @namespace       https://github.com/TheLastZombie/
-// @version         1.3.4
+// @version         1.3.5
 // @description     Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
 // @description:de  Zeigt sowohl T3X- als auch Download-Links zu alten Versionen von TYPO3-Extensions.
 // @description:en  Adds T3X buttons as well as download links to old versions of TYPO3 extensions.
@@ -16,7 +16,7 @@
 // @contributionURL https://ko-fi.com/rcrsch
 // @downloadURL     https://raw.github.com/TheLastZombie/userscripts/main/user/T3Xtend.user.js
 // @updateURL       https://raw.github.com/TheLastZombie/userscripts/main/meta/T3Xtend.meta.js
-// @author          TheLastZombie <roesch.eric@protonmail.com>
+// @author          TheLastZombie <roesch.eric+userscripts@protonmail.com>
 // @match           https://extensions.typo3.org/extension/*
 // @connect         repo.packagist.org
 // @connect         ia801807.us.archive.org
@@ -33,6 +33,8 @@
 // ==/OpenUserJS==
 
 (function () {
+  "use strict";
+
   // Shorten button text
 
   document
