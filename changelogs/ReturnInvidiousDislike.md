@@ -1,3 +1,7 @@
+### Version 1.1.0
+
+- Update API endpoint URL
+
 ### Version 1.0.4
 
 - Use strict mode
